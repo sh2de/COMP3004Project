@@ -1,5 +1,5 @@
 <div>
     <label for="player">Player name</label>
-    <input type="text"><br>
-    <button>{{button}}</button>
+    <input type="text" [(ngModel)]="player"><br>
+    <button (click)="nextPlayer()">{{button}}</button>
 </div>
