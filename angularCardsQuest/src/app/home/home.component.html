@@ -1,5 +1,10 @@
-<div>
-    <label for="player">Player name</label>
-    <input type="text" [(ngModel)]="player"><br>
-    <button (click)="nextPlayer()">{{button}}</button>
-</div>
+<div class="container">
+    <h2>Player</h2>
+    <form>
+      <div class="form-group">
+        <label for="email">Name:</label>
+        <input type="text" class="form-control"  placeholder="Enter your name" >
+      </div>
+      <button type="submit" class="btn btn-success" (click)="join()">Join</button>
+    </form>
+  </div>

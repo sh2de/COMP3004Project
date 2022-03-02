@@ -6,13 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  button='';
   player='';
   constructor() { }
 
   ngOnInit(): void {
-    this.player="player 1";
-    this.button='next'
+    
+  }
+
+  join(){
+    console.log(this.player+" has joined")
   }
 
 }
