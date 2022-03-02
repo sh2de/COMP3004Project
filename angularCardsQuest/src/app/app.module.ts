@@ -7,12 +7,14 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GameboardComponent } from './gameboard/gameboard.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GameboardComponent
+    GameboardComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
