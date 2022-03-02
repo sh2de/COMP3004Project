@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   player='';
-  constructor() { }
+  constructor(private gameService:GameService) { }
 
   ngOnInit(): void {
     
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   join(){
     console.log(this.player+" has joined")
+    this.player=''    
   }
 
 }
