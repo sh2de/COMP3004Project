@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { NavComponent } from './nav/nav.component';
 
 
@@ -7,10 +10,15 @@ import { NavComponent } from './nav/nav.component';
   providedIn: 'root'
 })
 export class GameService {
-  player=''
-  constructor(private router:Router) { }
+  private apiServerUrl = environment.apiBaseUrl;
+
+  constructor(private http:HttpClient) { }
 
   load(){
-    console.log(this.player+" test service");
+    
+  }
+
+  public getHello(): Observable<Object>{
+    return this.http.get(this.apiServerUrl+"/hello");
   }
 }
