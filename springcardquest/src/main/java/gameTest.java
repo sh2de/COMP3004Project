@@ -1,10 +1,11 @@
 
 import java.util.Scanner;
+
 public class gameTest {
     public static void main(String[] args){
         System.out.println("testing the game");
 
-        GameHandler game = new GameHandler(); //create new game
+        Game game = new Game(); //create new game
 
 
         
@@ -12,20 +13,22 @@ public class gameTest {
         while(true){
             
             System.out.println("Enter player number");
-            Integer playernumber = Integer.parseInt(getInput.nextLine());  // Read user input
+            String playernumber = (getInput.nextLine());  // Read user input
             //System.out.println("Username is: " + userName);  // Output user input
             
             System.out.println("Enter action");
-            Integer action = Integer.parseInt(getInput.nextLine());
+            String action = (getInput.nextLine());
 
-            executeCommand(playernumber, action);
+            executeCommand(playernumber, action, game);
         }
 
 
     }
 
-    public static void executeCommand(Integer x, Integer y){
-        
+    public static void executeCommand(String x, String y, Game g){
+        if (y == ""){
+            System.out.println(g.storydeck.draw().id);
+        }
     }
     
 }
