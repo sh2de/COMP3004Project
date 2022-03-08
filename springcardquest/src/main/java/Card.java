@@ -1,4 +1,4 @@
-public class Card {
+public abstract class Card {
     public String name = "card";
-    public Long id = (long) 0;
+    public long id = -1;
 }
