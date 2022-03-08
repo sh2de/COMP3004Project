@@ -4,6 +4,7 @@ import java.util.ArrayList;
 //It is responsible for keeping track of all the game elements, but does not automatically advance the game itself
 public class Game {
     Deck storydeck = new Deck();
+    Deck adventuredeck = new Deck();
     int numPlayers = 0;
     int currentTurn = 1;
     ArrayList<Player> players = new ArrayList<>();
