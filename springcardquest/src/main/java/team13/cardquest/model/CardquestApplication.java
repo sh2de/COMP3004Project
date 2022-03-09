@@ -24,6 +24,7 @@ public class CardquestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CardquestApplication.class, args);
 		System.out.println("hello, world!");
+		
 	}
 
 	@Bean

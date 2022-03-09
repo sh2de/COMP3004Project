@@ -22,11 +22,18 @@ public class Card implements Serializable{
     private boolean isMordred;
 
     public Card(){}
-    public Card(Long id, String name, String type, String cardText){
+    public Card(Long id, String name, String type, String cardText, String pathToImage, int frequency, int mainBattlePower, int secondaryBattlePower, int stages, Long foeId, boolean isMordred){
         this.id = id;
         this.name = name;
         this.type = type;
         this.cardText = cardText;
+        this.pathToImage = pathToImage;
+        this.frequency = frequency;
+        this.mainBattlePower = mainBattlePower;
+        this.secondaryBattlePower = secondaryBattlePower;
+        this.stages = stages;
+        this.foeId = foeId;
+        this.isMordred = isMordred;
     }
 
     public Long GetId(){return id;}
