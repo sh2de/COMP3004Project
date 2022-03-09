@@ -21,6 +21,26 @@ public class Game {
     }
 
     public Game(){
+        addPlayer(new Player());
+        addPlayer(new Player());
+        addPlayer(new Player());
+        addPlayer(new Player());
+        
+        for (Player player : players) {
+            for(int i = 0; i < 12; i++){
+                player.addCardToHand(adventuredeck.draw());
+            }
+        }
 
     }
+
+    public void print(){
+        System.out.println("It is player "+currentTurn+"'s turn.");
+        int pnum = 1;
+        for (Player player : players) {
+            System.out.println("Showing player "+(pnum++)+"'s information:");
+            player.print();
+        }
+    }
+
 }

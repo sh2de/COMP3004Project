@@ -5,7 +5,7 @@ public class gameTest {
     public static void main(String[] args){
         System.out.println("testing the game");
 
-        Game game = new Game(); //create new game
+        GameHandler testgame = new GameHandler(); //create new game
 
 
         
@@ -19,15 +19,17 @@ public class gameTest {
             System.out.println("Enter action");
             String action = (getInput.nextLine());
 
-            executeCommand(playernumber, action, game);
+            executeCommand(playernumber, action, testgame);
         }
 
 
     }
 
-    public static void executeCommand(String x, String y, Game g){
+    public static void executeCommand(String x, String y, GameHandler g){
+        
         if (y == ""){
-            System.out.println(g.storydeck.draw().id);
+            g.game.print();
+            //System.out.println(g.storydeck.draw().id);
         }
     }
     
