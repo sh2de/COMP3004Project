@@ -19,6 +19,7 @@ public class Card implements Serializable{
     private int secondaryBattlePower;
     private int stages;
     private Long foeId;
+    private boolean isMordred;
 
     public Card(){}
     public Card(Long id, String name, String type, String cardText){
@@ -38,6 +39,7 @@ public class Card implements Serializable{
     public int GetSecondaryBattlePower(){return secondaryBattlePower;}
     public int GetStages(){return stages;}
     public Long GetFoeId(){return foeId;}
+    public boolean GetIsMordred(){return isMordred;}
 
     public void SetId(Long id){this.id = id;}
     public void SetName(String name){this.name = name;}
@@ -49,6 +51,7 @@ public class Card implements Serializable{
     public void SetSecondaryBatlePower(int secondaryBattlePower){this.secondaryBattlePower = secondaryBattlePower;}
     public void SetStages(int stages){this.stages = stages;}
     public void SetFoeId(Long foeId){this.foeId = foeId;}
+    public void SetIsMordred(boolean isMordred){this.isMordred = isMordred;}
 
     public String toString(){
         return "| id: " + id + " | name: " + name + " | type: " + type + " | cardText: " + cardText + " |";
