@@ -15,7 +15,7 @@ public class Deck {
     }
 
     public void shuffle(){
-        for (int i = 0; i<100; i++){stack.add(new FoeCard());}
+        for (int i = 0; i<100; i++){stack.add(new FoeCard(i, null, null, i, i, false));}
     }
 
     //fetch and create all quest cards (sami)
