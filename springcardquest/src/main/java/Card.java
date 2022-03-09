@@ -1,4 +1,4 @@
 public abstract class Card {
-    public String name = "card";
+    public String url = "./testcard.png";
     public long id = -1;
 }

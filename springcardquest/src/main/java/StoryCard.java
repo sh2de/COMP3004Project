@@ -1,4 +1,4 @@
-public class StoryCard extends Card{
+public abstract class StoryCard extends Card{
     
     public static int idCounter = 0;
     //public long id = (long) idCounter++;

@@ -15,10 +15,20 @@ public class Deck {
     }
 
     public void shuffle(){
-        for (int i = 0; i<100; i++){stack.add(new StoryCard());}
+        for (int i = 0; i<100; i++){stack.add(new FoeCard());}
+    }
+
+    //fetch and create all quest cards (sami)
+    public void shuffleStoryDeck(){
+
+    }
+
+    //fetch and create all foe and weapon cards (sami)
+    public void shuffleAdventureDeck(){
+
     }
 
     public Deck(){
-        shuffle();
+        shuffle(); //just comment this out when youre done with getting the information
     }
 }
