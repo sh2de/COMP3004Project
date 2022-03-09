@@ -27,10 +27,29 @@ public class gameTest {
 
     public static void executeCommand(String x, String y, GameHandler g){
         
-        if (y == ""){
+        if (x == ""){ //if no player is selected output gamestate
             g.game.print();
+            return;
             //System.out.println(g.storydeck.draw().id);
         }
+
+        if (!(x == "1" || x == "2" || x == "3" || x == "4")){
+            System.out.println("invalid player number");
+            return;
+        }
+
+        //events here will be sent with a player number
+        switch(y){
+            case "":
+
+                break;
+
+            default:
+                System.out.println("invalid command");
+                break;
+        }
+
+
     }
     
 }

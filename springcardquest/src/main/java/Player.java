@@ -4,6 +4,7 @@ public class Player {
     public ArrayList<Card> hand = new ArrayList<Card>();
     public int shields = 0;
     public String rank = "squire";
+    public String name = "";
 
     public void editShields(int s){
         shields += s;
