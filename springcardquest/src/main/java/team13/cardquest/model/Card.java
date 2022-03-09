@@ -48,7 +48,7 @@ public class Card implements Serializable{
     public void SetMainBattlePower(int mainBattlePower){this.mainBattlePower = mainBattlePower;}
     public void SetSecondaryBatlePower(int secondaryBattlePower){this.secondaryBattlePower = secondaryBattlePower;}
     public void SetStages(int stages){this.stages = stages;}
-    public void SetFoeId(Long id){this.foeId = foeId;}
+    public void SetFoeId(Long foeId){this.foeId = foeId;}
 
     public String toString(){
         return "| id: " + id + " | name: " + name + " | type: " + type + " | cardText: " + cardText + " |";
