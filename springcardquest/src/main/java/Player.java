@@ -5,6 +5,18 @@ public class Player {
     public int shields = 0;
     public String rank = "squire";
     public String name = "";
+    public Boolean waiting = true; //this variable determines if the player is waiting for other input
+
+    public Player(String _name){
+        name = _name;
+    }
+
+    //this function gets called by the gamehandler and should send an event to the connected player
+    public void updateGui(String command){
+        //for now, simply println according to the command for test purposes
+        System.out.println("PLAYER "+name+" HAS RECEIVED COMMAND "+command);
+
+    }
 
     public void editShields(int s){
         shields += s;
@@ -31,6 +43,18 @@ public class Player {
         }
         System.out.println("");
 
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public boolean getWaiting(){
+        return waiting;
+    }
+
+    public void setWaiting(boolean _waiting){
+        waiting = _waiting;
     }
 
 }

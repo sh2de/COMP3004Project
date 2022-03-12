@@ -7,7 +7,8 @@ public class Game {
     Deck adventuredeck = new Deck();
     int numPlayers = 0;
     int currentTurn = 1;
-    
+    ArrayList<Player> players = new ArrayList<>();
+
     String state = "initialize";
     /*the state variable is what will be used to check what moves are currently legal or not.
     depending on the state, the game may end up waiting to receive input from all players. (possibly have a timer to prevent getting stuck?)
@@ -23,7 +24,63 @@ public class Game {
     
     */
 
-    ArrayList<Player> players = new ArrayList<>();
+    //function that updates the game according to its state
+    //returns true/false depending on if the command is valid
+    public boolean update(String executor, String command){ //executor is the player name, command is the action
+        System.out.println("game has received command "+command+" from player "+executor);
+        boolean flag = false;
+        switch(state){
+            case "initialize":
+                switch(command){
+                    case "join": //join command is to join the game
+                        if (numPlayers < 4){ //check to make sure that there arent more players than can play the game
+                            //missing----------check that no 2 players share a name/id
+                            addPlayer(new Player(executor));
+                            flag = true;
+
+                        }
+                        break;
+                    case "startgame":
+                        int waitCounter = 0;
+                        for (Player player : players) {
+                            if (player.getName() == executor){
+                                player.setWaiting(false);
+                                flag = true;
+                            }
+                            if (!player.getWaiting()){waitCounter++;}
+                        }
+                        System.out.print(waitCounter);
+                        if(waitCounter == numPlayers && numPlayers > 1){
+                            state = "turn start";
+                            for (Player player : players) {
+                                for(int i = 0; i < 12; i++){
+                                    player.addCardToHand(adventuredeck.draw());
+                                }
+                            }
+                            System.out.println("Open The Game!!!");
+                        }
+
+                        break;
+                }
+                return flag;
+            case "turn start":
+                return flag;
+            case "quest sponsor":
+                return flag;
+            case "quest setup":
+                return flag;
+            case "quest foe":
+                return flag;
+            case "quest test":
+                return flag;
+            default:
+                return flag;
+        }
+
+        //return false;
+
+    }
+    
 
 
     public void addPlayer(Player p){
@@ -37,16 +94,8 @@ public class Game {
     }
 
     public Game(){
-        addPlayer(new Player());
-        addPlayer(new Player());
-        addPlayer(new Player());
-        addPlayer(new Player());
         
-        for (Player player : players) {
-            for(int i = 0; i < 12; i++){
-                player.addCardToHand(adventuredeck.draw());
-            }
-        }
+        
 
     }
 

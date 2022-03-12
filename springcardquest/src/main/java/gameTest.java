@@ -26,7 +26,14 @@ public class gameTest {
     }
 
     public static void executeCommand(String x, String y, GameHandler g){
-        
+        if(g.game.update(x, y)){
+            System.out.println("command processed!!");
+        } else {
+            System.out.println("command rejected...");
+        }
+        System.out.println("current gamestate:");
+        g.game.print();
+        /*
         if (x == ""){ //if no player is selected output gamestate
             g.game.print();
             return;
@@ -48,6 +55,7 @@ public class gameTest {
                 System.out.println("invalid command");
                 break;
         }
+        */
 
 
     }

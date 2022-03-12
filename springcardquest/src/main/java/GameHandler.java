@@ -4,7 +4,7 @@ import java.util.ArrayList;
 //and then checks if the move is legal, and executes it if so
 
 public class GameHandler {
-    Game game = new Game();
+    public Game game = new Game();
     
     
 
