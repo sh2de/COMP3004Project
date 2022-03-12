@@ -41,9 +41,11 @@ public class Game {
                         }
                         break;
                     case "startgame":
+                        System.out.println("attempting to start the game");
                         int waitCounter = 0;
                         for (Player player : players) {
-                            if (player.getName() == executor){
+                            if (player.getName().equals(executor)){
+                                System.out.println("player found!");
                                 player.setWaiting(false);
                                 flag = true;
                             }
@@ -100,6 +102,7 @@ public class Game {
     }
 
     public void print(){
+        System.out.println(state);
         System.out.println("It is player "+currentTurn+"'s turn.");
         int pnum = 1;
         for (Player player : players) {

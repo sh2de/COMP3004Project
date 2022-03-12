@@ -42,6 +42,9 @@ public class Player {
             System.out.print(card.id +"|");
         }
         System.out.println("");
+        System.out.print("Player is ");
+        if (!waiting){System.out.print("not ");}
+        System.out.print("waiting for input\n");
 
     }
 
