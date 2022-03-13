@@ -1,3 +1,5 @@
+package team13.cardquest;
+
 public class WeaponCard extends AdventureCard{
     String name = "DUMMYWEAPON";
     int power = 10;

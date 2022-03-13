@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package team13.cardquest;
 
 //The game handler receives requests for what moves to make in the game
 //and then checks if the move is legal, and executes it if so
@@ -19,12 +19,7 @@ public class GameHandler {
 
     }
 
-    @PostMapping("/join")
-    public ResponseEntity<Object> joinGame(@RequestBody String name){
-        Player newPlayer=new Player(name);
-        game.addPlayer(newPlayer);
-        return new ResponseEntity<>(newPlayer, HttpStatus.OK);
-    }
+
 
 
     

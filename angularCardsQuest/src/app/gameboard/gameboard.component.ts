@@ -7,15 +7,16 @@ import { GameService } from '../game.service';
   styleUrls: ['./gameboard.component.scss']
 })
 export class GameboardComponent implements OnInit {
-
+  player= new Object;
   constructor(private gameService:GameService) { }
-  player='';
+  
   ngOnInit(): void {
-    
+    this.load()
   }
 
   load(){
-
+    this.player=this.gameService.getPlayer()
+    console.log("test player:"+this.gameService.getPlayer())
   }
 
 }

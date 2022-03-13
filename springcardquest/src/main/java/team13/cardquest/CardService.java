@@ -1,4 +1,4 @@
-package team13.cardquest.service;
+package team13.cardquest;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public class CardService {
     public List<Card> findAllCards(){return cardRepo.findAll();}
     public Card findCardById(Long id){
         return cardRepo.findCardById(id)
-            .orElseThrow(() -> new CardNotFoundException ("Card " + id + " was not found"));
+            .orElseThrow(() -> new CardNotFoundException ("team13.cardquest.Card " + id + " was not found"));
     }
     
     public Card updateCard(Card card){return cardRepo.save(card);}

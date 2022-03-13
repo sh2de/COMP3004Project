@@ -1,3 +1,5 @@
+package team13.cardquest;
+
 public class QuestCard extends StoryCard{
     String name = "DUMMYQUEST";
     int stages = 3;

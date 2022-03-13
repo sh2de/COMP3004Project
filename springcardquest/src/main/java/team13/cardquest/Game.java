@@ -1,3 +1,5 @@
+package team13.cardquest;
+
 import java.util.ArrayList;
 
 //The game object represents the internal state of a game session
@@ -59,7 +61,7 @@ public class Game {
                                     player.addCardToHand(adventuredeck.draw());
                                 }
                             }
-                            System.out.println("Open The Game!!!");
+                            System.out.println("Open The team13.cardquest.Game!!!");
                         }
 
                         break;

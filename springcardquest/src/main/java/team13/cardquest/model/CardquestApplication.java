@@ -4,13 +4,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 //adding for testing purposes
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import team13.cardquest.Game;
+import team13.cardquest.Player;
+
 
 import java.util.Arrays;
 
@@ -20,6 +27,7 @@ import java.util.Arrays;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 @RestController
 public class CardquestApplication {
+	private Game game=new Game();
 
 	public static void main(String[] args) {
 		SpringApplication.run(CardquestApplication.class, args);
@@ -42,9 +50,18 @@ public class CardquestApplication {
 		return new CorsFilter(urlBasedCorsConfigurationSource);
 	}
 
-//	@GetMapping
-//	public String hello() {
-//    	return "Hello World";
-//	}
+	@GetMapping("/hello")
+	public ResponseEntity<Object> helloWorld(){
+		String s = "hello World";
+		return new ResponseEntity<>(new String[]{"hello world"}, HttpStatus.OK);
+	}
+
+	@PostMapping("/join")
+	public ResponseEntity<Object> joinGame(@RequestBody String name){
+		Player newPlayer=new Player(name);
+		game.addPlayer(newPlayer);
+		return new ResponseEntity<>(newPlayer, HttpStatus.OK);
+	}
+
 	
 }

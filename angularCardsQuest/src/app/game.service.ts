@@ -11,7 +11,9 @@ import { NavComponent } from './nav/nav.component';
 })
 export class GameService {
   private apiServerUrl = environment.apiBaseUrl;
-  private player:object;
+
+  private player= new Object;
+  
   constructor(private http:HttpClient) { }
 
   load(){
@@ -26,11 +28,18 @@ export class GameService {
     this.http.post(this.apiServerUrl+"/join/",name).subscribe(
       (res:Object)=>{
         this.player=res;
+        console.log("test obs: ");
         console.log(this.player);
       },
       (err:HttpErrorResponse)=>{
         console.log(err.message);
       }
     )
+  }
+
+  public getPlayer(){
+    console.log("get Player");
+    console.log(this.player);
+    return this.player;
   }
 }
