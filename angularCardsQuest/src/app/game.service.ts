@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { NavComponent } from './nav/nav.component';
 })
 export class GameService {
   private apiServerUrl = environment.apiBaseUrl;
-
+  private player:object;
   constructor(private http:HttpClient) { }
 
   load(){
@@ -20,5 +20,17 @@ export class GameService {
 
   public getHello(): Observable<Object>{
     return this.http.get(this.apiServerUrl+"/hello");
+  }
+
+  public joinGame(name:string){
+    this.http.post(this.apiServerUrl+"/join/",name).subscribe(
+      (res:Object)=>{
+        this.player=res;
+        console.log(this.player);
+      },
+      (err:HttpErrorResponse)=>{
+        console.log(err.message);
+      }
+    )
   }
 }

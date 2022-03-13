@@ -15,4 +15,6 @@ public class GameResource {
         String s = "hello World";
         return new ResponseEntity<>(new String[]{"hello world"}, HttpStatus.OK);
     }
+
+
 }

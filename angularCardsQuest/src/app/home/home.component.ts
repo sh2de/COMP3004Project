@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameService } from '../game.service';
 
 @Component({
@@ -8,14 +9,15 @@ import { GameService } from '../game.service';
 })
 export class HomeComponent implements OnInit {
   player='';
-  constructor(private gameService:GameService) { }
+  constructor(private gameService:GameService, private route:Router) { }
 
   ngOnInit(): void {
     
   }
 
   join(){
-    console.log(this.player+" has joined")
+    this.gameService.joinGame(this.player);
+    this.route.navigateByUrl("gameboard");
     this.player=''    
   }
 
