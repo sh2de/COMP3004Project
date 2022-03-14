@@ -37,14 +37,14 @@ public class Player {
     }
 
     public void print(){
-        System.out.println("team13.cardquest.Player has "+shields+" shields");
-        System.out.println("team13.cardquest.Player has the rank of "+rank);
-        System.out.print("team13.cardquest.Player has the cards: |");
+        System.out.println("Player has "+shields+" shields");
+        System.out.println("Player has the rank of "+rank);
+        System.out.print("Player has the cards:");
         for (Card card : hand) {
-            System.out.print(card.id +"|");
+            System.out.print(card);
         }
         System.out.println("");
-        System.out.print("team13.cardquest.Player is ");
+        System.out.print("Player is ");
         if (!waiting){System.out.print("not ");}
         System.out.print("waiting for input\n");
 
