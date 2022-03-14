@@ -33,7 +33,8 @@ public class gameTest {
             System.out.println("command rejected...");
         }
         System.out.println("current gamestate:");
-        g.game.print();
+        //g.game.print();
+        
         /*
         if (x == ""){ //if no player is selected output gamestate
             g.game.print();

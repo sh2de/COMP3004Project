@@ -16,7 +16,7 @@ public class Game {
     depending on the state, the game may end up waiting to receive input from all players. (possibly have a timer to prevent getting stuck?)
     an index of the states will be described here below:
     "initialize"    wait for players to arrive. upon confirmation that all players have joined, start the game
-    "turn start"    draw a card from the story deck
+    "turn start"    draw a card from the story deck upon receiving "draw" command from the current player
     "quest sponsor"   decide a sponsor for the quest. if the person who drew the card refuses to sponsor or cannot with their current cards, 
                     pass the choice to the next player. if all players refuse, discard the quest card.
     "quest setup"   the sponsor now decides which cards to play for the quest
@@ -61,13 +61,24 @@ public class Game {
                                     player.addCardToHand(adventuredeck.draw());
                                 }
                             }
-                            System.out.println("Open The team13.cardquest.Game!!!");
+                            System.out.println("Open The Game!!!");
                         }
 
                         break;
                 }
                 return flag;
             case "turn start":
+                System.out.println(currentTurn);
+                System.out.println(executor);
+                System.out.println(players.get(currentTurn-1).getName());
+                if (executor.equals(players.get(currentTurn-1).getName()) && command.equals("draw")){
+                    flag = true;
+                    //if the correct player draws, handle the turn here
+                    Card c = storydeck.draw();
+                    System.out.println("player drew card "+c);
+                } else {
+                    System.out.println("INCORRECT COMMAND/PLAYER");
+                }
                 return flag;
             case "quest sponsor":
                 return flag;
