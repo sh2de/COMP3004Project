@@ -8,7 +8,7 @@ public class gameTest {
 
         GameHandler testgame = new GameHandler(); //create new game
 
-
+        autoJoin(testgame);
         
         Scanner getInput = new Scanner(System.in);  // Create a Scanner object
         while(true){
@@ -61,6 +61,17 @@ public class gameTest {
 
     }
     
+    public static void autoJoin(GameHandler g){
+        executeCommand("1", "join", g);
+        executeCommand("2", "join", g);
+        executeCommand("3", "join", g);
+        executeCommand("4", "join", g);
+        executeCommand("1", "startgame", g);
+        executeCommand("2", "startgame", g);
+        executeCommand("3", "startgame", g);
+        executeCommand("4", "startgame", g);
+
+    }
 }
 /*
 */
