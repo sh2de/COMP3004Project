@@ -5,8 +5,8 @@ import java.util.ArrayList;
 //The game object represents the internal state of a game session
 //It is responsible for keeping track of all the game elements, but does not automatically advance the game itself
 public class Game {
-    Deck storydeck = new Deck();
-    Deck adventuredeck = new Deck();
+    Deck storydeck = new Deck(true);
+    Deck adventuredeck = new Deck(false);
     int numPlayers = 0;
     int currentTurn = 1;
     ArrayList<Player> players = new ArrayList<>();
