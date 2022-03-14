@@ -14,4 +14,9 @@ public class QuestCard extends StoryCard{
         bossname = _bossname;
         bossid = _bossid;
     }
+
+    public boolean initQuest(Quest q){
+        q.setParams(name, stages, bossname, bossid);
+        return true;
+    }
 }

@@ -11,7 +11,9 @@ public class Game {
     int currentTurn = 1;
     ArrayList<Player> players = new ArrayList<>();
 
-    StoryCard currentStory = null;
+    //StoryCard currentStory = null;
+
+    Quest activeQuest = null;
 
 
     String state = "initialize";
@@ -80,7 +82,10 @@ public class Game {
                     Card c = storydeck.draw();
                     
                     System.out.println("player drew card "+c);
-                    setStory(c);
+                    activeQuest = new Quest();
+                    c.initQuest(activeQuest);
+                    state = "quest sponsor";
+                    
                     
                 } else {
                     System.out.println("INCORRECT COMMAND/PLAYER");
@@ -102,16 +107,7 @@ public class Game {
 
     }
     
-    
-    public void setStory(QuestCard c){
-        System.out.println("handling quest card");
-        currentStory = c;
-    }
 
-    
-    public void setStory(Card c){
-        System.out.println("handling story card");
-    }
 
 
     public void addPlayer(Player p){
