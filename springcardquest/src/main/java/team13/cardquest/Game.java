@@ -11,6 +11,9 @@ public class Game {
     int currentTurn = 1;
     ArrayList<Player> players = new ArrayList<>();
 
+    StoryCard currentStory = null;
+
+
     String state = "initialize";
     /*the state variable is what will be used to check what moves are currently legal or not.
     depending on the state, the game may end up waiting to receive input from all players. (possibly have a timer to prevent getting stuck?)
@@ -75,7 +78,10 @@ public class Game {
                     flag = true;
                     //if the correct player draws, handle the turn here
                     Card c = storydeck.draw();
+                    
                     System.out.println("player drew card "+c);
+                    setStory(c);
+                    
                 } else {
                     System.out.println("INCORRECT COMMAND/PLAYER");
                 }
@@ -96,6 +102,16 @@ public class Game {
 
     }
     
+    
+    public void setStory(QuestCard c){
+        System.out.println("handling quest card");
+        currentStory = c;
+    }
+
+    
+    public void setStory(Card c){
+        System.out.println("handling story card");
+    }
 
 
     public void addPlayer(Player p){
