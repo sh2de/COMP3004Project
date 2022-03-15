@@ -20,7 +20,6 @@ public class QuestCard extends StoryCard{
         return true;
     }
 
-    @Override
     public String toString(){
         return name + ", a " + stages + " stage quest featuring " + bossname;
     }
