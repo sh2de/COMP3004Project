@@ -19,8 +19,11 @@ public class gameTest {
             
             System.out.println("Enter action");
             String action = (getInput.nextLine());
-
-            executeCommand(playernumber, action, testgame);
+            if (action.equals("print")){
+                System.out.println("current gamestate:");
+                testgame.game.print();
+            }
+            else{executeCommand(playernumber, action, testgame);}
         }
 
 

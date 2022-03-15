@@ -7,4 +7,8 @@ public abstract class Card {
     public boolean initQuest(Quest q){
         return false;
     }
+
+    public String toString(){
+        return "GENERIC CARD :( ";
+    }
 }

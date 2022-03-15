@@ -14,4 +14,8 @@ public class FoeCard extends AdventureCard{
         bosspower = _bosspower;
         mordred = _mordred;
     }
+
+    public String toString(){
+        return name + ", a foe with a power of " + power + "/" + bosspower;
+    }
 }

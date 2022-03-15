@@ -19,4 +19,9 @@ public class QuestCard extends StoryCard{
         q.setParams(name, stages, bossname, bossid);
         return true;
     }
+
+    @Override
+    public String toString(){
+        return name + ", a " + stages + " stage quest featuring " + bossname;
+    }
 }
