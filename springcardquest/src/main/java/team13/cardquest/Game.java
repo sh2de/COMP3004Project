@@ -120,6 +120,15 @@ public class Game {
         if (currentTurn > numPlayers){currentTurn = 1;}
     }
 
+    public Player getPlayer(String name){
+        for (Player player : players) {
+            if(player.getName().equals(name)){
+                return player;
+            }
+        }
+        return null;
+    }
+
     public Game(){
         
         
