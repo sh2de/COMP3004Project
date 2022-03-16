@@ -50,7 +50,8 @@ public class Game {
                     case "startgame":
                         System.out.println("attempting to start the game");
                         int waitCounter = 0;
-                        for (Player player : players) {
+                        for (Player
+                                player : players) {
                             if (player.getName().equals(executor)){
                                 System.out.println("player found!");
                                 player.setWaiting(false);

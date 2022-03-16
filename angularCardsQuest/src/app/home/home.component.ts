@@ -16,8 +16,9 @@ export class HomeComponent implements OnInit {
   }
 
   join(){
-    this.gameService.joinGame(this.player);
-    this.route.navigateByUrl("gameboard");
+    if (this.gameService.joinGame(this.player)){
+      this.route.navigateByUrl("gameboard");
+    }
     this.player=''    
   }
 

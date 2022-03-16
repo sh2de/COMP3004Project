@@ -24,17 +24,17 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/hello");
   }
 
-  public joinGame(name:string){
+  public  joinGame(name:string): boolean{
+    let flag=false;
     this.http.post(this.apiServerUrl+"/join/",name).subscribe(
-      (res:Object)=>{
-        this.player=res;
-        console.log("test obs: ");
-        console.log(this.player);
+      (res:boolean)=>{
+        flag=res;
       },
       (err:HttpErrorResponse)=>{
-        console.log(err.message);
+        alert(err.message);
       }
     )
+    return flag;
   }
 
   public getPlayer(){

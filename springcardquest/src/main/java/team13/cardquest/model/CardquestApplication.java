@@ -6,12 +6,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 //adding for testing purposes
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -57,11 +54,18 @@ public class CardquestApplication {
 	}
 
 	@PostMapping("/join")
-	public ResponseEntity<Object> joinGame(@RequestBody String name){
-		Player newPlayer=new Player(name);
-		game.addPlayer(newPlayer);
-		return new ResponseEntity<>(newPlayer, HttpStatus.OK);
+	public ResponseEntity<Boolean> joinGame(@RequestBody String name){
+		return new ResponseEntity<>(game.update(name,"join"), HttpStatus.OK);
 	}
 
+	@GetMapping("/start/{name}")
+	public ResponseEntity<Boolean> startGame(@PathVariable("name") String name){
+		return new ResponseEntity<>(game.update(name,"startgame"),HttpStatus.OK);
+	}
+
+	@GetMapping("/turn/{name}")
+	public ResponseEntity<Boolean> turnStart(@PathVariable("name") String name){
+		return new ResponseEntity<>(game.update(name,"turn start"),HttpStatus.OK);
+	}
 	
 }
