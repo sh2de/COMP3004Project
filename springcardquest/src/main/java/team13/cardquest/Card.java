@@ -11,4 +11,8 @@ public abstract class Card {
     public String toString(){
         return "GENERIC CARD :( ";
     }
+
+    public String getType(){
+        return "UNDEFINED";
+    }
 }
