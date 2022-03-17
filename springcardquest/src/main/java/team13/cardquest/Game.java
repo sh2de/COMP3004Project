@@ -127,13 +127,37 @@ public class Game {
                 return player;
             }
         }
-        return null;
+        return new Player("");
     }
 
     public Game(){
         
         
 
+    }
+
+    public String joinGame(String name){
+        if (numPlayers > 3){
+            return "";
+        }
+
+        //missing functionality: make sure there are no duplicate player names
+
+        numPlayers += 1;
+        System.out.println("player "+name+" has joined the game"); //debug message
+        return name;
+        
+
+    }
+
+    public boolean startGame(String name){
+        //set player as ready to start, if all players are ready give them all the “ALL_PLAYERS_READY” signal
+        getPlayer(name).eventQueue.add("ALL_PLAYERS_READY");
+        return true;
+    }
+
+    public ArrayList<String> getUpdates(String name){
+        return getPlayer(name).sendEventQueue();
     }
 
     public void print(){

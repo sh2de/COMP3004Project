@@ -15,7 +15,7 @@ import org.springframework.web.filter.CorsFilter;
 import team13.cardquest.Game;
 import team13.cardquest.Player;
 
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
 //end
@@ -53,7 +53,7 @@ public class CardquestApplication {
 		return new ResponseEntity<>(new String[]{"hello world"}, HttpStatus.OK);
 	}
 
-	@PostMapping("/join")
+	/*@PostMapping("/join")
 	public ResponseEntity<Boolean> joinGame(@RequestBody String name){
 		return new ResponseEntity<>(game.update(name,"join"), HttpStatus.OK);
 	}
@@ -66,6 +66,29 @@ public class CardquestApplication {
 	@GetMapping("/turn/{name}")
 	public ResponseEntity<Boolean> turnStart(@PathVariable("name") String name){
 		return new ResponseEntity<>(game.update(name,"turn start"),HttpStatus.OK);
+	}*/
+	//old mappings in case something breaks
+
+
+	//new mappings as follows
+	
+	//request to register a player under the name given, returns the name they will use (which would change if there are duplicates)
+	@PostMapping("/joinGame")
+	public ResponseEntity<String> joinGame(@RequestBody String name){
+		return new ResponseEntity<>(game.joinGame(name), HttpStatus.OK);
+	}
+
+	//request to start the game, player will then wait until all other players are ready to begin
+	@PostMapping("/startGame")
+	public ResponseEntity<Boolean> startGame(@RequestBody String name){
+		return new ResponseEntity<>(game.startGame(name), HttpStatus.OK);
+	}
+
+	//request for any update signals to the corresponding player
+	@PostMapping("/getUpdates")
+	public ResponseEntity<ArrayList<String>> getUpdates(@RequestBody String name){
+		return new ResponseEntity<>(new ArrayList<String>(),HttpStatus.OK);
+		//return new ResponseEntity<>(game.joinGame(name), HttpStatus.OK);
 	}
 	
 }

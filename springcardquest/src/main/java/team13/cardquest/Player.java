@@ -8,9 +8,17 @@ public class Player {
     public String rank = "squire";
     public String name = "";
     public Boolean waiting = true; //this variable determines if the player is waiting for other input
+    public ArrayList<String> eventQueue = new ArrayList<String>();
+
 
     public Player(String _name){
         name = _name;
+    }
+
+    public ArrayList<String> sendEventQueue(){
+        ArrayList<String> updates = eventQueue;
+        eventQueue = new ArrayList<String>();
+        return updates;
     }
 
     //this function gets called by the gamehandler and should send an event to the connected player
