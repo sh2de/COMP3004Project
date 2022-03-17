@@ -142,7 +142,7 @@ public class Game {
         }
 
         //missing functionality: make sure there are no duplicate player names
-
+        addPlayer(new Player(name));
         numPlayers += 1;
         System.out.println("player "+name+" has joined the game"); //debug message
         return name;
