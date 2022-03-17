@@ -23,4 +23,8 @@ public class QuestCard extends StoryCard{
     public String toString(){
         return name + ", a " + stages + " stage quest featuring " + bossname;
     }
+
+    public String getType(){
+        return "QUEST";
+    }
 }
