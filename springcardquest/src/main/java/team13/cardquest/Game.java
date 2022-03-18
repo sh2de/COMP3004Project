@@ -137,24 +137,33 @@ public class Game {
     */
 
     
-    public String getSponsor(){
+    public void getSponsor(){
         if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
             nextTurn();
+            
             state = "turn_start";
             activeQuest = null;
-            return "";
+            return;
         }
 
-        
+        Player p = players.get((currentTurn + sponsor)%numPlayers);
+        sponsor++;
 
-
-        return "";
+        if (p.canSponsor(activeQuest)){
+            p.eventQueue.add("REQUEST_SPONSORSHIP"); //signal to ask if the player would like to sponsor the following quest
+        } else {
+            p.setWaiting(false);
+            getSponsor();
+        }
+        return;
     }
 
     public void sponsorshipAccepted(){
+        forceAllReady();
         for (Player player : players) {
             if ((player).equals(currentSponsor)){
                 player.eventQueue.add("CREATE_QUEST"); //signal to select cards for the quest
+                player.setWaiting(true);
             } else {
                 player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin
             }
