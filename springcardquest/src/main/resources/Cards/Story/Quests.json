@@ -1,0 +1,65 @@
+[
+	{
+		"type": "Quest",
+		"name": "Journey through the Enchanted Forest",
+		"stages": "3",
+		"foe": "Evil Knight",
+		"frequency": "1"	
+	},
+	{
+		"type": "Quest",
+		"name": "Vanquish King Arthur's Enemies",
+		"stages": "3",
+		"foe": null,
+		"frequency": "2"	
+	},
+	{
+		"type": "Quest",
+		"name": "Repel the Saxon Raiders",
+		"stages": "2",
+		"foe": "Saxon",
+		"frequency": "2"	
+	},
+	{
+		"type": "Quest",
+		"name": "Boar Hunt",
+		"stages": "2",
+		"foe": "Boar",
+		"frequency": "2"	
+	},
+	{
+		"type": "Quest",
+		"name": "Search for the Questing Beast",
+		"stages": "4",
+		"foe": null,
+		"frequency": "1"	
+	},
+	{
+		"type": "Quest",
+		"name": "Defend the Queen's Honor",
+		"stages": 4,
+		"foe": "All",
+		"frequency": "1"	
+	},
+	{
+		"type": "Quest",
+		"name": "Slay the Dragon",
+		"stages": "3",
+		"foe": "Dragon",
+		"frequency": "1"	
+	},
+	{
+		"type": "Quest",
+		"name": "Rescue the Fair Maiden",
+		"stages": "3",
+		"foe": "Black Knight",
+		"frequency": "1"	
+	},
+	{
+		"type": "Quest",
+		"name": "Search for the Holy Grail",
+		"stages": "5",
+		"foe": "All",
+		"frequency": "1"	
+	}
+]

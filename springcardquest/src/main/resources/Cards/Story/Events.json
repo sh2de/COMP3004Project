@@ -1,0 +1,41 @@
+[
+	{
+		"type": "Event",
+		"name": "Chivalrous Deed",
+		"frequency": "1"	
+	},
+	{
+		"type": "Event",
+		"name": "Court Called to Camelot",
+		"frequency": "2"	
+	},
+	{
+		"type": "Event",
+		"name": "King's Call to Arms",
+		"frequency": "1"	
+	},
+	{
+		"type": "Event",
+		"name": "King's Recognition",
+		"frequency": "2"	
+	},
+	{
+		"type": "Event",
+		"name": "Plague",
+		"frequency": "1"	
+	},
+	{
+		"type": "Event",
+		"name": "Pox"
+	},
+	{
+		"type": "Event",
+		"name": "Prosperity Throughout the Realm",
+		"frequency": "1"	
+	},
+	{
+		"type": "Event",
+		"name": "Queen's Favor",
+		"frequency": "2"	
+	}
+]
