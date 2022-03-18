@@ -25,7 +25,6 @@ public class Game {
     "quest sponsor"   decide a sponsor for the quest. if the person who drew the card refuses to sponsor or cannot with their current cards, 
                     pass the choice to the next player. if all players refuse, discard the quest card.
     "quest setup"   the sponsor now decides which cards to play for the quest
-                    NOTE FOR BEN: THEY SHOULD SET UP EVERYTHING ON THEIR END THEN SEND THE COMPLETE INPUT TO BE VALIDATED, IF ITS REJECTED THEY MUST RESELECT THE CARDS/ORDER
     "quest foe"     players must select the cards they wish to use before the foe is revealed and result is calculated    
     "quest test"    tbd
     
@@ -108,8 +107,14 @@ public class Game {
 
     }
     
+    //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
+    public void turnStart(){
+        Card c = storydeck.draw();
+        activeQuest = new Quest();
+        c.initQuest(activeQuest);
+        state = "quest sponsor";
 
-
+    }
 
     public void addPlayer(Player p){
         players.add(p);
@@ -166,17 +171,22 @@ public class Game {
         if (allPlayersReady()){
             for (Player player : players) {
                 player.eventQueue.add("ALL_PLAYERS_READY");
+                for(int i = 0; i < 12; i++){
+                    player.addCardToHand(adventuredeck.draw());
+                }
             }
             state = "turn_start"; //set the internal state to begin the game
         }
         return true;
     }
 
-    
+    //api call to get a player's list of update signals
     public ArrayList<String> getUpdates(String name){
         return getPlayer(name).sendEventQueue();
     }
+    
 
+    //print function for debugging purposes
     public void print(){
         System.out.println(state);
         System.out.println("It is player "+currentTurn+"'s turn.");
