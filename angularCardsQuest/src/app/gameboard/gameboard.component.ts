@@ -15,8 +15,9 @@ export class GameboardComponent implements OnInit {
   }
 
   load(){
-    this.player=this.gameService.getPlayer()
-    console.log("test player:"+this.gameService.getPlayer())
+    
   }
+
+ 
 
 }
