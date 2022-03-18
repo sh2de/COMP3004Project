@@ -1,0 +1,64 @@
+[
+	{
+		"type": "Ally",
+		"name": "Sir Gawain",
+		"battlePower": "10",
+		"bidWorth": "1",
+		"trigger": "Green Knight Quest"		
+	},
+	{
+		"type": "Ally",
+		"name": "King Pellinore",
+		"battlePower": "10",
+		"bidWorth": "1",
+		"trigger": "Search for the Questing Beast Quest"
+	},
+	{
+		"type": "Ally",
+		"name": "Sir Percival",
+		"battlePower": "5",
+		"bidWorth": "1",
+		"trigger": "Holy Grail Quest"
+	},
+	{
+		"type": "Ally",
+		"name": "Sir Tristan",
+		"battlePower": "10",
+		"bidWorth": "1",
+		"trigger": "Queen Iseult"
+	},{
+		"type": "Ally",
+		"name": "King Arthur",
+		"battlePower": "10",
+		"bidWorth": "2",
+		"trigger": null
+	},
+	{
+		"type": "Ally",
+		"name": "Queen Guinevere",
+		"battlePower": "0",
+		"bidWorth": "3",
+		"trigger": null
+	},
+	{
+		"type": "Ally",
+		"name": "Merlin",
+		"battlePower": "0",
+		"bidWorth": "1",
+		"trigger": null
+	},
+	{
+		"type": "Ally",
+		"name": "Queen Iseult",
+		"battlePower": "0",
+		"bidWorth": "2",
+		"trigger": "Tristan"
+	},
+	{
+		"type": "Ally",
+		"name": "Sir Galahad",
+		"battlePower": "15",
+		"bidWorth": "1",
+		"trigger": null
+	}
+]

@@ -1,0 +1,79 @@
+[
+	{
+		"type": "Foe",
+		"name": "Black Knight",
+		"battlePower": "25",
+		"boost": "10"
+	},
+	{
+		"type": "Foe",
+		"name": "Boar",
+		"battlePower": "5",
+		"boost": "10"
+	},
+	{
+		"type": "Foe",
+		"name": "Black Knight",
+		"battlePower": "25",
+		"boost": "10"
+	},
+	{
+		"type": "Foe",
+		"name": "Dragon",
+		"battlePower": "50",
+		"boost": "20"
+	},
+	{
+		"type": "Foe",
+		"name": "Evil Knight",
+		"battlePower": "20",
+		"boost": "10"
+	},
+	{
+		"type": "Foe",
+		"name": "Black Knight",
+		"battlePower": "25",
+		"boost": "10"
+	},
+	{
+		"type": "Foe",
+		"name": "Giant",
+		"battlePower": "40",
+		"boost": "0"
+	},
+	{
+		"type": "Foe",
+		"name": "Green Knight",
+		"battlePower": "25",
+		"boost": "15"
+	},
+	{
+		"type": "Foe",
+		"name": "Mordred",
+		"battlePower": "30",
+		"boost": "0"
+	},{
+		"type": "Foe",
+		"name": "Robber Knight",
+		"battlePower": "15",
+		"boost": "0"
+	},
+	{
+		"type": "Foe",
+		"name": "Saxons",
+		"battlePower": "10",
+		"boost": "10"
+	},
+	{
+		"type": "Foe",
+		"name": "Saxon Knight",
+		"battlePower": "15",
+		"boost": "10"
+	},
+	{
+		"type": "Foe",
+		"name": "Theives",
+		"battlePower": "5",
+		"boost": "0"
+	}
+]
