@@ -23,23 +23,40 @@ export class GameService {
   public getHello(): Observable<Object>{
     return this.http.get(this.apiServerUrl+"/hello");
   }
-
-  public  joinGame(name:string): boolean{
-    let flag=false;
-    this.http.post(this.apiServerUrl+"/join/",name).subscribe(
-      (res:boolean)=>{
-        flag=res;
-      },
-      (err:HttpErrorResponse)=>{
-        alert(err.message);
-      }
-    )
-    return flag;
+  
+  /*
+  request to register the player unde inputed name
+  return observable which contains empty string when players is not registered and player's name otherwise
+  */
+  public  joinGame(name:string): Observable<Object>{
+    return this.http.post(this.apiServerUrl+"/joinGame",name);
+  }
+  /**
+   * requesting to start the game
+   * @param name : player name
+   * @returns observable that contains boolean, if player can start the game or not
+   */
+  public startGame(name:string): Observable<Object>{
+    return this.http.get(this.apiServerUrl+"/startGame/"+name);
   }
 
-  public getPlayer(){
-    console.log("get Player");
-    console.log(this.player);
-    return this.player;
+  /**
+   * requesting a player with the specifued name
+   * @param name : player name
+   * @returns player object if player with given name and null otherwise
+   */
+   public getPlayer(name:string): Observable<Object>{
+    return this.http.get(this.apiServerUrl+"/getPlayer/"+name);
   }
+
+  /**
+   * requesting for updates
+   * @param name : player name
+   * @returns observable of event queue
+   */
+   public getUpdates(name:string): Observable<Object>{
+    return this.http.get(this.apiServerUrl+"/getUpdates/"+name);
+  }
+
+
 }
