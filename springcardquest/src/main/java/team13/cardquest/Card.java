@@ -15,4 +15,8 @@ public abstract class Card {
     public String getType(){
         return "UNDEFINED";
     }
+
+    public int getPower(){
+        return 0;
+    }
 }

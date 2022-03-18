@@ -22,4 +22,8 @@ public class FoeCard extends AdventureCard{
     public String getType(){
         return "FOE";
     }
+
+    public int getPower(){
+        return power;
+    }
 }

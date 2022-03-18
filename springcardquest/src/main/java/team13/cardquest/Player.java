@@ -83,6 +83,24 @@ public class Player {
         return waiting;
     }
 
+    public int getPower(){
+        int p = 0;
+        switch(rank){
+            case "squire":
+                p+=5;
+                break;
+            case "knight":
+                p+=10;
+                break;
+            case "champion knight":
+                p+=20;
+                break;
+        }
+        //add power for allies
+
+        return p;
+    }
+
     public void setWaiting(boolean _waiting){
         waiting = _waiting;
     }

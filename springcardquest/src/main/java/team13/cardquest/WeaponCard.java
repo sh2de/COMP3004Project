@@ -10,4 +10,8 @@ public class WeaponCard extends AdventureCard{
         name = _name;
         power = _power;
     }
+
+    public int getPower(){
+        return power;
+    }
 }
