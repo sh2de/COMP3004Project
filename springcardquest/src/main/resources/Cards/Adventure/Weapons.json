@@ -1,0 +1,32 @@
+[
+	{
+		"type": "Weapon",
+		"name": "Battle-ax",
+		"battlePower": "5"
+	},
+	{
+		"type": "Weapon",
+		"name": "Dagger",
+		"battlePower": "5"
+	},
+	{
+		"type": "Weapon",
+		"name": "Excalibur",
+		"battlePower": "30"
+	},
+	{
+		"type": "Weapon",
+		"name": "Horse",
+		"battlePower": "10"
+	},
+	{
+		"type": "Weapon",
+		"name": "Lance",
+		"battlePower": "20"
+	},
+	{
+		"type": "Weapon",
+		"name": "Sword",
+		"battlePower": "10"
+	}
+]

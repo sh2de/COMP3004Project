@@ -1,0 +1,26 @@
+[
+	{
+		"type": "Test",
+		"name": "Test of the Questing Beast",
+		"minBid": "3",
+		"trigger": "Search for the Questing Beast Quest"
+	},
+	{
+		"type": "Test",
+		"name": "Test of Temptation",
+		"minBid": "3",
+		"trigger": null
+	},
+	{
+		"type": "Test",
+		"name": "Test of Valor",
+		"minBid": "3",
+		"trigger": null
+	},
+	{
+		"type": "Test",
+		"name": "Test of Morgan Le Fey",
+		"minBid": "3",
+		"trigger": null	
+	}
+]
