@@ -9,6 +9,8 @@ public class Game {
     Deck adventuredeck = new Deck(false);
     int numPlayers = 0;
     int currentTurn = 1;
+    int sponsor = -1; //variable used for iterating through available sponsors
+    Player currentSponsor = null;
     ArrayList<Player> players = new ArrayList<>();
 
     //StoryCard currentStory = null;
@@ -29,8 +31,183 @@ public class Game {
     "quest test"    tbd
     */
 
+    //helper function to check if no players are waiting
+    public boolean allPlayersReady(){
+        boolean flag = true;
+        for (Player player : players) {
+            if (player.getWaiting()){flag = false;}
+        }
+        return flag;
+    }
+    
+    //helper function to make all players ready
+    public void forceAllReady(){
+        for (Player player : players) {
+            player.setWaiting(false);
+        }
+    }
 
-    //NOW IRRELEVANT function that updates the game according to its state
+    //helper function to make all players not ready
+    public void forceAllUnready(){
+        for (Player player : players) {
+            player.setWaiting(true);
+        }
+    }
+
+    public Player getPlayer(String name){
+        for (Player player : players) {
+            if(player.getName().equals(name)){
+                return player;
+            }
+        }
+        return new Player("");
+    }
+
+    public Game(){
+        
+    }
+
+    //GAME SETUP FUNCTIONS---------------------------------------------------------------------------------------------------------------------
+    //api call to add new player to the game
+    public String joinGame(String name){
+        if (numPlayers > 3){
+            return "";
+        }
+
+        //missing functionality: make sure there are no duplicate player names
+        addPlayer(new Player(name));
+        System.out.println("player "+name+" has joined the game"); //debug message
+        return name;
+        
+
+    
+    }
+
+    public void addPlayer(Player p){
+        players.add(p);
+        numPlayers += 1;
+    }
+
+    //api call to set player as ready to start the game
+    public boolean startGame(String name){
+        //set player as ready to start, if all players are ready give them all the “ALL_PLAYERS_READY” signal
+        getPlayer(name).setWaiting(false);
+        if (allPlayersReady()){
+            for (Player player : players) {
+                player.eventQueue.add("ALL_PLAYERS_READY");
+                for(int i = 0; i < 12; i++){
+                    player.addCardToHand(adventuredeck.draw());
+                }
+            }
+            state = "turn_start"; //set the internal state to begin the game
+            turnStart();
+        }
+        return true;
+    }
+
+
+    //TURN PROCESSING FUNCTIONS----------------------------------------------------------------------
+
+    //helper function to pass to the next turn no matter the number of players
+    public void nextTurn(){
+        currentTurn += 1;
+        if (currentTurn > numPlayers){currentTurn = 1;}
+    }
+
+    //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
+    public void turnStart(){
+        Card c = storydeck.draw();
+        activeQuest = new Quest();
+        c.initQuest(activeQuest);
+        state = "quest sponsor";
+        sponsor = currentTurn;
+        forceAllUnready();
+
+    }
+
+    //QUEST PROCESSING FUNCTIONS----------------------------------------------------------------------
+    
+    /*quest behavior as follows
+    quest card is drawn
+    for each player, check if they can sponsor it. it yes, send signal to ask if they wish to do so. if not, pass option to next player who can sponsor it
+    if no players can sponsor it, end turn
+    if a player decides to sponsor it, request the cards they wish to sponsor it with
+    once received, proceed with quest. send signal to each player who is still alive to pick cards for battle
+    receive cards for each player. once all have been received, show the results, repeat until all phases are done or all players fail
+    */
+
+    
+    public String getSponsor(){
+        if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
+            nextTurn();
+            state = "turn_start";
+            activeQuest = null;
+            return "";
+        }
+
+        
+
+
+        return "";
+    }
+
+    public void sponsorshipAccepted(){
+        for (Player player : players) {
+            if ((player).equals(currentSponsor)){
+                player.eventQueue.add("CREATE_QUEST"); //signal to select cards for the quest
+            } else {
+                player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin
+            }
+        }
+    }
+
+    public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
+        if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
+        return false;
+    }
+
+    public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
+        int p = 0;
+        for (Card card : hand) {
+            p += card.getPower();
+        }
+        return p;
+    }
+
+    //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
+
+    //TOURNAMENT PROCESSING FUNCTIONS----------------------------------------------------------------
+
+    //GENERAL USE FUNCTIONS---------------------------------------------------------------------------
+
+
+    //api call to get a player's list of update signals
+    public ArrayList<String> getUpdates(String name){
+        return getPlayer(name).sendEventQueue();
+    }
+    
+
+    //print function for debugging purposes
+    public void print(){
+        System.out.println(state);
+        System.out.println("It is player "+currentTurn+"'s turn.");
+        int pnum = 1;
+        for (Player player : players) {
+            System.out.println("Showing player "+(pnum++)+"'s information:");
+            player.print();
+        }
+    }
+
+    //OLD STUFF PLEASE IGNORE---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        //NOW IRRELEVANT function that updates the game according to its state
     //returns true/false depending on if the command is valid
     public boolean update(String executor, String command){ //executor is the player name, command is the action
         System.out.println("game has received command "+command+" from player "+executor);
@@ -105,167 +282,8 @@ public class Game {
         //return false;
     }
     //The above function was the old way of handling things that we decided to throw out
-    
-    
-    
 
-   
-
-    //helper function to check if no players are waiting
-    public boolean allPlayersReady(){
-        boolean flag = true;
-        for (Player player : players) {
-            if (player.getWaiting()){flag = false;}
-        }
-        return flag;
-    }
-    
-    //helper function to make all players ready
-    public void forceAllReady(){
-        for (Player player : players) {
-            player.setWaiting(false);
-        }
-    }
-
-    //helper function to make all players not ready
-    public void forceAllUnready(){
-        for (Player player : players) {
-            player.setWaiting(true);
-        }
-    }
-
-    
-
-    public Player getPlayer(String name){
-        for (Player player : players) {
-            if(player.getName().equals(name)){
-                return player;
-            }
-        }
-        return new Player("");
-    }
-
-    public Game(){
-        
-        
-
-    }
-
-    //GAME SETUP FUNCTIONS---------------------------------------------------------------------------------------------------------------------
-    //api call to add new player to the game
-    public String joinGame(String name){
-        if (numPlayers > 3){
-            return "";
-        }
-
-        //missing functionality: make sure there are no duplicate player names
-        addPlayer(new Player(name));
-        System.out.println("player "+name+" has joined the game"); //debug message
-        return name;
-        
-
-    
-    }
-
-    public void addPlayer(Player p){
-        players.add(p);
-        numPlayers += 1;
-    }
-
-    //api call to set player as ready to start the game
-    public boolean startGame(String name){
-        //set player as ready to start, if all players are ready give them all the “ALL_PLAYERS_READY” signal
-        getPlayer(name).setWaiting(false);
-        if (allPlayersReady()){
-            for (Player player : players) {
-                player.eventQueue.add("ALL_PLAYERS_READY");
-                for(int i = 0; i < 12; i++){
-                    player.addCardToHand(adventuredeck.draw());
-                }
-            }
-            state = "turn_start"; //set the internal state to begin the game
-        }
-        return true;
-    }
-
-
-    //TURN PROCESSING FUNCTIONS----------------------------------------------------------------------
-
-    //helper function to pass to the next turn no matter the number of players
-    public void nextTurn(){
-        currentTurn += 1;
-        if (currentTurn > numPlayers){currentTurn = 1;}
-    }
-
-    //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
-    public void turnStart(){
-        Card c = storydeck.draw();
-        activeQuest = new Quest();
-        c.initQuest(activeQuest);
-        state = "quest sponsor";
-        forceAllUnready();
-
-    }
-
-    //QUEST PROCESSING FUNCTIONS----------------------------------------------------------------------
-    
-    /*quest behavior as follows
-    quest card is drawn
-    for each player, check if they can sponsor it. it yes, send signal to ask if they wish to do so. if not, pass option to next player who can sponsor it
-    if no players can sponsor it, end turn
-    if a player decides to sponsor it, request the cards they wish to sponsor it with
-    once received, proceed with quest. send signal to each player who is still alive to pick cards for battle
-    receive cards for each player. once all have been received, show the results, repeat until all phases are done or all players fail
-    */
-
-    
-    public String getSponsor(){
-        if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
-            nextTurn();
-            state = "turn_start";
-            activeQuest = null;
-            return "";
-        }
-
-
-
-        return "";
-    }
-
-    public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
-        if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
-        return false;
-    }
-
-    public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
-        int p = 0;
-        for (Card card : hand) {
-            p += card.getPower();
-        }
-        return p;
-    }
-
-    //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
-
-    //TOURNAMENT PROCESSING FUNCTIONS----------------------------------------------------------------
-
-    //GENERAL USE FUNCTIONS---------------------------------------------------------------------------
-
-    //api call to get a player's list of update signals
-    public ArrayList<String> getUpdates(String name){
-        return getPlayer(name).sendEventQueue();
-    }
-    
-
-    //print function for debugging purposes
-    public void print(){
-        System.out.println(state);
-        System.out.println("It is player "+currentTurn+"'s turn.");
-        int pnum = 1;
-        for (Player player : players) {
-            System.out.println("Showing player "+(pnum++)+"'s information:");
-            player.print();
-        }
-    }
 
 }
+
+
