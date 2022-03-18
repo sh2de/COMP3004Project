@@ -108,10 +108,7 @@ public class Game {
     
     
 
-    public void addPlayer(Player p){
-        players.add(p);
-        numPlayers += 1;
-    }
+   
 
     //helper function to check if no players are waiting
     public boolean allPlayersReady(){
@@ -120,6 +117,20 @@ public class Game {
             if (player.getWaiting()){flag = false;}
         }
         return flag;
+    }
+    
+    //helper function to make all players ready
+    public void forceAllReady(){
+        for (Player player : players) {
+            player.setWaiting(false);
+        }
+    }
+
+    //helper function to make all players not ready
+    public void forceAllUnready(){
+        for (Player player : players) {
+            player.setWaiting(true);
+        }
     }
 
     
@@ -152,6 +163,12 @@ public class Game {
         return name;
         
 
+    
+    }
+
+    public void addPlayer(Player p){
+        players.add(p);
+        numPlayers += 1;
     }
 
     //api call to set player as ready to start the game
@@ -185,15 +202,38 @@ public class Game {
         activeQuest = new Quest();
         c.initQuest(activeQuest);
         state = "quest sponsor";
+        forceAllUnready();
+
     }
 
     //QUEST PROCESSING FUNCTIONS----------------------------------------------------------------------
+    
+    /*quest behavior as follows
+    quest card is drawn
+    for each player, check if they can sponsor it. it yes, send signal to ask if they wish to do so. if not, pass option to next player who can sponsor it
+    if no players can sponsor it, end turn
+    if a player decides to sponsor it, request the cards they wish to sponsor it with
+    once received, proceed with quest. send signal to each player who is still alive to pick cards for battle
+    receive cards for each player. once all have been received, show the results, repeat until all phases are done or all players fail
+    */
 
     
     public String getSponsor(){
+        if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
+            nextTurn();
+            state = "turn_start";
+            activeQuest = null;
+            return "";
+        }
+
+
+
         return "";
     }
 
+    public boolean defeatedFoe(){ //check if the player successfully defeated a foe or not
+
+    }
 
     //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
 

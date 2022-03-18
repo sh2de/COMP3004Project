@@ -16,7 +16,7 @@ public class FoeCard extends AdventureCard{
     }
 
     public String toString(){
-        return name + ", a foe with a power of " + power + "/" + bosspower;
+        return name + ", a foe with a power of " + power + "/" + bosspower+" ";
     }
 
     public String getType(){
