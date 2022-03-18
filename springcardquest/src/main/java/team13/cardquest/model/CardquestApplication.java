@@ -88,7 +88,8 @@ public class CardquestApplication {
 	@GetMapping("/getUpdates/{name}")
 	public ResponseEntity<ArrayList<String>> getUpdates(@PathVariable("name") String name){
 
-		return new ResponseEntity<>(new ArrayList<String>(),HttpStatus.OK);
+		return new ResponseEntity<>(game.getUpdates(name),HttpStatus.OK);
+		//return new ResponseEntity<>(new ArrayList<String>(),HttpStatus.OK);
 		//return new ResponseEntity<>(game.joinGame(name), HttpStatus.OK);
 	}
 	// request for player with specified name
