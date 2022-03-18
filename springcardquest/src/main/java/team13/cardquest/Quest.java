@@ -15,4 +15,7 @@ public class Quest {
         bossid = _bossid;
     }
 
+    public int getStages(){
+        return stages;
+    }
 }
