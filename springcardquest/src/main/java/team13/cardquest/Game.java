@@ -116,6 +116,15 @@ public class Game {
         numPlayers += 1;
     }
 
+    //helper function to check if no players are waiting
+    public boolean allPlayersReady(){
+        boolean flag = true;
+        for (Player player : players) {
+            if (player.getWaiting()){flag = false;}
+        }
+        return flag;
+    }
+
     public void nextTurn(){
         currentTurn += 1;
         if (currentTurn > numPlayers){currentTurn = 1;}
@@ -136,6 +145,7 @@ public class Game {
 
     }
 
+    //api call to add new player to the game
     public String joinGame(String name){
         if (numPlayers > 3){
             return "";
@@ -149,12 +159,20 @@ public class Game {
 
     }
 
+    //api call to set player as ready to start the game
     public boolean startGame(String name){
         //set player as ready to start, if all players are ready give them all the “ALL_PLAYERS_READY” signal
-        getPlayer(name).eventQueue.add("ALL_PLAYERS_READY");
+        getPlayer(name).setWaiting(false);
+        if (allPlayersReady()){
+            for (Player player : players) {
+                player.eventQueue.add("ALL_PLAYERS_READY");
+            }
+            state = "turn_start"; //set the internal state to begin the game
+        }
         return true;
     }
 
+    
     public ArrayList<String> getUpdates(String name){
         return getPlayer(name).sendEventQueue();
     }
