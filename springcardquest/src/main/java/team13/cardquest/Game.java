@@ -29,7 +29,8 @@ public class Game {
     "quest test"    tbd
     */
 
-    //function that updates the game according to its state
+
+    //NOW IRRELEVANT function that updates the game according to its state
     //returns true/false depending on if the command is valid
     public boolean update(String executor, String command){ //executor is the player name, command is the action
         System.out.println("game has received command "+command+" from player "+executor);
@@ -101,10 +102,10 @@ public class Game {
             default:
                 return flag;
         }
-
         //return false;
-
     }
+    //The above function was the old way of handling things that we decided to throw out
+    
     
     
 
@@ -232,7 +233,15 @@ public class Game {
     }
 
     public boolean defeatedFoe(){ //check if the player successfully defeated a foe or not
+        return false;
+    }
 
+    public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
+        int p = 0;
+        for (Card card : hand) {
+            p += card.getPower();
+        }
+        return p;
     }
 
     //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------

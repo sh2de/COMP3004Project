@@ -18,4 +18,6 @@ public class Quest {
     public int getStages(){
         return stages;
     }
+
+    
 }
