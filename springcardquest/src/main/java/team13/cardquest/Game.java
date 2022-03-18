@@ -232,7 +232,8 @@ public class Game {
         return "";
     }
 
-    public boolean defeatedFoe(){ //check if the player successfully defeated a foe or not
+    public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
+        if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
         return false;
     }
 
