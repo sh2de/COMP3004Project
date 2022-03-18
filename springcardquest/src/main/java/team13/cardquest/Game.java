@@ -27,7 +27,6 @@ public class Game {
     "quest setup"   the sponsor now decides which cards to play for the quest
     "quest foe"     players must select the cards they wish to use before the foe is revealed and result is calculated    
     "quest test"    tbd
-    
     */
 
     //function that updates the game according to its state
