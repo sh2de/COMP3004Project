@@ -106,14 +106,7 @@ public class Game {
 
     }
     
-    //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
-    public void turnStart(){
-        Card c = storydeck.draw();
-        activeQuest = new Quest();
-        c.initQuest(activeQuest);
-        state = "quest sponsor";
-
-    }
+    
 
     public void addPlayer(Player p){
         players.add(p);
@@ -129,10 +122,7 @@ public class Game {
         return flag;
     }
 
-    public void nextTurn(){
-        currentTurn += 1;
-        if (currentTurn > numPlayers){currentTurn = 1;}
-    }
+    
 
     public Player getPlayer(String name){
         for (Player player : players) {
@@ -149,6 +139,7 @@ public class Game {
 
     }
 
+    //GAME SETUP FUNCTIONS---------------------------------------------------------------------------------------------------------------------
     //api call to add new player to the game
     public String joinGame(String name){
         if (numPlayers > 3){
@@ -178,6 +169,37 @@ public class Game {
         }
         return true;
     }
+
+
+    //TURN PROCESSING FUNCTIONS----------------------------------------------------------------------
+
+    //helper function to pass to the next turn no matter the number of players
+    public void nextTurn(){
+        currentTurn += 1;
+        if (currentTurn > numPlayers){currentTurn = 1;}
+    }
+
+    //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
+    public void turnStart(){
+        Card c = storydeck.draw();
+        activeQuest = new Quest();
+        c.initQuest(activeQuest);
+        state = "quest sponsor";
+    }
+
+    //QUEST PROCESSING FUNCTIONS----------------------------------------------------------------------
+
+    
+    public String getSponsor(){
+        return "";
+    }
+
+
+    //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
+
+    //TOURNAMENT PROCESSING FUNCTIONS----------------------------------------------------------------
+
+    //GENERAL USE FUNCTIONS---------------------------------------------------------------------------
 
     //api call to get a player's list of update signals
     public ArrayList<String> getUpdates(String name){
