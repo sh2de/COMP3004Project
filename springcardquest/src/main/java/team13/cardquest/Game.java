@@ -137,7 +137,7 @@ public class Game {
     */
 
     
-    public void getSponsor(){
+    public void getSponsor(){ //function to be called to iterate through possible sponsors for a quest
         if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
             nextTurn();
             
@@ -158,7 +158,7 @@ public class Game {
         return;
     }
 
-    public void sponsorshipAccepted(){
+    public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
         forceAllReady();
         for (Player player : players) {
             if ((player).equals(currentSponsor)){

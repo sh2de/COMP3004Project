@@ -19,4 +19,6 @@ public abstract class Card {
     public int getPower(){
         return 0;
     }
+	
+	public abstract void play();
 }
