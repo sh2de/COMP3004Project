@@ -18,7 +18,7 @@ public class Deck {
     }
 
     public void initialize(){
-        String url = "springcardquest\\src\\main\\resources\\static\\images\\testcard.png";
+        String url = "..\\..\\..\\resources\\static\\imagestestcard.png";
         if(isStory){
             for(int i = 0; i<100; i++){
                 String name = "Quest " + i;
