@@ -117,7 +117,7 @@ public class Game {
         activeQuest = new Quest();
         c.initQuest(activeQuest);
         state = "quest sponsor";
-        sponsor = currentTurn;
+        sponsor = 0;
         forceAllUnready();
 
     }
@@ -143,7 +143,7 @@ public class Game {
             return;
         }
 
-        Player p = players.get((currentTurn + sponsor)%numPlayers);
+        Player p = players.get((currentTurn - 1 + sponsor)%numPlayers);
         sponsor++;
 
         if (p.canSponsor(activeQuest)){
