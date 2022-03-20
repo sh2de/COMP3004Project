@@ -74,8 +74,8 @@ public class CardquestApplication {
 	
 	//request to register a player under the name given, returns the name they will use (which would change if there are duplicates)
 	@PostMapping("/joinGame")
-	public ResponseEntity<String> joinGame(@RequestBody String name){
-		return new ResponseEntity<>(game.joinGame(name), HttpStatus.CREATED);
+	public ResponseEntity<Object> joinGame(@RequestBody String name){
+		return new ResponseEntity<>(game.joinGame(name), HttpStatus.OK);
 	}
 
 	//request to start the game, player will then wait until all other players are ready to begin
@@ -92,6 +92,7 @@ public class CardquestApplication {
 		//return new ResponseEntity<>(new ArrayList<String>(),HttpStatus.OK);
 		//return new ResponseEntity<>(game.joinGame(name), HttpStatus.OK);
 	}
+
 	// request for player with specified name
 	@GetMapping("/getPlayer/{name}")
 	public ResponseEntity<Player> getPlayer(@PathVariable("name") String name){

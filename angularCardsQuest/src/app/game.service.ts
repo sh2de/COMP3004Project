@@ -20,9 +20,11 @@ export class GameService {
     
   }
 
-  public getHello(): Observable<Object>{
-    return this.http.get(this.apiServerUrl+"/hello");
+
+  public getApiUrl(){
+    return this.apiServerUrl;
   }
+  
   
   /*
   request to register the player unde inputed name
@@ -46,7 +48,9 @@ export class GameService {
    * @returns player object if player with given name and null otherwise
    */
    public getPlayer(name:string): Observable<Object>{
+     console.log("url: "+this.apiServerUrl+"/getPlayer/"+name)
     return this.http.get(this.apiServerUrl+"/getPlayer/"+name);
+  
   }
 
   /**

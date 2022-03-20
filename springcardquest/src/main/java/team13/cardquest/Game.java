@@ -78,9 +78,6 @@ public class Game {
         addPlayer(new Player(name));
         System.out.println("player "+name+" has joined the game"); //debug message
         return name;
-        
-
-    
     }
 
     public void addPlayer(Player p){

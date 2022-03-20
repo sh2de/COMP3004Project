@@ -17,15 +17,7 @@ export class NavComponent implements OnInit {
   }
 
   load(){
-    this.gameService.getHello().subscribe(
-      (res: Object)=>{
-        console.log(res)
-      },
-
-      (err:HttpErrorResponse)=>{
-        console.log(err.message);
-      }
-    )
+    
   }
 
 }
