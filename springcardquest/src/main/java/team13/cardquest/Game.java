@@ -156,13 +156,12 @@ public class Game {
     }
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
-        forceAllReady();
+        forceAllUnready(); //we need a response from all players
         for (Player player : players) {
             if ((player).equals(currentSponsor)){
                 player.eventQueue.add("CREATE_QUEST"); //signal to select cards for the quest
-                player.setWaiting(true);
             } else {
-                player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin
+                player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin and request participation
             }
         }
     }
