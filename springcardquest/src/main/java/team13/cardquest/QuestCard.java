@@ -27,4 +27,9 @@ public class QuestCard extends StoryCard{
     public String getType(){
         return "QUEST";
     }
+
+    @Override
+    public void play() {
+
+    }
 }

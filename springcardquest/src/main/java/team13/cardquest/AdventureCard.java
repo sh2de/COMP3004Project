@@ -8,5 +8,9 @@ public class AdventureCard extends Card{
     public AdventureCard(){
         id = (long) idCounter++;
     }
-    
+
+    @Override
+    public void play() {
+
+    }
 }

@@ -1,6 +1,6 @@
 package team13.cardquest;
 
-public abstract class FoeCard extends AdventureCard{
+public class FoeCard extends AdventureCard{
     String name = "DUMMY FOE";
     int power = 20;
     int bosspower = 30;
@@ -27,5 +27,4 @@ public abstract class FoeCard extends AdventureCard{
         return power;
     }
 	
-	protected abstract void checkTrigger();
 }

@@ -1,5 +1,5 @@
 package team13.cardquest;
 
-public Class TestCard extends AdventureCard{
-	protected abstract checkTrigger();
+public abstract class TestCard extends AdventureCard{
+	protected abstract void checkTrigger();
 }
