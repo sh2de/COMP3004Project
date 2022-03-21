@@ -4,6 +4,7 @@
 		"name": "Black Knight",
 		"battlePower": "25",
 		"boost": "10",
+		"bidWorth": "1",
 		"frequency": "3"	
 	},
 	{
@@ -11,6 +12,7 @@
 		"name": "Boar",
 		"battlePower": "5",
 		"boost": "10",
+		"bidWorth": "1",
 		"frequency": "4"	
 	},
 	{
@@ -18,6 +20,7 @@
 		"name": "Dragon",
 		"battlePower": "50",
 		"boost": "20",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
@@ -25,6 +28,7 @@
 		"name": "Evil Knight",
 		"battlePower": "20",
 		"boost": "10",
+		"bidWorth": "1",
 		"frequency": "6"	
 	},
 	{
@@ -32,6 +36,7 @@
 		"name": "Giant",
 		"battlePower": "40",
 		"boost": "0",
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -39,6 +44,7 @@
 		"name": "Green Knight",
 		"battlePower": "25",
 		"boost": "15",
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -46,12 +52,14 @@
 		"name": "Mordred",
 		"battlePower": "30",
 		"boost": "0",
+		"bidWorth": "1",
 		"frequency": "4"	
 	},{
 		"type": "Foe",
 		"name": "Robber Knight",
 		"battlePower": "15",
 		"boost": "0",
+		"bidWorth": "1",
 		"frequency": "7"	
 	},
 	{
@@ -59,6 +67,7 @@
 		"name": "Saxons",
 		"battlePower": "10",
 		"boost": "10",
+		"bidWorth": "1",
 		"frequency": "5"	
 	},
 	{
@@ -66,6 +75,7 @@
 		"name": "Saxon Knight",
 		"battlePower": "15",
 		"boost": "10",
+		"bidWorth": "1",
 		"frequency": "8"	
 	},
 	{
@@ -73,6 +83,7 @@
 		"name": "Theives",
 		"battlePower": "5",
 		"boost": "0",
+		"bidWorth": "1",
 		"frequency": "8"	
 	}
 ]

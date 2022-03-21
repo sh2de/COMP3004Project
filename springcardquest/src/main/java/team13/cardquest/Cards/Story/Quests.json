@@ -4,6 +4,7 @@
 		"name": "Journey through the Enchanted Forest",
 		"stages": "3",
 		"foe": "Evil Knight",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
@@ -11,6 +12,7 @@
 		"name": "Vanquish King Arthur's Enemies",
 		"stages": "3",
 		"foe": null,
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -18,6 +20,7 @@
 		"name": "Repel the Saxon Raiders",
 		"stages": "2",
 		"foe": "Saxon",
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -25,6 +28,7 @@
 		"name": "Boar Hunt",
 		"stages": "2",
 		"foe": "Boar",
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -32,6 +36,7 @@
 		"name": "Search for the Questing Beast",
 		"stages": "4",
 		"foe": null,
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
@@ -39,6 +44,7 @@
 		"name": "Defend the Queen's Honor",
 		"stages": 4,
 		"foe": "All",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
@@ -46,6 +52,7 @@
 		"name": "Slay the Dragon",
 		"stages": "3",
 		"foe": "Dragon",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
@@ -53,6 +60,7 @@
 		"name": "Rescue the Fair Maiden",
 		"stages": "3",
 		"foe": "Black Knight",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
@@ -60,6 +68,7 @@
 		"name": "Search for the Holy Grail",
 		"stages": "5",
 		"foe": "All",
+		"bidWorth": "1",
 		"frequency": "1"	
 	}
 ]

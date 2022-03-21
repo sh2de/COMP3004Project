@@ -1,18 +1,18 @@
 package team13.cardquest;
 
-public class FoeCard extends AdventureCard{
-    String name = "DUMMY FOE";
-    int power = 20;
-    int bosspower = 30;
-    boolean mordred = false;
+public class FoeCard extends Card{
+    //spooky unencapsulation
+    public boolean isMordred = false;
 
-    public FoeCard(long _id, String _url, String _name, int _power, int _bosspower, boolean _mordred){
-        id = _id;
-        url = _url;
-        name = _name;
-        power = _power;
-        bosspower = _bosspower;
-        mordred = _mordred;
+    public FoeCard(String name, int battlePower, int boost, int bidWorth, String url){
+        id = -3;
+        type = "Foe";
+        this.name = name;
+        this.battlePower = battlePower;
+        this.boost = boost;
+        this.bidWorth = bidWorth;
+        this.url = url;
+        
     }
 
     public String toString(){
@@ -25,6 +25,10 @@ public class FoeCard extends AdventureCard{
 
     public int getPower(){
         return power;
+    }
+
+    public void play(){
+        System.out.println("dummy play behaviour");
     }
 	
 }

@@ -4,6 +4,7 @@
 		"name": "Test of the Questing Beast",
 		"minBid": "3",
 		"trigger": "Search for the Questing Beast",
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -11,6 +12,7 @@
 		"name": "Test of Temptation",
 		"minBid": "3",
 		"trigger": null,
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -18,6 +20,7 @@
 		"name": "Test of Valor",
 		"minBid": "3",
 		"trigger": null,
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
@@ -25,6 +28,7 @@
 		"name": "Test of Morgan Le Fey",
 		"minBid": "3",
 		"trigger": null,
+		"bidWorth": "1",
 		"frequency": "2"		
 	}
 ]

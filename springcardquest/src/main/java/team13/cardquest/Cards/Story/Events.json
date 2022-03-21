@@ -2,40 +2,48 @@
 	{
 		"type": "Event",
 		"name": "Chivalrous Deed",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
 		"type": "Event",
 		"name": "Court Called to Camelot",
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
 		"type": "Event",
 		"name": "King's Call to Arms",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
 		"type": "Event",
 		"name": "King's Recognition",
+		"bidWorth": "1",
 		"frequency": "2"	
 	},
 	{
 		"type": "Event",
 		"name": "Plague",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
 		"type": "Event",
+		"bidWorth": "1",
 		"name": "Pox"
 	},
 	{
 		"type": "Event",
 		"name": "Prosperity Throughout the Realm",
+		"bidWorth": "1",
 		"frequency": "1"	
 	},
 	{
 		"type": "Event",
 		"name": "Queen's Favor",
+		"bidWorth": "1",
 		"frequency": "2"	
 	}
 ]

@@ -5,8 +5,9 @@ import java.util.ArrayList;
 //The game object represents the internal state of a game session
 //It is responsible for keeping track of all the game elements, but does not automatically advance the game itself
 public class Game {
-    Deck storydeck = new Deck(true);
-    Deck adventuredeck = new Deck(false);
+    DeckFactory df = new DeckFactory();
+    Deck storydeck = df.createDeck(true);
+    Deck adventuredeck = df.createDeck(false);
     int numPlayers = 0;
     int currentTurn = 1;
     int sponsor = -1; //variable used for iterating through available sponsors
