@@ -118,7 +118,7 @@ public class Game {
         activeQuest = new Quest();
         c.initQuest(activeQuest);
         state = "quest sponsor";
-        sponsor = currentTurn;
+        sponsor = 0;
         forceAllUnready();
 
     }
@@ -144,7 +144,7 @@ public class Game {
             return;
         }
 
-        Player p = players.get((currentTurn + sponsor)%numPlayers);
+        Player p = players.get((currentTurn - 1 + sponsor)%numPlayers);
         sponsor++;
 
         if (p.canSponsor(activeQuest)){
@@ -157,13 +157,12 @@ public class Game {
     }
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
-        forceAllReady();
+        forceAllUnready(); //we need a response from all players
         for (Player player : players) {
             if ((player).equals(currentSponsor)){
                 player.eventQueue.add("CREATE_QUEST"); //signal to select cards for the quest
-                player.setWaiting(true);
             } else {
-                player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin
+                player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin and request participation
             }
         }
     }
