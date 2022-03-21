@@ -17,10 +17,10 @@ export class GameboardComponent implements OnInit {
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
-    
+    this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
-        this.load()
+        this.getUpdates();
       });
       this.load()
   }
@@ -28,7 +28,7 @@ export class GameboardComponent implements OnInit {
   load(){
     console.log("playename:"+this.route.snapshot.params["username"])
 
-    this.gameService.getPlayer(this.route.snapshot.params["username"]).subscribe(
+    this.gameService.getPlayer(this.playerName).subscribe(
       (res:Object)=>{
         this.player=res;
         this.myHand=this.player["hand"];
@@ -45,7 +45,18 @@ export class GameboardComponent implements OnInit {
   }
 
   start(){
-    this.gameService.startGame(this.route.snapshot.params["username"]).subscribe(
+    this.gameService.startGame(this.playerName).subscribe(
+      (res:Object)=>{
+        console.log(res)
+      },
+      (err:HttpErrorResponse)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+  }
+
+  getUpdates(){
+    this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
         console.log(res)
       },
