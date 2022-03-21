@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NavComponent } from './nav/nav.component';
+import {tap} from 'rxjs/operators'
 
 
 @Injectable({
@@ -20,6 +21,11 @@ export class GameService {
     
   }
 
+  private _refreshNeededs= new Subject<void>();
+
+  get refresNeededs () {
+    return this._refreshNeededs;
+  }
 
   public getApiUrl(){
     return this.apiServerUrl;
@@ -48,8 +54,14 @@ export class GameService {
    * @returns player object if player with given name and null otherwise
    */
    public getPlayer(name:string): Observable<Object>{
-     console.log("url: "+this.apiServerUrl+"/getPlayer/"+name)
-    return this.http.get(this.apiServerUrl+"/getPlayer/"+name);
+    return this.http.get(this.apiServerUrl+"/getPlayer/"+name)
+      .pipe(
+        tap(()=>{
+          this._refreshNeededs.next();
+        }
+
+        )
+      );
   
   }
 
@@ -60,6 +72,10 @@ export class GameService {
    */
    public getUpdates(name:string): Observable<Object>{
     return this.http.get(this.apiServerUrl+"/getUpdates/"+name);
+  }
+
+  public getCurrentPlayer(): Observable<Object>{
+    return this.http.get(this.apiServerUrl+"/getCurrentPlayer");
   }
 
 

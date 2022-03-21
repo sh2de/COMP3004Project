@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GameboardComponent } from './gameboard/gameboard.component';
 import { NavComponent } from './nav/nav.component';
 import { GameService } from './game.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GameService } from './game.service';
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [GameService],
   bootstrap: [AppComponent]

@@ -98,5 +98,11 @@ public class CardquestApplication {
 	public ResponseEntity<Player> getPlayer(@PathVariable("name") String name){
 		return new ResponseEntity<>(game.getPlayer(name),HttpStatus.OK);
 	}
-	
+
+	// request for getting current player
+
+	@GetMapping("/getCurrentPlayer")
+	public ResponseEntity<Player> getCurrentPlayer(){
+		return new ResponseEntity<>(game.getCurrentPlayer(),HttpStatus.OK);
+	}
 }
