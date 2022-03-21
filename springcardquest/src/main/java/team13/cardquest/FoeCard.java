@@ -3,7 +3,7 @@ package team13.cardquest;
 public class FoeCard extends Card{
     //spooky unencapsulation
     public boolean isMordred = false;
-
+    private int battlePower, boost;
     public FoeCard(String name, int battlePower, int boost, int bidWorth, String url){
         id = -3;
         type = "Foe";
@@ -16,7 +16,7 @@ public class FoeCard extends Card{
     }
 
     public String toString(){
-        return name + ", a foe with a power of " + power + "/" + bosspower+" ";
+        return name + ", a foe with a power of " + battlePower + "/" + boost+" ";
     }
 
     public String getType(){
@@ -24,7 +24,7 @@ public class FoeCard extends Card{
     }
 
     public int getPower(){
-        return power;
+        return battlePower;
     }
 
     public void play(){

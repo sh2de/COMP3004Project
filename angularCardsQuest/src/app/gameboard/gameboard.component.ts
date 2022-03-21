@@ -46,8 +46,11 @@ export class GameboardComponent implements OnInit {
 
   start(){
     this.gameService.startGame(this.playerName).subscribe(
-      (res:Object)=>{
-        console.log(res)
+      (res)=>{
+        if(res["length"]>0){
+          console.log(res)
+        }
+        
       },
       (err:HttpErrorResponse)=>{
         console.log("ERROR: "+err.message);

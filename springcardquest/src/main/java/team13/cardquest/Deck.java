@@ -17,24 +17,24 @@ public class Deck {
 
     public void initialize(){
         String url = "http://localhost:8080/images/testcard.png";
-        if(isStory){
-            for(int i = 0; i<100; i++){
-                //get all quest blobs
-                //get all event blobs
-                //get all tournament blobs*
-
-
-                /*String name = "Quest " + i;
-                String foe = "Boss " + i;
-                stack.add(new QuestCard(i, url, name, i, foe, i));*/
-            }
-        }else{
-            for(int i = 0; i<100; i++){
-                /*boolean isMord = i % 2 == 0 ? true: false;
-                String name = "Foe " + i;
-                stack.add(new FoeCard(i, url, name, i, i, isMord));*/
-            }
-        }
+//        if(isStory){
+//            for(int i = 0; i<100; i++){
+//                //get all quest blobs
+//                //get all event blobs
+//                //get all tournament blobs*
+//
+//
+//                /*String name = "Quest " + i;
+//                String foe = "Boss " + i;
+//                stack.add(new QuestCard(i, url, name, i, foe, i));*/
+//            }
+//        }else{
+//            for(int i = 0; i<100; i++){
+//                /*boolean isMord = i % 2 == 0 ? true: false;
+//                String name = "Foe " + i;
+//                stack.add(new FoeCard(i, url, name, i, i, isMord));*/
+//            }
+//        }
     }
 
     //fetch and create all quest cards (sami)
@@ -49,6 +49,7 @@ public class Deck {
 
     public Deck(){
         stack = new ArrayList<Card>();
+
         //initialize(); //just comment this out when youre done with getting the information
     }
 

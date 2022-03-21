@@ -2,7 +2,7 @@ package team13.cardquest;
 
 public abstract class Card {
     protected long id = -1;
-    protected name = "UNNAMED";
+    protected String name = "UNNAMED";
     protected String type = "UNDEFINED";
     protected int bidWorth = 1;
     protected int frequency = 1;
@@ -42,9 +42,9 @@ public abstract class Card {
 
 
     //doesn't make sense for Card to have, should be for specific type of
-    /*public int getPower(){
+    public int getPower(){
         return 0;
-    }*/
+    }
 	
 	public abstract void play();
 }

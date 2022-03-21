@@ -71,7 +71,13 @@ export class GameService {
    * @returns observable of event queue
    */
    public getUpdates(name:string): Observable<Object>{
-    return this.http.get(this.apiServerUrl+"/getUpdates/"+name);
+    return this.http.get(this.apiServerUrl+"/getUpdates/"+name)
+      .pipe(
+        tap(()=>{
+          this._refreshNeededs.next();
+        }
+        )
+      );
   }
 
   public getCurrentPlayer(): Observable<Object>{
