@@ -5,8 +5,9 @@ import java.util.ArrayList;
 //The game object represents the internal state of a game session
 //It is responsible for keeping track of all the game elements, but does not automatically advance the game itself
 public class Game {
-    Deck storydeck = new Deck(true);
-    Deck adventuredeck = new Deck(false);
+    DeckFactory df = new DeckFactory();
+    Deck storydeck = df.createDeck(true);
+    Deck adventuredeck = df.createDeck(false);
     int numPlayers = 0;
     int currentTurn = 1;
     int sponsor = -1; //variable used for iterating through available sponsors
@@ -117,7 +118,7 @@ public class Game {
         activeQuest = new Quest();
         c.initQuest(activeQuest);
         state = "quest sponsor";
-        sponsor = currentTurn;
+        sponsor = 0;
         forceAllUnready();
 
     }
@@ -143,7 +144,7 @@ public class Game {
             return;
         }
 
-        Player p = players.get((currentTurn + sponsor)%numPlayers);
+        Player p = players.get((currentTurn - 1 + sponsor)%numPlayers);
         sponsor++;
 
         if (p.canSponsor(activeQuest)){
@@ -156,13 +157,12 @@ public class Game {
     }
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
-        forceAllReady();
+        forceAllUnready(); //we need a response from all players
         for (Player player : players) {
             if ((player).equals(currentSponsor)){
                 player.eventQueue.add("CREATE_QUEST"); //signal to select cards for the quest
-                player.setWaiting(true);
             } else {
-                player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin
+                player.eventQueue.add("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin and request participation
             }
         }
     }
