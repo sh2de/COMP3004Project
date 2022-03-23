@@ -98,7 +98,7 @@ public class Game {
                 }
             }
             state = "turn_start"; //set the internal state to begin the game
-            turnStart();
+            //turnStart();
         }
         return true;
     }
