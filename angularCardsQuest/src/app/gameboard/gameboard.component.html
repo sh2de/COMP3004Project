@@ -8,8 +8,15 @@
       </div>
 <div class="col-sm-9">
     <h4><small>Player: {{player["name"]}}</small></h4>
+    <button type="button" class="btn btn-primary" (click)="start()">ready to start</button>
     <div *ngIf="condition">
-      <label for="tes">hands</label>
+      <h5>Your hand</h5>
+      <div class="row itemsBlock">
+        <div *ngFor="let card of myHand" class="col-md-4 col-sm-6 col-12">
+             <img class="itemImage" (click)="selected(card)" src="{{card['url']}}" />
+             <span class="itemitle">{{card['type']}}</span>
+        </div>
+     </div>
     </div>
     <br><br>
     <h4>list of cards</h4>

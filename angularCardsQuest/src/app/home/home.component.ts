@@ -10,27 +10,31 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
   player='';
+  message='';
   private apiServerUrl=environment.apiBaseUrl;
+
   constructor(private gameService:GameService, private route:Router,private http:HttpClient) { }
 
   ngOnInit(): void {
-    
+    this.message="You can join the Game"
   }
 
   join(){
     let url=this.apiServerUrl+"/joinGame"
-    console.log(url)
+
     this.http.post(url,this.player).subscribe(
       (res)=>{
-        console.log(res);
-        
+        console.log(res);        
       },
       (err:HttpErrorResponse)=>{
         console.log("ERROR: "+err.message);
       }
     )
-    this.route.navigateByUrl("gameboard/"+this.player);   
+    this.route.navigateByUrl("gameboard/"+this.player);
+
     
   }
+
+  
 
 }

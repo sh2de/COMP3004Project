@@ -191,6 +191,12 @@ public class Game {
     public ArrayList<String> getUpdates(String name){
         return getPlayer(name).sendEventQueue();
     }
+
+    //api call to get a current player
+
+    public Player getCurrentPlayer(){
+        return players.get(currentTurn-1);
+    }
     
 
     //print function for debugging purposes
