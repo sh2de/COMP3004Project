@@ -5,7 +5,6 @@ public abstract class Card {
     protected name = "UNNAMED";
     protected String type = "UNDEFINED";
     protected int bidWorth = 1;
-    protected int frequency = 1;
     protected String url = "./images/testcard.png";
 
     public boolean initQuest(Quest q){

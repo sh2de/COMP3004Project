@@ -30,7 +30,7 @@ public class DeckFactory{
 				for(int i = 0; i<quest.frequency; i++){
 					deck.stack.add(new QuestCard(quest.name, quest.stages, quest.foeName, quest.bidWorth, url));
 				}
-			});
+			});c
 		}
 
 		return deck;

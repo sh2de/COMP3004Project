@@ -49,6 +49,7 @@ public class Deck {
 
     public Deck(){
         stack = new ArrayList<Card>();
+        
         //initialize(); //just comment this out when youre done with getting the information
     }
 
