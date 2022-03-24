@@ -5,9 +5,9 @@ import java.util.ArrayList;
 //The game object represents the internal state of a game session
 //It is responsible for keeping track of all the game elements, but does not automatically advance the game itself
 public class Game {
-    DeckFactory df = new DeckFactory();
-    Deck storydeck = df.createDeck(true);
-    Deck adventuredeck = df.createDeck(false);
+    DeckFactory df = new DeckFactory(this);
+    Deck storydeck = df.CreateDeck(true);
+    Deck adventuredeck = df.CreateDeck(false);
     int numPlayers = 0;
     int currentTurn = 1;
     int sponsor = -1; //variable used for iterating through available sponsors
@@ -116,7 +116,7 @@ public class Game {
     public void turnStart(){
         Card c = storydeck.draw();
         activeQuest = new Quest();
-        c.initQuest(activeQuest);
+        //c.initQuest(activeQuest);
         state = "quest sponsor";
         sponsor = 0;
         forceAllUnready();
@@ -167,6 +167,9 @@ public class Game {
         }
     }
 
+    //this function is what each quest will call so that the game can put itself in the right state for the quest
+    public void ReceiveQuest(BlobQuest q){ System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
+
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
         if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
         return false;
@@ -175,7 +178,7 @@ public class Game {
     public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
         int p = 0;
         for (Card card : hand) {
-            p += card.getPower();
+            //p += card.GetPower();
         }
         return p;
     }
@@ -272,7 +275,7 @@ public class Game {
                     
                     System.out.println("player drew card "+c);
                     activeQuest = new Quest();
-                    c.initQuest(activeQuest);
+                    //c.initQuest(activeQuest);
                     state = "quest sponsor";
                     
                     
