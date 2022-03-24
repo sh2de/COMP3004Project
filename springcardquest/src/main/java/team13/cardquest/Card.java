@@ -1,20 +1,10 @@
 package team13.cardquest;
 
-<<<<<<< HEAD
 public class Card{
 	private String name;
 	private String type;
 	private int value;
 	private String url;
-=======
-public abstract class Card {
-    protected long id = -1;
-    protected String name = "UNNAMED";
-    protected String type = "UNDEFINED";
-    protected int bidWorth = 1;
-    protected String url = "./images/testcard.png";
-    protected int frequency=0;
->>>>>>> 76af40816f7a19092c7c65a75227bb570e806728
 
 	private Game game;
 	private Playable play;
