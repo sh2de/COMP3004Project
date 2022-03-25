@@ -4,11 +4,21 @@
       <div class="col-sm-3 sidenav">
         <h4>Cards</h4>
         <br><br><br><br>
-        <h4>Cards played by other player</h4>        
+        <h4>Cards in play</h4>
+
+        <!-- for player to accept or reject sponsoring the card -->
+        <div>
+          <label for="sponsoring"> can you sponsor the following quest?</label><br>
+          <button type="button" (click)="sponsor()" class="btn btn-link">Yes</button>
+          <button type="button" (click)="notSponsor()" class="btn btn-link">No</button>
+        </div>        
       </div>
 <div class="col-sm-9">
     <h4><small>Player: {{player["name"]}}</small></h4>
-    <button type="button" class="btn btn-primary" (click)="start()">ready to start</button>
+    <div *ngIf="read">
+      <button type="button" class="btn btn-primary" (click)="start()">ready to start</button>
+    </div>
+    
     <div *ngIf="condition">
       <h5>Your hand</h5>
       <div class="row itemsBlock">

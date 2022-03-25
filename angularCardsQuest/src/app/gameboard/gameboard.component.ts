@@ -14,9 +14,11 @@ export class GameboardComponent implements OnInit {
   condition=false;
   myHand=[];
   selectedCards=[];
+  read: Boolean;
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
+    this.read=true;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -45,11 +47,10 @@ export class GameboardComponent implements OnInit {
   }
 
   start(){
+    this.read=false;
     this.gameService.startGame(this.playerName).subscribe(
       (res)=>{
-        if(res["length"]>0){
-          console.log(res)
-        }
+        console.log(res)
         
       },
       (err:HttpErrorResponse)=>{
@@ -61,12 +62,21 @@ export class GameboardComponent implements OnInit {
   getUpdates(){
     this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
-        console.log(res)
+        if(res["length"]>0){
+          console.log(res)
+        }
       },
       (err:HttpErrorResponse)=>{
         console.log("ERROR: "+err.message);
       }
     )
+  }
+
+  sponsor(){
+    console.log("i can sponsor it");
+  }
+  notSponsor(){
+    console.log("not sponsoring it")
   }
 
   selected(card){
