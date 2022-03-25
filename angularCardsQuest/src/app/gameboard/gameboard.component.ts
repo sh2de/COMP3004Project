@@ -12,6 +12,7 @@ export class GameboardComponent implements OnInit {
   player= new Object;
   playerName="";
   condition=false;
+  cardList=[];
   myHand=[];
   selectedCards=[];
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
@@ -37,11 +38,14 @@ export class GameboardComponent implements OnInit {
         if(this.player["hand"].length>0){
           this.condition=true;
         }
+        
       },
       (err:HttpErrorResponse)=>{
         console.log("ERROR: "+err.message);
       }
     )
+
+    this.cardList = this.gameService.getImages();
   }
 
   start(){
@@ -58,6 +62,11 @@ export class GameboardComponent implements OnInit {
     )
   }
 
+  send(){
+    this.gameService.sendSelected(this.selectedCards);
+    this.gameService.sendHanded(this.myHand);
+  }
+
   getUpdates(){
     this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
@@ -69,12 +78,18 @@ export class GameboardComponent implements OnInit {
     )
   }
 
-  selected(card){
-  
-    this.selectedCards.push(card);
-    console.log(card)
+  addToplayerList(i:number){
+    this.myHand.push(this.cardList[i]);
   }
-
+  selected(i:number){  
+    this.selectedCards.push(this.myHand[i]);
+    this.myHand.splice(i, 1);
+    console.log(this.myHand[i]);
+  }
+  cancel(i:number){
+    this.myHand.push(this.selectedCards[i]);
+    this.selectedCards.splice(i, 1);
+  }
  
 
 }
