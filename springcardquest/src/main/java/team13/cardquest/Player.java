@@ -50,8 +50,8 @@ public class Player {
         boolean test = false; //we only check for one because only one test may be played per quest
 
         for (Card c : hand) {
-            if (c.getType().equals("FOE")){foes++;}
-            if (c.getType().equals("TEST")){test = true;}
+            if (c.GetType().equals("FOE")){foes++;}
+            if (c.GetType().equals("TEST")){test = true;}
         }
 
         if (test){foes++;}
