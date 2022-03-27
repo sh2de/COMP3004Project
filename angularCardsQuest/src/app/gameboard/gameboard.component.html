@@ -1,6 +1,5 @@
 <h1>Quest Of The Round Table</h1>
 <div class="container-fluid">
-<<<<<<< HEAD
     <div class="row content">
       <div class="col-sm-3 sidenav">
         <h4>Cards</h4>
@@ -13,26 +12,21 @@
           <button type="button" (click)="sponsor()" class="btn btn-link">Yes</button>
           <button type="button" (click)="notSponsor()" class="btn btn-link">No</button>
         </div>        
-=======
   <div class="row content">
     <div class="col-sm-3 card">
       <h4>Cards</h4>
       <div *ngFor="let card of cardList; index as i">  
-        <img src={{card}} style="width:250px;height:150px;" (click) = "addToplayerList(i)"> <br><br>      
->>>>>>> 73064811551d153aef9b120af40765a1fd0a9794
+        <!-- <img src={{card}} style="width:250px;height:150px;" (click) = "addToplayerList(i)"> <br><br>       -->
       </div>
     </div>
 <div class="col-sm-9">
     <h4><small>Player: {{player["name"]}}</small></h4>
-<<<<<<< HEAD
     <div *ngIf="read">
       <button type="button" class="btn btn-primary" (click)="start()">ready to start</button>
     </div>
     
-=======
     <button type="button" style="margin-left:2.5em" class="btn btn-primary" (click)="start()">ready to start</button>
     <button type="button" style="margin-left:2.5em" class="btn btn-primary" (click)="send()"> send </button>
->>>>>>> 73064811551d153aef9b120af40765a1fd0a9794
     <div *ngIf="condition">
       <h5>Your hand</h5>
       <div class="row itemsBlock">
@@ -43,7 +37,7 @@
       <h4><small>List of Card</small></h4>
       <div *ngFor="let card of myHand; index as i">
         <div class="column">
-          <img src={{card}} style="width:150px;height:100px;" class="itemImage" (click)="selected(i)"/>
+          <!-- <img src="{{card}}" style="width:150px;height:100px;" class="itemImage" (click)="selected(i)"/> -->
         </div>
       </div>
     </div>
@@ -52,7 +46,7 @@
       <h4><small>Selected Card</small></h4>
       <div *ngFor="let card of selectedCards; index as i">
         <div class="column">
-          <img src={{card}} style="width:150px;height:100px;" class="itemImage" (click)="cancel(i)"/>
+          <!-- <img src={{card}} style="width:150px;height:100px;" class="itemImage" (click)="cancel(i)"/> -->
         </div>
       </div>
     </div>

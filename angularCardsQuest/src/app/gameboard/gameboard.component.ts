@@ -81,7 +81,6 @@ export class GameboardComponent implements OnInit {
     )
   }
 
-<<<<<<< HEAD
   sponsor(){
     console.log("i can sponsor it");
   }
@@ -93,11 +92,13 @@ export class GameboardComponent implements OnInit {
   
     this.selectedCards.push(card);
     console.log(card)
-=======
+  }
+
   addToplayerList(i:number){
     this.myHand.push(this.cardList[i]);
   }
-  selected(i:number){  
+  isSelected(i:number){  
+
     this.selectedCards.push(this.myHand[i]);
     this.myHand.splice(i, 1);
     console.log(this.myHand[i]);
@@ -105,7 +106,7 @@ export class GameboardComponent implements OnInit {
   cancel(i:number){
     this.myHand.push(this.selectedCards[i]);
     this.selectedCards.splice(i, 1);
->>>>>>> 73064811551d153aef9b120af40765a1fd0a9794
+
   }
  
 

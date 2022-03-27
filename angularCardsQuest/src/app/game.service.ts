@@ -15,14 +15,7 @@ export class GameService {
 
   private player= new Object;
 
-  private imglist = [
-    './assets/QuestEvents.jpg',
-    './assets/QuestsFoes1.jpg',
-    './assets/QuestsFoes2.jpg',
-    './assets/QuestsQuests1.jpg',
-    './assets/QuestsQuests2.jpg'
-  ];
-  
+  private imglist =[];  
   constructor(private http:HttpClient) { }
 
   load(){
