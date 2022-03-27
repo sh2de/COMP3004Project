@@ -14,7 +14,7 @@ public class Game {
     Player currentSponsor = null;
     ArrayList<Player> players = new ArrayList<>();
 
-    //StoryCard currentStory = null;
+    Card currentStory = null;
 
     Quest activeQuest = null;
 
@@ -75,6 +75,10 @@ public class Game {
             return "";
         }
 
+        for (Player player : players) { //edit duplicate names
+            if (player.getName().equals(name)){name += (numPlayers+1);}
+        }
+
         //missing functionality: make sure there are no duplicate player names
         addPlayer(new Player(name));
         System.out.println("player "+name+" has joined the game"); //debug message
@@ -98,7 +102,7 @@ public class Game {
                 }
             }
             state = "turn_start"; //set the internal state to begin the game
-            //turnStart();
+            turnStart();
         }
         return true;
     }
@@ -114,12 +118,37 @@ public class Game {
 
     //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
     public void turnStart(){
-        Card c = storydeck.draw();
-        activeQuest = new Quest();
+        currentStory = storydeck.draw();
+
+        if (currentStory.GetType().equals("QUEST")){
+            //quest card drawn
+            for (Player player : players) {
+                player.addEventSignal("DRAW_STORY");
+            }
+            state = "quest sponsor";
+            sponsor = 0;
+            forceAllUnready();
+            getSponsor();
+
+        } else if (currentStory.GetType().equals("EVENT")){
+            //event card drawn
+
+        } else if (currentStory.GetType().equals("TOURNAMENT")){
+            //tournament card drawn
+
+        } else {
+            //invalid card
+            currentStory = null;
+            turnStart();
+        }
+        
+
+
+        //activeQuest = new Quest();
         //c.initQuest(activeQuest);
-        state = "quest sponsor";
-        sponsor = 0;
-        forceAllUnready();
+        //state = "quest sponsor";
+        //sponsor = 0;
+        //forceAllUnready();
 
     }
 
@@ -137,10 +166,9 @@ public class Game {
     
     public void getSponsor(){ //function to be called to iterate through possible sponsors for a quest
         if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
-            nextTurn();
-            
             state = "turn_start";
             activeQuest = null;
+            nextTurn();
             return;
         }
 
@@ -154,6 +182,10 @@ public class Game {
             getSponsor();
         }
         return;
+    }
+
+    public void sponsorshipDeclined(){//function that runs when a player rejects a quest
+        getSponsor();
     }
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
