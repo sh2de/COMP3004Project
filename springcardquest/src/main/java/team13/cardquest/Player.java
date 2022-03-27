@@ -64,7 +64,7 @@ public class Player {
     }
 
     //check if this player is capable of sponsoring a given quest with their current hand
-    public boolean canSponsor(Quest q){
+    public boolean canSponsor(BlobQuest q){
         int foes = 0;
         boolean test = false; //we only check for one because only one test may be played per quest
 
@@ -75,7 +75,7 @@ public class Player {
 
         if (test){foes++;}
 
-        if (foes >= q.getStages()){return true;}
+        if (foes >= q.stages){return true;}
 
         return false;
     }
