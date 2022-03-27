@@ -94,7 +94,7 @@ public class Game {
             for (Player player : players) {
                 player.eventQueue.add("ALL_PLAYERS_READY");
                 for(int i = 0; i < 12; i++){
-                    //player.addCardToHand(adventuredeck.draw());
+                    player.addCardToHand(adventuredeck.draw());
                 }
             }
             state = "turn_start"; //set the internal state to begin the game
