@@ -14,7 +14,7 @@ public class Game {
     Player currentSponsor = null;
     ArrayList<Player> players = new ArrayList<>();
 
-    Card currentStory = null;
+    //StoryCard currentStory = null;
 
     Quest activeQuest = null;
 
@@ -94,7 +94,7 @@ public class Game {
             for (Player player : players) {
                 player.eventQueue.add("ALL_PLAYERS_READY");
                 for(int i = 0; i < 12; i++){
-                    player.addCardToHand(adventuredeck.draw());
+                    //player.addCardToHand(adventuredeck.draw());
                 }
             }
             state = "turn_start"; //set the internal state to begin the game
@@ -168,7 +168,10 @@ public class Game {
     }
 
     //this function is what each quest will call so that the game can put itself in the right state for the quest
-    public void ReceiveQuest(BlobQuest q){ System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
+    public void ReceiveQuest(BlobQuest q){System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
+    public void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);}
+    public void ReceiveFoe(BlobFoe f){System.out.println(f.name + " " + f.power + " " + f.boost);}
+    public void ReceiveWeapon(Blob w){System.out.println(w.name + " " + w.power);}
 
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
         if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
