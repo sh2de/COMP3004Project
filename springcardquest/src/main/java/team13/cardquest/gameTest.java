@@ -15,10 +15,10 @@ public class gameTest {
 
 
         //WRITE TEST CODE HERE----------------------------------
-        String p1 = "player 1";
-        String p2 = "player 2";
-        game.joinGame(p1);
-        game.joinGame(p2);
+        String p1 = "player";
+        String p2 = "player";
+        p1 = game.joinGame(p1);
+        p2 = game.joinGame(p2);
         game.startGame(p1);
         game.startGame(p2);
         game.print();
