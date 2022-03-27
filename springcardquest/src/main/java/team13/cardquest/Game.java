@@ -16,7 +16,7 @@ public class Game {
 
     Card currentStory = null;
 
-    Quest activeQuest = null;
+    BlobQuest activeQuest = null;
 
 
     String state = "initialize";
@@ -127,6 +127,7 @@ public class Game {
             }
             state = "quest sponsor";
             sponsor = 0;
+            currentStory.Play();
             forceAllUnready();
             getSponsor();
 
@@ -163,6 +164,9 @@ public class Game {
     receive cards for each player. once all have been received, show the results, repeat until all phases are done or all players fail
     */
 
+    public void ReceiveQuest(BlobQuest q){
+        activeQuest = q;
+    }
     
     public void getSponsor(){ //function to be called to iterate through possible sponsors for a quest
         if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
@@ -200,7 +204,7 @@ public class Game {
     }
 
     //this function is what each quest will call so that the game can put itself in the right state for the quest
-    public void ReceiveQuest(BlobQuest q){System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
+    //public void ReceiveQuest(BlobQuest q){System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
     public void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);}
     public void ReceiveFoe(BlobFoe f){System.out.println(f.name + " " + f.power + " " + f.boost);}
     public void ReceiveWeapon(BlobWeapon w){System.out.println(w.name + " " + w.power);}
