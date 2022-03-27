@@ -8,12 +8,18 @@ public class Player {
     private String rank = "squire";
     private String name = "";
     private Boolean waiting = true; //this variable determines if the player is waiting for other input
-    public ArrayList<String> eventQueue = new ArrayList<String>();
+    private ArrayList<String> eventQueue = new ArrayList<String>();
+    private ArrayList<BlobAlly> allies = new ArrayList<>();
 
 
     public Player(String _name){
         name = _name;
     }
+
+    public void addEventSignal(String s){
+        eventQueue.add(s);
+    }
+
 
     public ArrayList<String> sendEventQueue(){
         ArrayList<String> updates = eventQueue;
@@ -42,6 +48,19 @@ public class Player {
             //actual version should prompt player to pick a card to discard
             hand.remove(0);
         }
+    }
+
+    public void removeCardByName(String n){
+        Card toRemove = null;
+        Boolean flag = false;
+        for (Card c : hand) {
+            if (c.GetName().equals(n)){
+                flag = true;
+                toRemove = c;
+                break;
+            }
+        }
+        if (flag){hand.remove(toRemove);}
     }
 
     //check if this player is capable of sponsoring a given quest with their current hand

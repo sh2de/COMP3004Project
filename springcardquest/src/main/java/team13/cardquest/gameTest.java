@@ -13,9 +13,6 @@ public class gameTest {
         //String name = (getInput.nextLine());  // Read user input
         //game.joinGame(name);
 
-        /*while(true){
-            executeSignals(game.getUpdates(name), name, game);
-        }*/
 
         //WRITE TEST CODE HERE----------------------------------
         String p1 = "player 1";
@@ -29,26 +26,5 @@ public class gameTest {
         
         
         //TEST CODE END-----------------------------------------
-    }
-
-    /*
-    public static void executeSignals(ArrayList<String> commands, String name, Game game){
-        for (String signal : commands) {
-            switch(signal){
-                case "ALL_PLAYERS_READY":
-                    game.getPlayer(name).print();
-                    break;
-                case "REQUEST_SPONSORSHIP":
-                    break;
-                case "":
-                    break;
-                default:
-                    System.out.println("invalid signal");
-                    break;
-            }
-        }
-    }*/
- 
+    } 
 }
-/*
-*/
