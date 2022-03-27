@@ -6,29 +6,35 @@
 .column {
   float: left;
   width: 200px;
-  padding: 15px;
+  padding: 1%;
 }
  
 /* Set gray background color and 100% height */
 .card {
   background-color: #979797;
   height: 100%;
-  padding: 15px;
+  padding: 1%;
 }
 .player{
   background-color: #c7f7ff;
   height: 10%;
-  padding: 15px;
+  padding: 3%;
 }
 .playercard{
   background-color: #ffb7b7;
   height: 35%;
-  padding: 15px;
+  padding: 3%;
 }
 .selectedcard{
   background-color: #f8ffb7;
   height: 35%;
-  padding: 15px;
+  padding: 3%;
+}
+.itemImage{
+  width:50%;
+  height:auto;
+  padding: 5%;
+  object-fit: cover;
 }
 
 /* Set black background color, white text and some padding */
@@ -45,7 +51,11 @@ footer {
     height: auto;
     padding: 15px;
   }
-  .row.content {height: auto;} 
+  .row.content {height: auto;}
+  .itemImage{
+    width:200px;
+    height:auto;
+  }
 }
 
 ul {
