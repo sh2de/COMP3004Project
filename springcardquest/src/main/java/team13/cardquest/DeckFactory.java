@@ -32,7 +32,13 @@ public class DeckFactory{
             deck.AddCard(new Card("Repel the Saxon Raiders", "QUEST", 1, url, game, new QuestSaxons()));
             deck.AddCard(new Card("Repel the Saxon Raiders", "QUEST", 1, url, game, new QuestSaxons()));
         }else{
-            System.out.println("Can't make adventure decks yet :(");
+            for (int i = 0; i < 30; i++){
+                deck.AddCard(new Card("TestFoe", "FOE", 1, url, game, new FoeGeneric()));
+                deck.AddCard(new Card("TestWeapon", "WEAPON", 1, url, game, new WeaponGeneric()));
+            }
+            
+
+            //System.out.println("Can't make adventure decks yet :(");
         }
 
         return deck;

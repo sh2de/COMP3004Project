@@ -3,11 +3,11 @@ package team13.cardquest;
 import java.util.ArrayList;
 
 public class Player {
-    public ArrayList<Card> hand = new ArrayList<Card>();
-    public int shields = 0;
-    public String rank = "squire";
-    public String name = "";
-    public Boolean waiting = true; //this variable determines if the player is waiting for other input
+    private ArrayList<Card> hand = new ArrayList<Card>();
+    private int shields = 0;
+    private String rank = "squire";
+    private String name = "";
+    private Boolean waiting = true; //this variable determines if the player is waiting for other input
     public ArrayList<String> eventQueue = new ArrayList<String>();
 
 
@@ -64,9 +64,9 @@ public class Player {
     public void print(){
         System.out.println("Player has "+shields+" shields");
         System.out.println("Player has the rank of "+rank);
-        System.out.print("Player has the cards:");
+        System.out.print("Player has the cards: | ");
         for (Card card : hand) {
-            System.out.print(card);
+            System.out.print(card+" | ");
         }
         System.out.println("");
         System.out.print("Player is ");
