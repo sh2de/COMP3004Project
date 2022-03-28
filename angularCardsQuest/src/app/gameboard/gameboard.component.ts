@@ -77,13 +77,13 @@ export class GameboardComponent implements OnInit {
         if(res["length"]>0){
           //test updates 
           console.log("test updates: "+res[0]);
-          if(res[0]=="ALL_PLAYERS_READY"){
-            this.load()
-          }
+          // if(res[0]=="ALL_PLAYERS_READY"){
+          //   this.load()
+          // }
 
-          if(res[0]=="REQUEST_SPONSORSHIP"){
-            this.sponsorReq=true;
-          }
+          // if(res[0]=="REQUEST_SPONSORSHIP"){
+          //   this.sponsorReq=true;
+          // }
 
         }
       },
