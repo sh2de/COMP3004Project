@@ -84,12 +84,32 @@ export class GameService {
       );
   }
 
+
+
   /**
    * requesting for CurrentPlayer
    * @returns object of current player
    */
   public getCurrentPlayer(): Observable<Object>{
     return this.http.get(this.apiServerUrl+"/getCurrentPlayer");
+  }
+
+ 
+
+  /**
+   * declining sponsorship
+   * @returns observable
+   */
+  public declineSponsor(){
+    return this.http.get(this.apiServerUrl+"/declineSponsorship");
+  }
+
+  /**
+   * accepting sponsorship
+   * @returns observable
+   */
+   public acceptSponsor(){
+    return this.http.get(this.apiServerUrl+"/acceptSponsorship");
   }
 
 
@@ -112,5 +132,6 @@ export class GameService {
   public sendHanded(card: string[]){
     return this.http.post(this.apiServerUrl+"/handed", card); 
   }
+
 
 }

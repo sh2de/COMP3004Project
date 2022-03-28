@@ -15,11 +15,14 @@ export class GameboardComponent implements OnInit {
   cardList=[];
   myHand=[];
   selectedCards=[];
-  read: Boolean;
+  ready: Boolean;
+  sponsorReq: Boolean;
+
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
-    this.read=true;
+    this.ready=true;
+    this.sponsorReq=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -51,7 +54,7 @@ export class GameboardComponent implements OnInit {
   }
 
   start(){
-    this.read=false;
+    this.ready=false;
     this.gameService.startGame(this.playerName).subscribe(
       (res)=>{
         console.log(res)
@@ -72,7 +75,16 @@ export class GameboardComponent implements OnInit {
     this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
         if(res["length"]>0){
-          console.log(res)
+          //test updates 
+          console.log("test updates: "+res[0]);
+          if(res[0]=="ALL_PLAYERS_READY"){
+            this.load()
+          }
+
+          if(res[0]=="REQUEST_SPONSORSHIP"){
+            this.sponsorReq=true;
+          }
+
         }
       },
       (err:HttpErrorResponse)=>{
@@ -81,11 +93,25 @@ export class GameboardComponent implements OnInit {
     )
   }
 
-  sponsor(){
+  acceptSponsor(){
     console.log("i can sponsor it");
+    this.gameService.acceptSponsor().subscribe(
+      (res)=>{},
+      (err:HttpErrorResponse)=>{
+        console.log(err.message);
+      }
+
+    )
   }
-  notSponsor(){
+
+  declineSponsor(){
     console.log("not sponsoring it")
+    this.gameService.acceptSponsor().subscribe(
+      (res)=>{},
+      (err:HttpErrorResponse)=>{
+        console.log(err.message);
+      }
+    );
   }
 
   selected(card){

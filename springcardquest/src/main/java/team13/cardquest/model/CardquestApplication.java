@@ -105,4 +105,20 @@ public class CardquestApplication {
 	public ResponseEntity<Player> getCurrentPlayer(){
 		return new ResponseEntity<>(game.getCurrentPlayer(),HttpStatus.OK);
 	}
+
+
+
+	// declining sponsorship
+	@GetMapping("/declineSponsorship")
+	public ResponseEntity<Void> declineSponsorship(){
+		game.sponsorshipDeclined();
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	// accepting sponsorship
+	@GetMapping("/acceptSponsorship")
+	public ResponseEntity<Void> acceptSponsorship(){
+		game.sponsorshipAccepted();
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

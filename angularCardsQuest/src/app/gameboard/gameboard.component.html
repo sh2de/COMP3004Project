@@ -7,10 +7,10 @@
         <h4>Cards in play</h4>
 
         <!-- for player to accept or reject sponsoring the card -->
-        <div>
+        <div *ngIf="sponsorReq">
           <label for="sponsoring"> can you sponsor the following quest?</label><br>
-          <button type="button" (click)="sponsor()" class="btn btn-link">Yes</button>
-          <button type="button" (click)="notSponsor()" class="btn btn-link">No</button>
+          <button type="button" (click)="acceptSponsor()" class="btn btn-link">Yes</button>
+          <button type="button" (click)="declineSponsor()" class="btn btn-link">No</button>
         </div>        
   <div class="row content">
     <div class="col-sm-3 card">
@@ -21,7 +21,7 @@
     </div>
 <div class="col-sm-9">
     <h4><small>Player: {{player["name"]}}</small></h4>
-    <div *ngIf="read">
+    <div *ngIf="ready">
       <button type="button" class="btn btn-primary" (click)="start()">ready to start</button>
     </div>
     
