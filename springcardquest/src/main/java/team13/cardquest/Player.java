@@ -21,10 +21,12 @@ public class Player {
     }
 
 
-    public ArrayList<String> sendEventQueue(){
-        ArrayList<String> updates = eventQueue;
-        eventQueue = new ArrayList<String>();
-        return updates;
+    public String sendEventQueue(){ //sends the top event from the event queue
+        if (eventQueue.size() == 0){return "";}
+        else {return eventQueue.remove(0);}
+        //String updates = eventQueue;
+        //eventQueue = new ArrayList<String>();
+        //return updates;
     }
 
     //this function gets called by the gamehandler and should send an event to the connected player
