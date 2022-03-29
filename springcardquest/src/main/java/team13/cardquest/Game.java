@@ -1,6 +1,7 @@
 package team13.cardquest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 //The game object represents the internal state of a game session
 //It is responsible for keeping track of all the game elements, but does not automatically advance the game itself
@@ -230,7 +231,7 @@ public class Game {
 
 
     //api call to get a player's list of update signals
-    public String getUpdates(String name){
+    public ArrayList<String> getUpdates(String name){
         return getPlayer(name).sendEventQueue();
     }
 

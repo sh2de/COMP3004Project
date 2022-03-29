@@ -21,9 +21,10 @@ public class Player {
     }
 
 
-    public String sendEventQueue(){ //sends the top event from the event queue
-        if (eventQueue.size() == 0){return "";}
-        else {return eventQueue.remove(0);}
+    public ArrayList<String> sendEventQueue(){ //sends the top event from the event queue
+        return eventQueue;
+//        if (eventQueue.size() == 0){return "";}
+//        else {return eventQueue.remove(0);}
         //String updates = eventQueue;
         //eventQueue = new ArrayList<String>();
         //return updates;

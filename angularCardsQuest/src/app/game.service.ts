@@ -74,7 +74,7 @@ export class GameService {
    * @param name : player name
    * @returns observable of event queue
    */
-   public getUpdates(name:string): Observable<Object>{
+   public getUpdates(name:string){
     return this.http.get(this.apiServerUrl+"/getUpdates/"+name)
       .pipe(
         tap(()=>{

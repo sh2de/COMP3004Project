@@ -17,10 +17,12 @@ export class GameboardComponent implements OnInit {
   selectedCards=[];
   ready: Boolean;
   sponsorReq: Boolean;
+  prevUpdatesLen: number;
 
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
+    this.prevUpdatesLen=0;
     this.ready=true;
     this.sponsorReq=false;
     this.playerName=this.route.snapshot.params["username"];
@@ -74,16 +76,22 @@ export class GameboardComponent implements OnInit {
   getUpdates(){
     this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
-        if(res["length"]>0){
+        
+        // console.log(res)
+        if(res["length"]>this.prevUpdatesLen){
+          this.prevUpdatesLen=res["length"]
+          console.log("test updates: ");
+          console.log(res)
           //test updates 
-          console.log("test updates: "+res[0]);
-          // if(res[0]=="ALL_PLAYERS_READY"){
-          //   this.load()
-          // }
+          if(res[this.prevUpdatesLen-1]=="ALL_PLAYERS_READY"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+            this.load()
+          }
 
-          // if(res[0]=="REQUEST_SPONSORSHIP"){
-          //   this.sponsorReq=true;
-          // }
+          if(res[this.prevUpdatesLen-1]=="REQUEST_SPONSORSHIP"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+            this.sponsorReq=true;
+          }
 
         }
       },
