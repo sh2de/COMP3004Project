@@ -8,8 +8,9 @@ public class Player {
     private String rank = "squire";
     private String name = "";
     private Boolean waiting = true; //this variable determines if the player is waiting for other input
-    private ArrayList<String> eventQueue = new ArrayList<String>();
+    private ArrayList<String> eventQueue = new ArrayList<>();
     private ArrayList<BlobAlly> allies = new ArrayList<>();
+    private ArrayList<Playable> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
 
 
     public Player(String _name){
@@ -22,12 +23,12 @@ public class Player {
 
 
     public ArrayList<String> sendEventQueue(){ //sends the top event from the event queue
-        return eventQueue;
+        //return eventQueue;
 //        if (eventQueue.size() == 0){return "";}
 //        else {return eventQueue.remove(0);}
-        //String updates = eventQueue;
-        //eventQueue = new ArrayList<String>();
-        //return updates;
+        ArrayList<String>updates = eventQueue;
+        eventQueue = new ArrayList<String>();
+        return updates;
     }
 
     //this function gets called by the gamehandler and should send an event to the connected player
@@ -83,6 +84,21 @@ public class Player {
         return false;
     }
 
+    //playable hand functions
+    public void setPlayableHand(ArrayList<Playable> playableHand) {
+        this.playableHand = playableHand;
+    }
+
+    public ArrayList<Playable> getPlayableHand() {
+        return playableHand;
+    }
+
+    public void discardPlayableHand(){
+        
+    }
+
+
+
     public void print(){
         System.out.println("Player has "+shields+" shields");
         System.out.println("Player has the rank of "+rank);
@@ -119,6 +135,9 @@ public class Player {
                 break;
         }
         //add power for allies
+        for (BlobAlly blobAlly : allies) {
+            p += blobAlly.power;
+        }
 
         return p;
     }
