@@ -10,7 +10,7 @@ public class Player {
     private Boolean waiting = true; //this variable determines if the player is waiting for other input
     private ArrayList<String> eventQueue = new ArrayList<>();
     private ArrayList<BlobAlly> allies = new ArrayList<>();
-    //private ArrayList<Playable> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
+    private ArrayList<Playable> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
     
 
     public Player(String _name){
@@ -119,6 +119,18 @@ public class Player {
 
     public boolean getWaiting(){
         return waiting;
+    }
+
+    public int getShields(){
+        return shields;
+    }
+
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
+
+    public ArrayList<BlobAlly> getAllies(){
+        return allies;
     }
 
     public int getPower(){
