@@ -203,6 +203,7 @@ public class Game {
             if ((player).equals(currentSponsor)){
                 player.addEventSignal("CREATE_QUEST"); //signal to select cards for the quest
             } else {
+                currentSponsor = player;
                 player.addEventSignal("WAIT_FOR_QUEST_CREATION"); //signal to know that a quest is about to begin and request participation
             }
         }
