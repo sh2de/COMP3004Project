@@ -11,7 +11,7 @@ public class Player {
     private ArrayList<String> eventQueue = new ArrayList<>();
     private ArrayList<BlobAlly> allies = new ArrayList<>();
     private ArrayList<Playable> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
-
+    private int testPower = 13;
 
     public Player(String _name){
         name = _name;
@@ -94,7 +94,7 @@ public class Player {
     }
 
     public void discardPlayableHand(){
-        
+
     }
 
 
