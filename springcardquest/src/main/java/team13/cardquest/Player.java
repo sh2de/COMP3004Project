@@ -136,6 +136,10 @@ public class Player {
         return allies;
     }
 
+    public String getRank(){
+        return rank;
+    }
+
     public int getPower(){
         int p = 0;
         switch(rank){
