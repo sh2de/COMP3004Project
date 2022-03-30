@@ -19,6 +19,8 @@ export class GameboardComponent implements OnInit {
   sponsorReq: Boolean;
   prevUpdatesLen: number;
 
+  stages: Array<Array<object>>
+
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
@@ -31,6 +33,8 @@ export class GameboardComponent implements OnInit {
         this.getUpdates();
       });
       this.load()
+
+      
   }
 
   load(){
