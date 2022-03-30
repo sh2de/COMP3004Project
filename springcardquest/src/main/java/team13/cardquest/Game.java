@@ -19,6 +19,7 @@ public class Game {
     BlobQuest activeQuest = null;
     int activeStage = 0;
     ArrayList<ArrayList<Card>> questStages = new ArrayList<ArrayList<Card>>();
+    int questBonus = 0;
 
 
     String state = "initialize";
@@ -301,6 +302,91 @@ public class Game {
 
 
     //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
+
+    public void eventChivalrousDeed(){ //players with the lowest rank/amount of shields receives 3 shields
+        int lowestShields = 10;
+        for (Player player : players) {
+            if (player.getShields()<lowestShields){
+                lowestShields = player.getShields();
+            }
+        }
+
+        for (Player player : players) {
+            if (player.getShields()==lowestShields){
+                player.editShields(3);
+            }
+        }
+    }
+
+    public void eventPox(){ //all players except the one who drew this card lose 1 shield
+        for (Player player : players) {
+            if (!player.equals(getCurrentPlayer())){
+                player.editShields(-1);
+            }
+        }
+    }
+
+    public void eventPlague(){ //drawer loses two shields if possible
+        getCurrentPlayer().editShields(-2);
+    }
+
+    public void eventKingsRecognition(){ //next quest completion gets 2 extra shields
+        questBonus += 2;
+    }
+
+    public void eventQueensFavor(){ //lowest ranked players draw 1 card
+        int lowestShields = 10;
+        String targetRank = "squire";
+        for (Player player : players) {
+            if (player.getShields()<lowestShields){
+                lowestShields = player.getShields();
+            }
+        }
+
+        for (Player player : players) {
+            if (player.getShields()==lowestShields){
+                targetRank = player.getRank();
+            }
+        }
+
+        for (Player player : players) {
+            if (player.getRank()==targetRank){
+                player.addCardToHand(adventuredeck.draw());
+            }
+        }
+    }
+
+    public void eventCourtCalledToCamelot(){//discard all allies
+        for (Player player : players) {
+            player.discardAllAllies();
+        }
+    }
+
+    public void eventKingsCallToArms(){//highest ranked players must discard 1 weapon, if impossible must discard 2 foes
+        int highestShields = 0;
+        String targetRank = "squire";
+        for (Player player : players) {
+            if (player.getShields()>highestShields){
+                highestShields = player.getShields();
+            }
+        }
+
+        for (Player player : players) {
+            if (player.getShields()==highestShields){
+                targetRank = player.getRank();
+            }
+        }
+
+        //DISCARD PROCESS TBD
+        //PROBABLY GONNA INVOLVE A SIGNAL
+    }
+
+    public void eventProsperityThroughTheRealm(){ //all players draw 2 cards
+        for (Player player : players) {
+            player.addCardToHand(adventuredeck.draw());
+            player.addCardToHand(adventuredeck.draw());
+        }
+    }
 
     //TOURNAMENT PROCESSING FUNCTIONS----------------------------------------------------------------
 
