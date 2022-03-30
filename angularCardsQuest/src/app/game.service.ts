@@ -112,6 +112,10 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/acceptSponsorship");
   }
 
+  public sendingStages(stages: Array<Array<object>>){
+    return this.http.put(this.apiServerUrl+"/receiveStages",stages);
+  }
+
 
 //////////////// TEST ZONE ////////////////
   public getImages(){ //<--- WILL BE IN GET ZONE
