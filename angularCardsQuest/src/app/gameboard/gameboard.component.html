@@ -22,7 +22,7 @@
 <div class="col-sm-9">
     <h4><small>Player: {{player["name"]}}</small></h4>
     <div *ngIf="ready">
-      <button type="button" class="btn btn-primary" (click)="start()">ready to start</button>
+      <button type="button" class="btn btn-primary" (click)="ready()">ready to start</button>
     </div>
     
     <button type="button" style="margin-left:2.5em" class="btn btn-primary" (click)="send()"> send </button>
@@ -53,3 +53,56 @@
 <footer class="container-fluid">
     <p>Footer Text</p>
   </footer>
+  <!--
+    THIS IS MY PART
+    <h1>Quest Of The Round Table</h1>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h2>Text box containing the rules for quest preparation</h2>
+      <br><br><br><br>
+      <h4>a stage is made up of either a single foe and any number of weapons OR a single test card</h4>
+      <br>
+      <h4>a quest can only have one test</h4>
+      <br> 
+      <h4>each stage has to have a higher value than the last</h4>       
+    </div>
+    <div class="col-sm-9 midnav">
+      <div class = "player">
+        <h4><small>Player: {{player["name"]}}</small></h4>
+        <button type="button" class="btn btn-primary" (click)="ready()">Ready</button>
+      </div>
+      <br><br>
+      <div class="Stage" ngbDropdown>
+        <button type="button" class="btn btn-primary dropdown-toggle" ngbDropdownToggle="dropdown">
+          Stage {{roundNUM}}
+        </button>
+        <ul class="dropdown-menu" ngbDropdownMenu>
+          <li><a class="dropdown-item">Stage 1</a></li>
+          <li><a class="dropdown-item">Stage 2</a></li>
+          <li><a class="dropdown-item">Stage 3</a></li>
+        </ul>
+      </div>
+      <br><br>
+      <div class = "hand">
+        <div class = "row">
+          <div class = "col-sm-10">
+            <h4> Your hand </h4>
+          </div>
+          <div class = "col-sm-2">
+            <div class="start">
+              <button type="button" class="btn btn-primary btn-lg" style="position: absolute; top: 40%; left: 40%;" (click)="start()">
+                Start
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+  -->

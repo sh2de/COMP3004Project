@@ -15,6 +15,7 @@ export class GameboardComponent implements OnInit {
   cardList=[];
   myHand=[];
   selectedCards=[];
+  roundNUM=0;
   ready: Boolean;
   sponsorReq: Boolean;
   prevUpdatesLen: number;
@@ -59,7 +60,7 @@ export class GameboardComponent implements OnInit {
     this.cardList = this.gameService.getImages();
   }
 
-  start(){
+  ready(){
     this.ready=false;
     this.gameService.startGame(this.playerName).subscribe(
       (res)=>{
@@ -71,7 +72,9 @@ export class GameboardComponent implements OnInit {
       }
     )
   }
-
+  start(){
+    this.roundNUM += 1;
+  }
   send(){
     this.gameService.sendSelected(this.selectedCards);
     this.gameService.sendHanded(this.myHand);
