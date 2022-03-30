@@ -20,6 +20,10 @@ public class Game {
     int activeStage = 0;
     ArrayList<ArrayList<Card>> questStages = new ArrayList<ArrayList<Card>>();
     int questBonus = 0;
+    String questStageResults = "";
+
+    BlobFoe currentFoe = null;
+    BlobWeapon currentWeapon = null;
 
 
     String state = "initialize";
@@ -210,8 +214,6 @@ public class Game {
     }
 
     public void receiveStages(ArrayList<ArrayList<Card>> stages){
-        
-
         //start by checking if the received list of cards is valid
         //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
         boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
@@ -274,7 +276,9 @@ public class Game {
             //if (!p.equals(currentSponsor)){
             //    p.addEventSignal("");
             //}
-        }   
+        }
+        
+        
     }
 
     public void rejectStageSetup(){
@@ -282,11 +286,51 @@ public class Game {
         currentSponsor.addEventSignal("CREATE_QUEST");
     }
 
+    public void questAcceptParticipation(String name){
+        Player p = getPlayer(name);
+        p.setWaiting(false);
+        p.setAlive(true);
+    }
+
+    public void questRejectParticipation(String name){
+        Player p = getPlayer(name);
+        p.setWaiting(false);
+    }
+
+    public void questTurn(){//handle the start of a quest's stage
+
+        //first step: check if any players are alive
+
+        //second step: check if stages are left in the quest
+
+        //third step: announce foe or test
+
+        //fourth step: get cards to be played from alive players
+        for (Player player : players) {
+            if (!(player).equals(currentSponsor) && player.getAlive()){
+                player.addCardToHand(adventuredeck.draw());
+                player.setWaiting(true);
+                player.addEventSignal("QUEST_FOE_SELECT_CARDS"); //signal to select cards for the foe
+            } 
+        }
+    }
+
+    public void questReceivePlayableHand(){//receive the cards played by the player for a quest
+        //step 1: check if cards are valid. on fail, resend signal
+
+        //step 2: set player as ready, if all players ready move on to the next stage
+    }
+
+
+
     //this function is what each quest will call so that the game can put itself in the right state for the quest
     //public void ReceiveQuest(BlobQuest q){System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
-    public void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);}
-    public void ReceiveFoe(BlobFoe f){System.out.println(f.name + " " + f.power + " " + f.boost);}
-    public void ReceiveWeapon(BlobWeapon w){System.out.println(w.name + " " + w.power);}
+    public void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);} //add ally to the allies of player who played it
+    //public void ReceiveFoe(BlobFoe f){System.out.println(f.name + " " + f.power + " " + f.boost);}
+    //public void ReceiveWeapon(BlobWeapon w){System.out.println(w.name + " " + w.power);}
+
+    public void ReceiveFoe(BlobFoe f){currentFoe = f;}
+    public void ReceiveWeapon(BlobWeapon w){currentWeapon = w;}
 
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
         if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
@@ -296,6 +340,28 @@ public class Game {
     public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
         int p = 0;
         for (Card card : hand) {
+            card.play();
+            switch(card.getType()){
+                case "FOE":
+                    p += currentFoe.power;
+                    //add power if foe is named in the quest
+                    if (activeQuest.namedFoe.equals("all")){//all case
+                        p+=currentFoe.boost;
+                    }else if(activeQuest.namedFoe.equals("saxon")&&(currentFoe.name.equals("saxons")||currentFoe.name.equals("saxon knight"))){//saxon case
+                        p+=currentFoe.boost;
+                    }else if(activeQuest.namedFoe.equals(currentFoe.name)){//regular named case
+                        p+=currentFoe.boost;
+                    }
+                    //bosspower end
+                    currentFoe = null;
+                    break;
+                case "WEAPON":
+                    p += currentWeapon.power;
+                    currentWeapon = null;
+                    break;
+                default:
+                    break;
+            }
             //p += card.GetPower();
         }
         return p;
@@ -364,7 +430,7 @@ public class Game {
         }
     }
 
-    public void eventKingsCallToArms(){//highest ranked players must discard 1 weapon, if impossible must discard 2 foes
+    public void eventKingsCallToArms(){//highest ranked players must discard 1 weapon, if impossible must discard 2 foes (INCOMPLETE)
         int highestShields = 0;
         String targetRank = "squire";
         for (Player player : players) {
