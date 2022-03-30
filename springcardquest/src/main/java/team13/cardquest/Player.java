@@ -96,11 +96,11 @@ public class Player {
         return playableHand;
     }
 
-    public void discardPlayableHand(){
-
+    public ArrayList<Playable> discardPlayableHand(){//returns the list so it can be properly discarded in the game object
+        ArrayList<Playable> discards = playableHand;
+        playableHand = new ArrayList<>();
+        return discards;
     }
-
-
 
     public void print(){
         System.out.println("Player has "+shields+" shields");
@@ -136,9 +136,11 @@ public class Player {
         return allies;
     }
 
-    public void discardAllAllies(){
+    public ArrayList<BlobAlly> discardAllAllies(){
         //missing: send allies to discard pile
+        ArrayList<BlobAlly> discards = allies;
         allies = new ArrayList<>();
+        return discards;
     }
 
     public String getRank(){
