@@ -136,6 +136,11 @@ public class Player {
         return allies;
     }
 
+    public void discardAllAllies(){
+        //missing: send allies to discard pile
+        allies = new ArrayList<>();
+    }
+
     public String getRank(){
         return rank;
     }
