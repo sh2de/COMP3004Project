@@ -1,7 +1,6 @@
 package team13.cardquest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 //The game object represents the internal state of a game session
 //It is responsible for keeping track of all the game elements, but does not automatically advance the game itself
@@ -18,6 +17,8 @@ public class Game {
     Card currentStory = null;
 
     BlobQuest activeQuest = null;
+    int activeStage = 0;
+    ArrayList<ArrayList<Card>> questStages = new ArrayList<ArrayList<Card>>();
 
 
     String state = "initialize";
@@ -123,9 +124,11 @@ public class Game {
 
         if (currentStory.GetType().equals("QUEST")){
             //quest card drawn
+            currentStory.Play();
             for (Player player : players) {
                 player.addEventSignal("DRAW_STORY");
             }
+
             state = "quest sponsor";
             sponsor = 0;
             currentStory.Play();
@@ -204,6 +207,78 @@ public class Game {
         }
     }
 
+    public void receiveStages(ArrayList<ArrayList<Card>> stages){
+        //start by checking if the received list of cards is valid
+        //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
+        boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
+        //SECOND CHECK: IS THERE ONLY ONE TEST?
+        
+        for (ArrayList<Card> stage : stages) {
+            boolean foeFlag = false;
+            ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
+            for (Card card : stage) {
+                switch(card.GetType()){
+                    case "FOE":
+                        if (foeFlag){
+                            rejectStageSetup();
+                            return;
+                        }
+                        foeFlag = true;
+                        break;
+                    case "WEAPON":
+                        weapons.add(card);
+                        break;
+                    case "TEST":
+                        if (testFlag || stage.size() > 1){
+                            rejectStageSetup();
+                            return;
+                        }
+                        testFlag = true;
+                        break;
+                    default: //reject if an invalid card is received
+                        rejectStageSetup();
+                        return;
+                }
+            }
+            //reject if no foe or test is present
+            if ((!foeFlag && !testFlag)||(foeFlag && testFlag)){
+                rejectStageSetup();
+                return;
+            }
+
+            //reject if duplicate weapons
+            while (weapons.size() != 0){
+                Card w = weapons.remove(0);
+                for (Card weapon : weapons) {
+                    if (w.GetName().equals(weapon.GetName())){
+                        //reject if they share a name
+                        rejectStageSetup();
+                        return;
+                    }
+                }
+            }    
+        }
+
+        //if the quest is accepted, automatically sort them by power
+        //TBD
+
+        //just test the signal for now
+        questStages = stages;
+        for (Player p : players) {
+            p.addEventSignal("QUEST_START");
+            //if (!p.equals(currentSponsor)){
+            //    p.addEventSignal("");
+            //}
+        }
+
+        
+    }
+
+    public void rejectStageSetup(){
+        questStages = new ArrayList<>();
+        currentSponsor.addEventSignal("CREATE_QUEST");
+    }
+
     //this function is what each quest will call so that the game can put itself in the right state for the quest
     //public void ReceiveQuest(BlobQuest q){System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
     public void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);}
@@ -222,6 +297,8 @@ public class Game {
         }
         return p;
     }
+
+
 
     //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
 
