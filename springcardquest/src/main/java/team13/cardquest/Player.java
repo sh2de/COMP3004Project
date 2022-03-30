@@ -8,6 +8,7 @@ public class Player {
     private String rank = "squire";
     private String name = "";
     private Boolean waiting = true; //this variable determines if the player is waiting for other input
+    private Boolean alive = false; //this variable is used in quests or tournaments to judge if the player is a participant or not
     private ArrayList<String> eventQueue = new ArrayList<>();
     private ArrayList<BlobAlly> allies = new ArrayList<>();
     private ArrayList<Playable> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
@@ -145,6 +146,14 @@ public class Player {
 
     public String getRank(){
         return rank;
+    }
+
+    public boolean getAlive(){
+        return alive;
+    }
+
+    public void setAlive(boolean b){
+        alive = b;
     }
 
     public int getPower(){

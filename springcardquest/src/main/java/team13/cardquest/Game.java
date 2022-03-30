@@ -210,6 +210,8 @@ public class Game {
     }
 
     public void receiveStages(ArrayList<ArrayList<Card>> stages){
+        
+
         //start by checking if the received list of cards is valid
         //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
         boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
@@ -266,14 +268,13 @@ public class Game {
 
         //just test the signal for now
         questStages = stages;
+        activeStage = 1;
         for (Player p : players) {
             p.addEventSignal("QUEST_START");
             //if (!p.equals(currentSponsor)){
             //    p.addEventSignal("");
             //}
-        }
-
-        
+        }   
     }
 
     public void rejectStageSetup(){
