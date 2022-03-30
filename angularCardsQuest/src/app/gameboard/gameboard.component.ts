@@ -15,9 +15,13 @@ export class GameboardComponent implements OnInit {
   cardList=[];
   myHand=[];
   selectedCards=[];
+  roundNUM=0;
   ready: Boolean;
   sponsorReq: Boolean;
   prevUpdatesLen: number;
+  areSelected:Boolean;
+
+  stages=[];
 
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
@@ -25,12 +29,15 @@ export class GameboardComponent implements OnInit {
     this.prevUpdatesLen=0;
     this.ready=true;
     this.sponsorReq=false;
+    this.areSelected=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
         this.getUpdates();
       });
       this.load()
+
+      
   }
 
   load(){
@@ -55,7 +62,21 @@ export class GameboardComponent implements OnInit {
     this.cardList = this.gameService.getImages();
   }
 
-  start(){
+  /**
+   * command to the next steps
+   */
+  nextStage(){
+    
+    this.stages.push(this.selectedCards);
+    console.log(this.stages)
+    this.selectedCards=[];    
+    this.areSelected=false;
+    
+  }
+  /**
+   * ready to start the game
+   */
+  readyToStart(){
     this.ready=false;
     this.gameService.startGame(this.playerName).subscribe(
       (res)=>{
@@ -67,12 +88,26 @@ export class GameboardComponent implements OnInit {
       }
     )
   }
-
+  start(){
+    this.roundNUM += 1;
+    if(this.stages['length']==3){
+      this.gameService.sendingStages(this.stages).subscribe(
+        (res)=>{},
+        (err:HttpErrorResponse)=>{
+          console.log(err.message);
+        }
+      )
+    }
+    this.stages=[];
+  }
   send(){
     this.gameService.sendSelected(this.selectedCards);
     this.gameService.sendHanded(this.myHand);
   }
 
+  /**
+   * get players updates
+   */
   getUpdates(){
     this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
@@ -91,6 +126,34 @@ export class GameboardComponent implements OnInit {
           if(res[this.prevUpdatesLen-1]=="REQUEST_SPONSORSHIP"){
             console.log("updates "+res[this.prevUpdatesLen-1]);
             this.sponsorReq=true;
+          }
+
+          if(res[this.prevUpdatesLen-1]=="DRAW_STORY"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="CREATE_QUEST"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="WAIT_FOR_QUEST_CREATION"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SELECT_CARDS"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SHOW_RESULTS"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_OVER"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_START"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
         }
@@ -131,10 +194,12 @@ export class GameboardComponent implements OnInit {
   addToplayerList(i:number){
     this.myHand.push(this.cardList[i]);
   }
+
   isSelected(i:number){  
 
     this.selectedCards.push(this.myHand[i]);
     this.myHand.splice(i, 1);
+    this.areSelected=true;
     console.log(this.myHand[i]);
   }
   cancel(i:number){

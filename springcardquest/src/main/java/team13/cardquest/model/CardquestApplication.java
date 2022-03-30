@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import team13.cardquest.Card;
 import team13.cardquest.Game;
 import team13.cardquest.Player;
 
@@ -94,6 +95,7 @@ public class CardquestApplication {
 	}
 
 	// request for player with specified name
+
 	@GetMapping("/getPlayer/{name}")
 	public ResponseEntity<Player> getPlayer(@PathVariable("name") String name){
 		return new ResponseEntity<>(game.getPlayer(name),HttpStatus.OK);
@@ -119,6 +121,13 @@ public class CardquestApplication {
 	@GetMapping("/acceptSponsorship")
 	public ResponseEntity<Void> acceptSponsorship(){
 		game.sponsorshipAccepted();
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	//receiving stages
+	@PutMapping("/receiveStages")
+	public ResponseEntity<Void> receiveStages(@RequestBody ArrayList<ArrayList<Card>> stages){
+		game.receiveStages(stages);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
