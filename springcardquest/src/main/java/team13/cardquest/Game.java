@@ -14,6 +14,7 @@ public class Game {
     Player currentSponsor = null;
     ArrayList<Player> players = new ArrayList<>();
 
+    
     Card currentStory = null;
 
     BlobQuest activeQuest = null;
@@ -21,7 +22,8 @@ public class Game {
     ArrayList<ArrayList<Card>> questStages = new ArrayList<ArrayList<Card>>();
     int questBonus = 0;
     String questStageResults = "";
-
+    String questFinalResults = "";
+    
     BlobFoe currentFoe = null;
     BlobWeapon currentWeapon = null;
 
@@ -313,6 +315,24 @@ public class Game {
                 player.addEventSignal("QUEST_FOE_SELECT_CARDS"); //signal to select cards for the foe
             } 
         }
+    }
+
+    public void questAnnounceResults(){
+        for (Player player : players) {
+            if (player.getAlive()){
+                player.editShields(activeQuest.stages);
+                questFinalResults += player.getName() + " gets " + activeQuest.stages + " shields for surviving the quest!";
+            }else if (player.equals(currentSponsor)){
+                player.addCardToHand(adventuredeck.draw());//draw 1 per stage + cards played in a stage
+                for (ArrayList<Card> stage : questStages) {
+                    for (int i = 0; i < stage.size(); i++){
+                        player.addCardToHand(adventuredeck.draw());
+                    }
+                }
+            }
+            player.addEventSignal("QUEST_OVER");
+        }
+        //MISSING: CHECK FOR A WINNER
     }
 
     public void questReceivePlayableHand(){//receive the cards played by the player for a quest
