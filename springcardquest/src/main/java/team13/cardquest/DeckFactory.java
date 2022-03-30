@@ -33,9 +33,9 @@ public class DeckFactory{
             deck.AddCard(new Card("Repel the Saxon Raiders", "QUEST", 1, header+"Quest3.png", game, new QuestSaxons()));
         }else{
             for (int i = 0; i < 600; i++){
-                /deck.AddCard(new Card("TestFoe", "FOE", 1, defUrl, game, new FoeGeneric()));
+                deck.AddCard(new Card("TestFoe", "FOE", 1, defUrl, game, new FoeGeneric()));
                 deck.AddCard(new Card("TestWeapon", "WEAPON", 1, defUrl, game, new WeaponGeneric()));
-                
+
                 deck.AddCard(new Card("Sir Galahad", "ALLY", 1, header+"ally10.png", game, new AllyGalahad()));
                 deck.AddCard(new Card("Sir Lancelot", "ALLY", 1, header+"ally9.png", game, new AllyLancelot()));
                 deck.AddCard(new Card("King Arthur", "ALLY", 2, header+"ally5.png", game, new AllyArthur()));
