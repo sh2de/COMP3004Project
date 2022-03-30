@@ -1,60 +1,6 @@
-<h1>Quest Of The Round Table</h1>
-<div class="container-fluid">
-    <div class="row content">
-      <div class="col-sm-3 sidenav">
-        <h4>Cards</h4>
-        <br><br><br><br>
-        <h4>Cards in play</h4>
 
-        <!-- for player to accept or reject sponsoring the card -->
-        <div *ngIf="sponsorReq">
-          <label for="sponsoring"> can you sponsor the following quest?</label><br>
-          <button type="button" (click)="acceptSponsor()" class="btn btn-link">Yes</button>
-          <button type="button" (click)="declineSponsor()" class="btn btn-link">No</button>
-        </div>        
-  <div class="row content">
-    <div class="col-sm-3 card">
-      <h4>Cards</h4>
-      <div *ngFor="let card of cardList; index as i">  
-        <!-- <img src={{card}} style="width:250px;height:150px;" (click) = "addToplayerList(i)"> <br><br>       -->
-      </div>
-    </div>
-<div class="col-sm-9">
-    <h4><small>Player: {{player["name"]}}</small></h4>
-    <div *ngIf="ready">
-      <button type="button" class="btn btn-primary" (click)="ready()">ready to start</button>
-    </div>
-    
-    <button type="button" style="margin-left:2.5em" class="btn btn-primary" (click)="send()"> send </button>
-    <div *ngIf="condition">
-      <h5>Your hand</h5>
-      <div class="row itemsBlock">
-      </div>
-    </div>
-    <br><br>
-    <div class="playercard">
-      <h4><small>List of Card</small></h4>
-      <div *ngFor="let card of myHand; index as i">
-        <div class="column">
-          <!-- <img src="{{card}}" style="width:150px;height:100px;" class="itemImage" (click)="selected(i)"/> -->
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="selectedcard">
-      <h4><small>Selected Card</small></h4>
-      <div *ngFor="let card of selectedCards; index as i">
-        <div class="column">
-          <!-- <img src={{card}} style="width:150px;height:100px;" class="itemImage" (click)="cancel(i)"/> -->
-        </div>
-      </div>
-    </div>
-</div>
-<footer class="container-fluid">
-    <p>Footer Text</p>
-  </footer>
-  <!--
-    THIS IS MY PART
+  
+    <!-- THIS IS MY PART -->
     <h1>Quest Of The Round Table</h1>
 <div class="container-fluid">
   <div class="row content">
@@ -70,24 +16,54 @@
     <div class="col-sm-9 midnav">
       <div class = "player">
         <h4><small>Player: {{player["name"]}}</small></h4>
-        <button type="button" class="btn btn-primary" (click)="ready()">Ready</button>
+
+        <div *ngIf="ready">
+          <button type="button" class="btn btn-primary" (click)="readyToStart()">Ready</button>
+        </div>
+        
       </div>
       <br><br>
       <div class="Stage" ngbDropdown>
         <button type="button" class="btn btn-primary dropdown-toggle" ngbDropdownToggle="dropdown">
           Stage {{roundNUM}}
         </button>
-        <ul class="dropdown-menu" ngbDropdownMenu>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+        <!-- <ul class="dropdown-menu" ngbDropdownMenu>
           <li><a class="dropdown-item">Stage 1</a></li>
           <li><a class="dropdown-item">Stage 2</a></li>
           <li><a class="dropdown-item">Stage 3</a></li>
-        </ul>
+        </ul> -->
+        <div>
+          <button type="button" class="btn btn-link" (click)="nextStage()">Next Stage</button>
+
+        </div>
+        <div *ngIf="areSelected">
+          <div class="row" >
+            <div class="col-sm-2" *ngFor="let card of selectedCards, index as i">                
+              <img src="{{card['url']}}" alt="{{card['type']}}" style="width:100px;height:200px;">             
+              
+            </div>
+          </div>
+        </div>
       </div>
       <br><br>
       <div class = "hand">
         <div class = "row">
           <div class = "col-sm-10">
             <h4> Your hand </h4>
+          </div>
+
+          <div *ngIf="condition">
+            <div class="row" >
+              <div class="col-sm-2" *ngFor="let card of myHand, index as i">                
+                <img src="{{card['url']}}" alt="{{card['type']}}" (click)="isSelected(i)" style="width:100px;height:200px;">             
+                
+              </div>
+            </div>
           </div>
           <div class = "col-sm-2">
             <div class="start">
@@ -105,4 +81,3 @@
 <footer class="container-fluid">
   <p>Footer Text</p>
 </footer>
-  -->

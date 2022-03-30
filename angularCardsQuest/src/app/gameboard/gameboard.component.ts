@@ -19,8 +19,9 @@ export class GameboardComponent implements OnInit {
   ready: Boolean;
   sponsorReq: Boolean;
   prevUpdatesLen: number;
+  areSelected:Boolean;
 
-  stages: Array<Array<object>>
+  stages=[];
 
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
@@ -28,6 +29,7 @@ export class GameboardComponent implements OnInit {
     this.prevUpdatesLen=0;
     this.ready=true;
     this.sponsorReq=false;
+    this.areSelected=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -60,7 +62,21 @@ export class GameboardComponent implements OnInit {
     this.cardList = this.gameService.getImages();
   }
 
-  ready(){
+  /**
+   * command to the next steps
+   */
+  nextStage(){
+    
+    this.stages.push(this.selectedCards);
+    console.log(this.stages)
+    this.selectedCards=[];    
+    this.areSelected=false;
+    
+  }
+  /**
+   * ready to start the game
+   */
+  readyToStart(){
     this.ready=false;
     this.gameService.startGame(this.playerName).subscribe(
       (res)=>{
@@ -74,6 +90,15 @@ export class GameboardComponent implements OnInit {
   }
   start(){
     this.roundNUM += 1;
+    if(this.stages['length']==3){
+      this.gameService.sendingStages(this.stages).subscribe(
+        (res)=>{},
+        (err:HttpErrorResponse)=>{
+          console.log(err.message);
+        }
+      )
+    }
+    this.stages=[];
   }
   send(){
     this.gameService.sendSelected(this.selectedCards);
@@ -169,10 +194,12 @@ export class GameboardComponent implements OnInit {
   addToplayerList(i:number){
     this.myHand.push(this.cardList[i]);
   }
+
   isSelected(i:number){  
 
     this.selectedCards.push(this.myHand[i]);
     this.myHand.splice(i, 1);
+    this.areSelected=true;
     console.log(this.myHand[i]);
   }
   cancel(i:number){
