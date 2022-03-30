@@ -58,7 +58,7 @@ public class Player {
         Card toRemove = null;
         Boolean flag = false;
         for (Card c : hand) {
-            if (c.GetName().equals(n)){
+            if (c.getName().equals(n)){
                 flag = true;
                 toRemove = c;
                 break;
@@ -73,8 +73,8 @@ public class Player {
         boolean test = false; //we only check for one because only one test may be played per quest
 
         for (Card c : hand) {
-            if (c.GetType().equals("FOE")){foes++;}
-            if (c.GetType().equals("TEST")){test = true;}
+            if (c.getType().equals("FOE")){foes++;}
+            if (c.getType().equals("TEST")){test = true;}
         }
 
         if (test){foes++;}

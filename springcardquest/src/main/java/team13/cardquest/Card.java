@@ -19,12 +19,12 @@ public class Card{
 		this.play = play;
 	}
 
-	public void Play(){play.OnPlay(game);}
+	public void play(){play.OnPlay(game);}
 
-	public String GetName(){return name;}
-	public String GetType(){return type;}
-	public int GetValue(){return value;}
-	public String GetUrl(){return url;}
+	public String getName(){return name;}
+	public String getType(){return type;}
+	public int getValue(){return value;}
+	public String getUrl(){return url;}
 
 	//public String toString(){return name + " " + type + " " + value + " " + url;}
 	public String toString(){return name;}

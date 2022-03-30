@@ -122,23 +122,23 @@ public class Game {
     public void turnStart(){
         currentStory = storydeck.draw();
 
-        if (currentStory.GetType().equals("QUEST")){
+        if (currentStory.getType().equals("QUEST")){
             //quest card drawn
-            currentStory.Play();
+            currentStory.play();
             for (Player player : players) {
                 player.addEventSignal("DRAW_STORY");
             }
 
             state = "quest sponsor";
             sponsor = 0;
-            currentStory.Play();
+            currentStory.play();
             forceAllUnready();
             getSponsor();
 
-        } else if (currentStory.GetType().equals("EVENT")){
+        } else if (currentStory.getType().equals("EVENT")){
             //event card drawn
 
-        } else if (currentStory.GetType().equals("TOURNAMENT")){
+        } else if (currentStory.getType().equals("TOURNAMENT")){
             //tournament card drawn
 
         } else {
@@ -217,7 +217,7 @@ public class Game {
             boolean foeFlag = false;
             ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
             for (Card card : stage) {
-                switch(card.GetType()){
+                switch(card.getType()){
                     case "FOE":
                         if (foeFlag){
                             rejectStageSetup();
@@ -250,7 +250,7 @@ public class Game {
             while (weapons.size() != 0){
                 Card w = weapons.remove(0);
                 for (Card weapon : weapons) {
-                    if (w.GetName().equals(weapon.GetName())){
+                    if (w.getName().equals(weapon.getName())){
                         //reject if they share a name
                         rejectStageSetup();
                         return;

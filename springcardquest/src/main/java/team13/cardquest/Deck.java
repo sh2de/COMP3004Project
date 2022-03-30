@@ -15,7 +15,7 @@ public class Deck {
 
     public void PrintDeck(){
         for(int i = 0; i<cards.size(); i++){
-            System.out.println(cards.get(i).GetName());
+            System.out.println(cards.get(i).getName());
         }
     }
 
