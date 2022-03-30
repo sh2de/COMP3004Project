@@ -94,6 +94,7 @@ public class CardquestApplication {
 	}
 
 	// request for player with specified name
+	
 	@GetMapping("/getPlayer/{name}")
 	public ResponseEntity<Player> getPlayer(@PathVariable("name") String name){
 		return new ResponseEntity<>(game.getPlayer(name),HttpStatus.OK);

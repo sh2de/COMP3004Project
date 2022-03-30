@@ -73,6 +73,9 @@ export class GameboardComponent implements OnInit {
     this.gameService.sendHanded(this.myHand);
   }
 
+  /**
+   * get players updates
+   */
   getUpdates(){
     this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
@@ -91,6 +94,34 @@ export class GameboardComponent implements OnInit {
           if(res[this.prevUpdatesLen-1]=="REQUEST_SPONSORSHIP"){
             console.log("updates "+res[this.prevUpdatesLen-1]);
             this.sponsorReq=true;
+          }
+
+          if(res[this.prevUpdatesLen-1]=="DRAW_STORY"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="CREATE_QUEST"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="WAIT_FOR_QUEST_CREATION"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SELECT_CARDS"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SHOW_RESULTS"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_OVER"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="QUEST_START"){
+            console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
         }
