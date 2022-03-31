@@ -14,15 +14,16 @@ public class DeckFactory{
      */
     public Deck CreateDeck(boolean mode){
         Deck deck = new Deck();
-        String defUrl = "http://localhost:8080/images/testcard.png";
         String header = "http://localhost:8080/images/";
 
         if(mode){
             addQuests(deck, header);
+            addEvents(deck, header);
         }else{
             addAllies(deck, header);
             addFoes(deck, header);
             addWeapons(deck, header);
+            addArmours(deck, header);
         }
 
         return deck;
@@ -30,7 +31,7 @@ public class DeckFactory{
 
     private void addQuests(Deck deck, String header){
         deck.AddCard(new Card("Search for the Holy Grail", "QUEST", 1, header+"Quest9,png", game, new QuestGrail()));
-        //deck.AddCard(new Card("Test of the Green Knight", "Quest", 1, url, game, new QuestGrail())); this card isn't shown in the images folder, I have no idea what attributes it has
+        deck.AddCard(new Card("Test of the Green Knight", "Quest", 1, header+"Quest10.jpg", game, new QuestGreenKnight()));
         deck.AddCard(new Card("Search for the Questing Beast", "QUEST", 1, header+"Quest5.png", game, new QuestBeast()));
         deck.AddCard(new Card("Defend the Queen's Honor", "QUEST", 1, header+"Quest6.png", game, new QuestQueen()));
         deck.AddCard(new Card("Rescue the Fair Maiden", "QUEST", 1, header+"Quest8.png", game, new QuestMaiden()));
@@ -45,7 +46,16 @@ public class DeckFactory{
     }
 
     private void addEvents(Deck deck, String header){
-    
+        deck.AddCard(new Card("King's Recognition", "EVENT", 1, header+"King's_Recognition.png", game, new EventKingsRecognition()));
+        deck.AddCard(new Card("King's Recognition", "EVENT", 1, header+"King's_Recognition.png", game, new EventKingsRecognition()));
+        deck.AddCard(new Card("Queen's Favor", "EVENT", 1, header+"Queen's_Favor.png", game, new EventQueensFavour()));
+        deck.AddCard(new Card("Queen's Favor", "EVENT", 1, header+"Queen's_Favor.png", game, new EventQueensFavour()));
+        deck.AddCard(new Card("Court Called to Camelot", "EVENT", 1, header+"Court_Called_to_Camelot.png", game, new EventCourtCalled()));
+        deck.AddCard(new Card("Court Called to Camelot", "EVENT", 1, header+"Court_Called_to_Camelot.png", game, new EventCourtCalled()));
+        deck.AddCard(new Card("Pox", "EVENT", 1, header+"Pox.png", game, new EventPox()));
+        deck.AddCard(new Card("Plague", "EVENT", 1, header+"Plague.png", game, new EventPlague()));
+        deck.AddCard(new Card("Chivalrous Deed", "EVENT", 1, header+"Chivalrous_Deed.png", game, new EventChivalrousDeed()));
+        deck.AddCard(new Card("Prosperity Throughout the Realm", "EVENT", 1, header+"Prosperity_Throughout_the_Realm.png", game, new EventProsperity()));
     }
 
     private void addTournaments(Deck deck, String header){
@@ -183,6 +193,7 @@ public class DeckFactory{
     }
 
     private void addArmours(Deck deck, String header){
-
+        for(int i=0; i<8; i++)
+            deck.AddCard(new Card("Armour", "ARMOUR", 1, header+"armour1.png", game, new ArmourGeneric()));
     }
 }
