@@ -159,6 +159,8 @@ export class GameboardComponent implements OnInit {
    * sending playable hand to quest Foe
    */
    sendPlayableHand(){
+     console.log("playable hand")
+     console.log(this.playableHand)
      this.gameService.sendPlayableHand(this.playerName,this.playableHand).subscribe(
        (res)=>{},
        (err:HttpErrorResponse)=>{
@@ -262,7 +264,7 @@ export class GameboardComponent implements OnInit {
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
-
+          
           if(res[this.prevUpdatesLen-1]=="QUEST_OVER"){
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
@@ -310,6 +312,7 @@ export class GameboardComponent implements OnInit {
     console.log(this.myHand[i]);
     this.playableHand.push(this.myHand[i]);
     this.myHand.splice(i, 1);
+    this.areSelected=true;
     
   }
 
