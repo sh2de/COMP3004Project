@@ -18,12 +18,12 @@ public class DeckFactory{
 
         if(mode){
             addQuests(deck, header);
-            addEvents(deck, header);
+            //addEvents(deck, header);
         }else{
-            addAllies(deck, header);
+            //addAllies(deck, header);
             addFoes(deck, header);
             addWeapons(deck, header);
-            addArmours(deck, header);
+            //addArmours(deck, header);
         }
 
         return deck;

@@ -133,6 +133,22 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/rejectParticipation/"+name);
   }
 
+  /**
+   * geting active quest
+   * @returns obsavable BlogQues
+   */
+  public getActiveQuest(){
+    return this.http.get(this.apiServerUrl+"/getActiveQuest");
+  }
+
+  /**
+   * get story card
+   * @returns obsarvable of card
+   */
+  public getStoryCard(){
+    return this.http.get(this.apiServerUrl+"/getStoryCard");
+  }
+
 
 //////////////// TEST ZONE ////////////////
   public getImages(){ //<--- WILL BE IN GET ZONE
