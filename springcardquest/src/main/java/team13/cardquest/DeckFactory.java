@@ -18,20 +18,20 @@ public class DeckFactory{
 
         if(mode){
             addQuests(deck, header);
-            //addEvents(deck, header);
+            addEvents(deck, header);
         }else{
-            //addAllies(deck, header);
+            addAllies(deck, header);
             addFoes(deck, header);
             addWeapons(deck, header);
-            //addArmours(deck, header);
+            addArmours(deck, header);
         }
 
         return deck;
     }
 
     private void addQuests(Deck deck, String header){
-        deck.AddCard(new Card("Search for the Holy Grail", "QUEST", 1, header+"Quest9,png", game, new QuestGrail()));
-        deck.AddCard(new Card("Test of the Green Knight", "Quest", 1, header+"Quest10.jpg", game, new QuestGreenKnight()));
+        deck.AddCard(new Card("Search for the Holy Grail", "QUEST", 1, header+"Quest9.png", game, new QuestGrail()));
+        deck.AddCard(new Card("Test of the Green Knight", "Quest", 1, header+"Quest10.png", game, new QuestGreenKnight()));
         deck.AddCard(new Card("Search for the Questing Beast", "QUEST", 1, header+"Quest5.png", game, new QuestBeast()));
         deck.AddCard(new Card("Defend the Queen's Honor", "QUEST", 1, header+"Quest6.png", game, new QuestQueen()));
         deck.AddCard(new Card("Rescue the Fair Maiden", "QUEST", 1, header+"Quest8.png", game, new QuestMaiden()));
@@ -115,6 +115,7 @@ public class DeckFactory{
     }
 
     private void addTests(Deck deck, String header){
+        
     }
 
     private void addFoes(Deck deck, String header){
