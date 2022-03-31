@@ -366,6 +366,7 @@ public class Game {
             if (p.getWaiting()){anyWaiting = true;}
         }
         if (!anyWaiting){
+            System.out.println("all hands received, now processing result");
             questFoeStageResults();
         }
 
@@ -386,6 +387,7 @@ public class Game {
             }
         }
         activeStage++;
+        System.out.println("result processed, now sending signal");
         for (Player player : players){player.addEventSignal("QUEST_FOE_SHOW_RESULTS");}
         questTurn();
     }
