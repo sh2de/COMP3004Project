@@ -26,6 +26,6 @@ public class Card{
 	public int getValue(){return value;}
 	public String getUrl(){return url;}
 
-	//public String toString(){return name + " " + type + " " + value + " " + url;}
-	public String toString(){return name;}
+	public String toString(){return name + " " + type + " " + value + " " + url;}
+	//public String toString(){return name;}
 }
