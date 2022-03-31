@@ -388,10 +388,10 @@ public class Game {
             player.addEventSignal("QUEST_OVER");
         }
         //MISSING: CHECK FOR A WINNER
+        
+        state = "turn_start";
+        turnStart();
     }
-
-    
-
 
 
     //this function is what each quest will call so that the game can put itself in the right state for the quest
