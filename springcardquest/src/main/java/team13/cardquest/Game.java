@@ -374,11 +374,11 @@ public class Game {
 
     public void questFoeStageResults(){
         questStageResults = "";
-        int foePower = getPower(questStages.get(activeStage - 1));
+        int foePower = getPower(currentSponsor,questStages.get(activeStage - 1));
         for (Player player : players) {
             if (player.getAlive()){
                 //if player is alive, check if they survived
-                if (foePower > player.getPower() + getPower(player.getPlayableHand())){//if foe was stronger, kill the player
+                if (foePower > player.getPower() + getPower(currentSponsor,player.getPlayableHand())){//if foe was stronger, kill the player
                     player.setAlive(false);
                     questStageResults += player.getName() + " was felled in battle!\n";
                 } else{
@@ -427,11 +427,11 @@ public class Game {
     public void ReceiveTournament(BlobTournament t){}
 
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
-        if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
+        if (p.getPower() + getPower(p,playerCards) >= getPower(p,questCards)){return true;}
         return false;
     }
 
-    public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
+    public int getPower(Player player, ArrayList<Card> hand){//get power sum of the current combination of cards
         int p = 0;
         for (Card cardData : hand) {
             Card card = player.getCardByName(cardData.getName());
