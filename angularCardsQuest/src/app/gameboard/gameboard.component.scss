@@ -33,7 +33,7 @@
 }
 .start{
   background-color: #f7ff81;
-  height: 100%;
+  height: 500px;
   position: relative;
 }
 .start-button {
@@ -44,10 +44,16 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-.itemImage{
+.itemImage-stage{
   width:100%;
   height:auto;
+  border: 5px solid rgb(255, 0, 0);
 }
+.itemImage-hand{
+  width:75%;
+  height:auto;
+}
+
 // Set black background color, white text and some padding 
 footer {
   background-color: rgb(27, 24, 24);

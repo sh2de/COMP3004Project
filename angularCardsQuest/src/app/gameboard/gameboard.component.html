@@ -54,8 +54,8 @@
       <!-- STAGE-CARD -->
         <div *ngIf="areSelected">
           <div class="row" >
-            <div class="col-sm-2" *ngFor="let card of selectedCards, index as i">                
-              <img src="{{card['url']}}" alt="{{card['type']}}" style="width:100px;height:200px;">             
+            <div class="col-sm-1" *ngFor="let card of selectedCards, index as i">                
+              <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage">             
               
             </div>
           </div>
@@ -73,7 +73,7 @@
             <div *ngIf="condition">
               <div class="row" >
                 <div class="col-sm-2" *ngFor="let card of myHand; let i = index" [attr.data-index]="i">                
-                  <img src="{{card['url']}}" alt="{{card['type']}}" (click)="isSelected(i)" class="itemImage">             
+                  <img src="{{card['url']}}" alt="{{card['type']}}" (click)="isSelected(i)" class="itemImage-hand">             
                   
                 </div>
               </div>
