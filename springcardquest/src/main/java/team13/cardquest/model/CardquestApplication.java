@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import team13.cardquest.BlobQuest;
 import team13.cardquest.Card;
 import team13.cardquest.Game;
 import team13.cardquest.Player;
@@ -113,6 +114,18 @@ public class CardquestApplication {
 	public ResponseEntity<Void> rejectParticipation(@PathVariable("name") String name){
 		game.questRejectParticipation(name);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	//get story Card
+	@GetMapping("/getStoryCard")
+	public ResponseEntity<Card> getStoryCard(){
+		return new ResponseEntity<>(game.getStoryCard(),HttpStatus.OK);
+	}
+
+	//get active Quest
+	@GetMapping("/getActiveQuest")
+	public ResponseEntity<BlobQuest> getActiveQuest(){
+		return new ResponseEntity<>(game.getActiveBlobQuest(),HttpStatus.OK);
 	}
 
 	// request for getting current player

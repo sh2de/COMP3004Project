@@ -66,6 +66,32 @@ export class GameboardComponent implements OnInit {
   }
 
   /**
+   * accepting participation
+   */
+  acceptParticipation(){
+    this.gameService.acceptParticipation(this.playerName).subscribe(
+      (res)=>{},
+      (err:HttpErrorResponse)=>{
+        console.log(err.message);
+      }
+    )
+    this.participate=false;
+  }
+
+  /**
+   * decline participation
+   */
+   declineParticipation(){
+    this.gameService.rejectParticipation(this.playerName).subscribe(
+      (res)=>{},
+      (err:HttpErrorResponse)=>{
+        console.log(err.message);
+      }
+    )
+    this.participate=false;
+  }
+
+  /**
    * command to the next steps
    */
   nextStage(){
@@ -76,6 +102,37 @@ export class GameboardComponent implements OnInit {
     this.areSelected=false;
     
   }
+
+  /**
+   * get story card
+   */
+  getStoryCard(){
+    this.gameService.getStoryCard().subscribe(
+      (res)=>{
+        console.log("stor card");
+        console.log(res);
+      },
+      (err:HttpErrorResponse)=>{
+        console.log("ERRO:"+err.message);
+      }
+    )
+  }
+
+  /**
+   * get active quest
+   */
+   getActiveQuest(){
+    this.gameService.getActiveQuest().subscribe(
+      (res)=>{
+        console.log("stor card");
+        console.log(res);
+      },
+      (err:HttpErrorResponse)=>{
+        console.log("ERRO:"+err.message);
+      }
+    )
+  }
+
   /**
    * ready to start the game
    */
@@ -142,12 +199,16 @@ export class GameboardComponent implements OnInit {
           if(res[this.prevUpdatesLen-1]=="CREATE_QUEST"){
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
+            this.getActiveQuest();
+            this.getStoryCard();
           }
 
           if(res[this.prevUpdatesLen-1]=="WAIT_FOR_QUEST_CREATION"){
             this.participate=true;
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
+            this.getActiveQuest();
+            this.getStoryCard();
           }
 
           if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SELECT_CARDS"){
