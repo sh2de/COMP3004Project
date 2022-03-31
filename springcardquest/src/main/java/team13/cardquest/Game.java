@@ -175,6 +175,10 @@ public class Game {
     receive cards for each player. once all have been received, show the results, repeat until all phases are done or all players fail
     */
 
+    public BlobQuest getActiveBlobQuest(){return activeQuest;}
+
+    public Card getStoryCard(){return currentStory;}
+
     public void ReceiveQuest(BlobQuest q){
         activeQuest = q;
     }
