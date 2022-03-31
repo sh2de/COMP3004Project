@@ -19,11 +19,13 @@ public class DeckFactory{
         if(mode){
             addQuests(deck, header);
             //addEvents(deck, header);
+            //addTournaments(deck, header);
         }else{
             //addAllies(deck, header);
             addFoes(deck, header);
             addWeapons(deck, header);
             //addArmours(deck, header);
+            //addTests(deck, header);
         }
 
         return deck;
@@ -59,7 +61,10 @@ public class DeckFactory{
     }
 
     private void addTournaments(Deck deck, String header){
-    
+        deck.AddCard(new Card("Tournament at Camelot", "TOURNAMENT", 1, header+"tournament1.png", game, new TournamentCamelot()));
+        deck.AddCard(new Card("Tournament at Orkney", "TOURNAMENT", 1, header+"tournament2.png", game, new TournamentOrkney()));
+        deck.AddCard(new Card("Tournament at Tintagel", "TOURNAMENT", 1, header+"tournament3.png", game, new TournamentTintagel()));
+        deck.AddCard(new Card("Tournament at York", "TOURNAMENT", 1, header+"tournament4.png", game, new TournamentYork()));
     }
 
     private void addWeapons(Deck deck, String header){
