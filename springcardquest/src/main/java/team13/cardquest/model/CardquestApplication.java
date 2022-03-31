@@ -128,6 +128,13 @@ public class CardquestApplication {
 		return new ResponseEntity<>(game.getActiveBlobQuest(),HttpStatus.OK);
 	}
 
+	//send playable hand to quest foe
+	@PutMapping("/questFoeReceivePlayableHand/{name}")
+	public ResponseEntity<Void> questFoeReceivePlayableHand(@PathVariable("name") String name, @RequestBody ArrayList<Card> hand ){
+		game.questFoeReceivePlayableHand(name,hand);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	// request for getting current player
 
 	@GetMapping("/getCurrentPlayer")
