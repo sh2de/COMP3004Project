@@ -31,26 +31,26 @@ public class DeckFactory{
 
     private void addQuests(Deck deck, String header){
         deck.AddCard(new Card("Search for the Holy Grail", "QUEST", 1, header+"Quest9.png", game, new QuestGrail()));
-        deck.AddCard(new Card("Test of the Green Knight", "Quest", 1, header+"Quest10.png", game, new QuestGreenKnight()));
+        deck.AddCard(new Card("Test of the Green Knight", "QUEST", 1, header+"Quest10.png", game, new QuestGreenKnight()));
         deck.AddCard(new Card("Search for the Questing Beast", "QUEST", 1, header+"Quest5.png", game, new QuestBeast()));
         deck.AddCard(new Card("Defend the Queen's Honor", "QUEST", 1, header+"Quest6.png", game, new QuestQueen()));
         deck.AddCard(new Card("Rescue the Fair Maiden", "QUEST", 1, header+"Quest8.png", game, new QuestMaiden()));
         deck.AddCard(new Card("Journey through the Enchanted Forest", "QUEST", 1, header+"Quest1.png", game, new QuestForest()));
-        deck.AddCard(new Card("Vanquish King Arthur's Enemies", "QUEST", 1, header+"Quest2.png", game, new QuestArthur()));
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Vanquish King Arthur's Enemies", "QUEST", 1, header+"Quest2.png", game, new QuestArthur()));
         deck.AddCard(new Card("Slay the Dragon", "QUEST", 1, header+"Quest7.png", game, new QuestDragon()));
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Boar Hunt", "Quest", 1, header+"Quest4.png", game, new QuestBoar()));
-        deck.AddCard(new Card("Boar Hunt", "Quest", 1, header+"Quest4.png", game, new QuestBoar()));
-        deck.AddCard(new Card("Repel the Saxon Raiders", "QUEST", 1, header+"Quest3.png", game, new QuestSaxons()));
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Repel the Saxon Raiders", "QUEST", 1, header+"Quest3.png", game, new QuestSaxons()));
     }
 
     private void addEvents(Deck deck, String header){
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("King's Recognition", "EVENT", 1, header+"King's_Recognition.png", game, new EventKingsRecognition()));
-        deck.AddCard(new Card("King's Recognition", "EVENT", 1, header+"King's_Recognition.png", game, new EventKingsRecognition()));
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Queen's Favor", "EVENT", 1, header+"Queen's_Favor.png", game, new EventQueensFavour()));
-        deck.AddCard(new Card("Queen's Favor", "EVENT", 1, header+"Queen's_Favor.png", game, new EventQueensFavour()));
-        deck.AddCard(new Card("Court Called to Camelot", "EVENT", 1, header+"Court_Called_to_Camelot.png", game, new EventCourtCalled()));
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Court Called to Camelot", "EVENT", 1, header+"Court_Called_to_Camelot.png", game, new EventCourtCalled()));
         deck.AddCard(new Card("Pox", "EVENT", 1, header+"Pox.png", game, new EventPox()));
         deck.AddCard(new Card("Plague", "EVENT", 1, header+"Plague.png", game, new EventPlague()));
@@ -63,54 +63,17 @@ public class DeckFactory{
     }
 
     private void addWeapons(Deck deck, String header){
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Excalibur", "WEAPON", 1, header+"excalibur.png", game, new WeaponExcalibur()));
-        deck.AddCard(new Card("Excalibur", "WEAPON", 1, header+"excalibur.png", game, new WeaponExcalibur()));
+        for(int i = 0; i<6; i++)
         deck.AddCard(new Card("Lance", "WEAPON", 1, header+"lance.png", game, new WeaponLance()));
-        deck.AddCard(new Card("Lance", "WEAPON", 1, header+"lance.png", game, new WeaponLance()));
-        deck.AddCard(new Card("Lance", "WEAPON", 1, header+"lance.png", game, new WeaponLance()));
-        deck.AddCard(new Card("Lance", "WEAPON", 1, header+"lance.png", game, new WeaponLance()));
-        deck.AddCard(new Card("Lance", "WEAPON", 1, header+"lance.png", game, new WeaponLance()));
-        deck.AddCard(new Card("Lance", "WEAPON", 1, header+"lance.png", game, new WeaponLance()));
+        for(int i = 0; i<8; i++)
         deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
-        deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
-        deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
-        deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
-        deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
-        deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
-        deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
-        deck.AddCard(new Card("Battle Ax", "WEAPON", 1, header+"battle_ax.png", game, new WeaponBattleAx()));
+        for(int i = 0; i<16; i++)
         deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
-        deck.AddCard(new Card("Sword", "WEAPON", 1, header+"sword.png", game, new WeaponSword()));
+        for(int i = 0; i<11; i++)
         deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Horse", "WEAPON", 1, header+"horse.png", game, new WeaponHorse()));
-        deck.AddCard(new Card("Dagger", "WEAPON", 1, header+"dagger.png", game, new WeaponDagger()));
-        deck.AddCard(new Card("Dagger", "WEAPON", 1, header+"dagger.png", game, new WeaponDagger()));
-        deck.AddCard(new Card("Dagger", "WEAPON", 1, header+"dagger.png", game, new WeaponDagger()));
-        deck.AddCard(new Card("Dagger", "WEAPON", 1, header+"dagger.png", game, new WeaponDagger()));
-        deck.AddCard(new Card("Dagger", "WEAPON", 1, header+"dagger.png", game, new WeaponDagger()));
+        for(int i = 0; i<6; i++)
         deck.AddCard(new Card("Dagger", "WEAPON", 1, header+"dagger.png", game, new WeaponDagger()));
     }
 
