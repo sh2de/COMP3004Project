@@ -133,6 +133,13 @@ public class Player {
         return hand;
     }
 
+    public Card getCardByName(String n){
+        for (Card c : hand) {
+            if(c.getName().equals(n)){return c;}
+        }
+        return null;
+    }
+
     public ArrayList<BlobAlly> getAllies(){
         return allies;
     }

@@ -25,7 +25,7 @@ public class Card{
 	public String getType(){return type;}
 	public int getValue(){return value;}
 	public String getUrl(){return url;}
-	public Playable getPlay(){return play;}
+	//public Playable getPlay(){return play;}
 
 	public String toString(){return name + " " + type + " " + value + " " + url;}
 	//public String toString(){return name;}

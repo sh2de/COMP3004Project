@@ -433,7 +433,8 @@ public class Game {
 
     public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
         int p = 0;
-        for (Card card : hand) {
+        for (Card cardData : hand) {
+            Card card = player.getCardByName(cardData.getName());
             card.play();
             switch(card.getType()){
                 case "FOE":
