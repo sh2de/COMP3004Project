@@ -83,54 +83,25 @@ public class DeckFactory{
 
     private void addFoes(Deck deck, String header){
         deck.AddCard(new Card("Dragon", "FOE", 1, header+"Dragon.png", game, new FoeDragon()));
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Giant", "FOE", 1, header+"Giant.png", game, new FoeGiant()));
-        deck.AddCard(new Card("Giant", "FOE", 1, header+"Giant.png", game, new FoeGiant()));
+        for(int i = 0; i<4; i++)
         deck.AddCard(new Card("Mordred", "FOE", 1, header+"Mordred.png", game, new FoeMordred()));
-        deck.AddCard(new Card("Mordred", "FOE", 1, header+"Mordred.png", game, new FoeMordred()));
-        deck.AddCard(new Card("Mordred", "FOE", 1, header+"Mordred.png", game, new FoeMordred()));
-        deck.AddCard(new Card("Mordred", "FOE", 1, header+"Mordred.png", game, new FoeMordred()));
+        for(int i = 0; i<2; i++)
         deck.AddCard(new Card("Green Knight", "FOE", 1, header+"Green_Knight.png", game, new FoeGreenKnight()));
-        deck.AddCard(new Card("Green Knight", "FOE", 1, header+"Green_Knight.png", game, new FoeGreenKnight()));
+        for(int i = 0; i<3; i++)
         deck.AddCard(new Card("Black Knight", "FOE", 1, header+"Black_Knight.png", game, new FoeBlackKnight()));
-        deck.AddCard(new Card("Black Knight", "FOE", 1, header+"Black_Knight.png", game, new FoeBlackKnight()));
-        deck.AddCard(new Card("Black Knight", "FOE", 1, header+"Black_Knight.png", game, new FoeBlackKnight()));
+        for(int i = 0; i<6; i++)
         deck.AddCard(new Card("Evil Knight", "FOE", 1, header+"Evil_Knight.png", game, new FoeEvilKnight()));
-        deck.AddCard(new Card("Evil Knight", "FOE", 1, header+"Evil_Knight.png", game, new FoeEvilKnight()));
-        deck.AddCard(new Card("Evil Knight", "FOE", 1, header+"Evil_Knight.png", game, new FoeEvilKnight()));
-        deck.AddCard(new Card("Evil Knight", "FOE", 1, header+"Evil_Knight.png", game, new FoeEvilKnight()));
-        deck.AddCard(new Card("Evil Knight", "FOE", 1, header+"Evil_Knight.png", game, new FoeEvilKnight()));
-        deck.AddCard(new Card("Evil Knight", "FOE", 1, header+"Evil_Knight.png", game, new FoeEvilKnight()));
+        for(int i = 0; i<8; i++)
         deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
-        deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
-        deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
-        deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
-        deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
-        deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
-        deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
-        deck.AddCard(new Card("Saxon Knight", "FOE", 1, header+"Saxons_Knight.png", game, new FoeSaxonKnight()));
+        for(int i = 0; i<7; i++)
         deck.AddCard(new Card("Robber Knight", "FOE", 1, header+"Robber_Knight.png", game, new FoeRobberKnight()));
-        deck.AddCard(new Card("Robber Knight", "FOE", 1, header+"Robber_Knight.png", game, new FoeRobberKnight()));
-        deck.AddCard(new Card("Robber Knight", "FOE", 1, header+"Robber_Knight.png", game, new FoeRobberKnight()));
-        deck.AddCard(new Card("Robber Knight", "FOE", 1, header+"Robber_Knight.png", game, new FoeRobberKnight()));
-        deck.AddCard(new Card("Robber Knight", "FOE", 1, header+"Robber_Knight.png", game, new FoeRobberKnight()));
-        deck.AddCard(new Card("Robber Knight", "FOE", 1, header+"Robber_Knight.png", game, new FoeRobberKnight()));
-        deck.AddCard(new Card("Robber Knight", "FOE", 1, header+"Robber_Knight.png", game, new FoeRobberKnight()));
+        for(int i = 0; i<5; i++)
         deck.AddCard(new Card("Saxons", "FOE", 1, header+"Saxons.png", game, new FoeSaxons()));
-        deck.AddCard(new Card("Saxons", "FOE", 1, header+"Saxons.png", game, new FoeSaxons()));
-        deck.AddCard(new Card("Saxons", "FOE", 1, header+"Saxons.png", game, new FoeSaxons()));
-        deck.AddCard(new Card("Saxons", "FOE", 1, header+"Saxons.png", game, new FoeSaxons()));
-        deck.AddCard(new Card("Saxons", "FOE", 1, header+"Saxons.png", game, new FoeSaxons()));
+        for(int i = 0; i<4; i++)
         deck.AddCard(new Card("Boar", "FOE", 1, header+"Boar.png", game, new FoeBoar()));
-        deck.AddCard(new Card("Boar", "FOE", 1, header+"Boar.png", game, new FoeBoar()));
-        deck.AddCard(new Card("Boar", "FOE", 1, header+"Boar.png", game, new FoeBoar()));
-        deck.AddCard(new Card("Boar", "FOE", 1, header+"Boar.png", game, new FoeBoar()));
-        deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
-        deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
-        deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
-        deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
-        deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
-        deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
-        deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
+        for(int i = 0; i<8; i++)
         deck.AddCard(new Card("Thieves", "FOE", 1, header+"Thieves.png", game, new FoeThieves()));
     }
 
