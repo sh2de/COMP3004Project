@@ -109,7 +109,7 @@ export class GameboardComponent implements OnInit {
   getStoryCard(){
     this.gameService.getStoryCard().subscribe(
       (res)=>{
-        console.log("stor card");
+        console.log("story card");
         console.log(res);
       },
       (err:HttpErrorResponse)=>{
@@ -124,7 +124,7 @@ export class GameboardComponent implements OnInit {
    getActiveQuest(){
     this.gameService.getActiveQuest().subscribe(
       (res)=>{
-        console.log("stor card");
+        console.log("active quest");
         console.log(res);
       },
       (err:HttpErrorResponse)=>{

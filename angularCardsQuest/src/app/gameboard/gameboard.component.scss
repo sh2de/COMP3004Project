@@ -1,67 +1,5 @@
-/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 1000px}
- h1{
-     text-align: center;
- }  
-.column {
-  float: left;
-  width: 200px;
-  padding: 1%;
-}
- 
-/* Set gray background color and 100% height */
-.card {
-  background-color: #979797;
-  height: 100%;
-  padding: 1%;
-}
-.player{
-  background-color: #c7f7ff;
-  height: 10%;
-  padding: 3%;
-}
-.playercard{
-  background-color: #ffb7b7;
-  height: 35%;
-  padding: 3%;
-}
-.selectedcard{
-  background-color: #f8ffb7;
-  height: 35%;
-  padding: 3%;
-}
-.itemImage{
-  width:50%;
-  height:auto;
-  padding: 5%;
-  object-fit: cover;
-}
 
-/* Set black background color, white text and some padding */
-footer {
-  background-color: rgb(27, 24, 24);
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
 
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-  .card {
-    height: auto;
-    padding: 15px;
-  }
-  .row.content {height: auto;}
-  .itemImage{
-    width:200px;
-    height:auto;
-  }
-}
-
-ul {
-  white-space: nowrap;
-  display: inline;
-}
 
 // THIS IS MY PART
 //  Set height of the grid so .sidenav can be 100% (adjust if needed) 
@@ -95,13 +33,38 @@ ul {
 }
 .start{
   background-color: #f7ff81;
-  height: 1200%;
+  height: 100%;
   position: relative;
 }
- Set black background color, white text and some padding 
+.start-button {
+  margin: 0;
+  top: 50%;
+  left: 30%;
+  position: absolute;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.itemImage{
+  width:100%;
+  height:auto;
+}
+// Set black background color, white text and some padding 
 footer {
   background-color: rgb(27, 24, 24);
   color: white;
   padding: 15px;
   text-align: center;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .card {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height: auto;}
+  .itemImage{
+    width:200px;
+    height:auto;
+  }
 }
