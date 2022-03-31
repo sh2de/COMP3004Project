@@ -204,7 +204,7 @@ public class Game {
     }
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
-        currentSponsor = players.get((currentTurn + 1 + sponsor)%numPlayers);
+        currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
         forceAllUnready(); //we need a response from all players
         for (Player player : players) {
             if ((player).equals(currentSponsor)){
