@@ -25,7 +25,11 @@ export class GameboardComponent implements OnInit {
   activeQuest={};
   storyCard={};
   stages=[];
-  questCondition:boolean;
+  playableHand=[];
+  questCondition:Boolean;
+  questCreator:Boolean;
+  questPlayer:Boolean;
+  foeWarning:Boolean;
 
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
@@ -36,6 +40,9 @@ export class GameboardComponent implements OnInit {
     this.participate=false;
     this.sponsorReq=false;
     this.areSelected=false;
+    this.questCreator=true;
+    this.questPlayer=false;
+    this.foeWarning=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -81,6 +88,9 @@ export class GameboardComponent implements OnInit {
       }
     )
     this.participate=false;
+    this.questPlayer=true;
+    this.questCreator=false;
+    this.load()
   }
 
   /**
@@ -146,6 +156,18 @@ export class GameboardComponent implements OnInit {
   }
 
   /**
+   * sending playable hand to quest Foe
+   */
+   sendPlayableHand(){
+     this.gameService.sendPlayableHand(this.playerName,this.playableHand).subscribe(
+       (res)=>{},
+       (err:HttpErrorResponse)=>{
+        console.log("ERRO:"+err.message);
+       }
+     )
+   }
+
+  /**
    * ready to start the game
    */
   readyToStart(){
@@ -160,6 +182,10 @@ export class GameboardComponent implements OnInit {
       }
     )
   }
+
+  /**
+   * start the game
+   */
   start(){
     this.roundNUM += 1;
     console.log("start was clicked")
@@ -174,6 +200,7 @@ export class GameboardComponent implements OnInit {
     
     this.stages=[];
   }
+  
   send(){
     this.gameService.sendSelected(this.selectedCards);
     this.gameService.sendHanded(this.myHand);
@@ -218,6 +245,7 @@ export class GameboardComponent implements OnInit {
 
           if(res[this.prevUpdatesLen-1]=="WAIT_FOR_QUEST_CREATION"){
             this.participate=true;
+
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
             this.getActiveQuest();
@@ -226,6 +254,7 @@ export class GameboardComponent implements OnInit {
 
           if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SELECT_CARDS"){
             this.load()
+            this.foeWarning=true;
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
@@ -277,10 +306,11 @@ export class GameboardComponent implements OnInit {
     this.sponsorReq=false;
   }
 
-  selected(card){
-  
-    this.selectedCards.push(card);
-    console.log(card)
+  selected(i:number){
+    console.log(this.myHand[i]);
+    this.playableHand.push(this.myHand[i]);
+    this.myHand.splice(i, 1);
+    
   }
 
   addToplayerList(i:number){

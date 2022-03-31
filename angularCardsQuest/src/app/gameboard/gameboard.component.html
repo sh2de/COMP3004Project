@@ -1,5 +1,6 @@
 <h1>Quest Of The Round Table</h1>
-<div class="container-fluid">
+<!-- page of player who's creating quest -->
+<div class="container-fluid" *ngIf="questCreator">
   <div class="row content">
 
     <!-- ALERT-INFO -->
@@ -55,11 +56,12 @@
           <li><a class="dropdown-item">Stage 2</a></li>
           <li><a class="dropdown-item">Stage 3</a></li>
         </ul> 
-      
+        <button type="button" class="btn btn-link" (click)="nextStage()">next stage</button>
+
       <!-- STAGE-CARD -->
         <div *ngIf="areSelected">
           <div class="row" >
-            <div class="col-sm-1" *ngFor="let card of selectedCards, index as i">                
+            <div class="col-sm-2" *ngFor="let card of selectedCards, index as i">                
               <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage">             
               
             </div>
@@ -101,6 +103,84 @@
   </div>
 </div>
 
+<!-- page of player who's playing quest -->
+<div class="container-fluid" *ngIf="questPlayer">
+  <div class="row content"> 
+       <!-- Foe warning -->
+    <div class="alert alert-info" *ngIf="foesWarning">
+      <strong>UKNOWN FOE IS APPROACHING</strong><br>
+      select your weapons
+    </div>
+    <!-- SIDE -->
+    <div class="col-sm-3 sidenav">
+      
+      <h2> Rules for cards to be played</h2>
+      <br><br>
+      <h3>Select any number of weapons or allies to use for this stage</h3>
+      <br><br>
+      
+             
+    </div>
+
+    <!-- MID -->
+      
+    <div class="col-sm-9 midnav">
+      
+      <!-- PLAYER -->
+      <div class = "player">
+        <h4><small>Player: {{player["name"]}}</small></h4>       
+        
+      </div>
+      <br><br>
+
+      <!-- STAGE-DROPDOWN -->
+      <div class="Stage" ngbDropdown>         
+      
+      <!-- STAGE-CARD -->
+        <div *ngIf="areSelected">
+          <div class="row" >
+            <div class="col-sm-1" *ngFor="let card of playableHand, index as i">                
+              <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage">             
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
+
+      <!-- HAND -->
+      <div class = "hand">
+        <div class = "row">
+
+          <!-- HANDCARD -->
+          <div class = "col-sm-10">
+            <h4> Your hand </h4>
+            <div *ngIf="condition">
+              <div class="row" >
+                <div class="col-sm-2" *ngFor="let card of myHand; let i = index" [attr.data-index]="i">                
+                  <img src="{{card['url']}}" alt="{{card['type']}}" (click)="selected(i)" class="itemImage-hand">             
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- STARTBUTTON -->
+          <div class = "col-sm-2">
+            <div class="start">
+              <div class="start-button">
+                <button type="button" class="btn btn-primary btn-lg" (click)="sendPlayableHand()">
+                  Start
+                </button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="container-fluid">
-  <p>Footer Text</p>
+  <p></p>
 </footer>

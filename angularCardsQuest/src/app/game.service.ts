@@ -149,6 +149,13 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/getStoryCard");
   }
 
+  /**
+   * send playable hand to quest foe
+   * @returns obsarvable of void
+   */
+  public sendPlayableHand(name :string, hand: Array<object>){
+    return this.http.put(this.apiServerUrl+"/questFoeReceivePlayableHand/"+name, hand);
+  }
 
 //////////////// TEST ZONE ////////////////
   public getImages(){ //<--- WILL BE IN GET ZONE
