@@ -216,7 +216,7 @@ public class Game {
     }
 
     public void receiveStages(ArrayList<ArrayList<Card>> stages){
-        
+        System.out.println(stages);
         //start by checking if the received list of cards is valid
         //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
         boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
@@ -230,6 +230,7 @@ public class Game {
             ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
             for (Card card : stage) {
                 System.out.println(card);//debug line
+                System.out.println(card.toString());
                 switch(card.getType()){
                     case "FOE":
                         if (foeFlag){
