@@ -112,9 +112,6 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/acceptSponsorship");
   }
 
-  public sendingStages(stages: Array<Array<object>>){
-    return this.http.put(this.apiServerUrl+"/receiveStages",stages);
-  }
 /**
  * 
  * @param name player who's accepting patricipation
@@ -148,6 +145,7 @@ export class GameService {
   public getStoryCard(){
     return this.http.get(this.apiServerUrl+"/getStoryCard");
   }
+//////////////// PUT ZONE ////////////////
 
   /**
    * send playable hand to quest foe
@@ -156,13 +154,16 @@ export class GameService {
   public sendPlayableHand(name :string, hand: Array<object>){
     return this.http.put(this.apiServerUrl+"/questFoeReceivePlayableHand/"+name, hand);
   }
+  
+  public sendingStages(stages: Array<Array<object>>){
+    return this.http.put(this.apiServerUrl+"/receiveStages",stages);
+  }
 
 //////////////// TEST ZONE ////////////////
   public getImages(){ //<--- WILL BE IN GET ZONE
     //return this.http.get(this.apiServerUrl+"/getImg");
     return this.imglist;
   }
-
   
   /**
    * requesting to send cards and goes to next player's turn !!!==> It is designed for preview

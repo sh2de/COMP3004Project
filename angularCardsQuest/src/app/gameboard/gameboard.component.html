@@ -37,7 +37,7 @@
       
       <!-- PLAYER -->
       <div class = "player">
-        <h4><small>Player: {{player["name"]}}</small></h4>
+        <h4><small>Player: {{player["name"]}}    Rank: {{player["rank"]}}</small></h4>
 
         <div *ngIf="ready">
           <button type="button" class="btn btn-primary" (click)="readyToStart()">Ready</button>
@@ -56,12 +56,12 @@
           <li><a class="dropdown-item">Stage 2</a></li>
           <li><a class="dropdown-item">Stage 3</a></li>
         </ul> 
-        <button type="button" class="btn btn-link" (click)="nextStage()">next stage</button>
+        <!--<button type="button" class="btn btn-link" (click)="nextStage()">next stage</button>-->
 
       <!-- STAGE-CARD -->
-        <div *ngIf="areSelected">
+        <div>
           <div class="row" >
-            <div class="col-sm-2" *ngFor="let card of selectedCards, index as i">                
+            <div class="col-sm-1" *ngFor="let card of stages, index as i">                
               <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage">             
               
             </div>
@@ -80,7 +80,7 @@
             <div *ngIf="condition">
               <div class="row" >
                 <div class="col-sm-2" *ngFor="let card of myHand; let i = index" [attr.data-index]="i">                
-                  <img src="{{card['url']}}" alt="{{card['type']}}" (click)="isSelected(i)" class="itemImage-hand">             
+                  <img src="{{card['url']}}" id="{{i}}" style="border:0" alt="{{card['type']}}" (click)="isSelected(i)" class="itemImage-hand">             
                   
                 </div>
               </div>
