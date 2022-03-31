@@ -1,10 +1,8 @@
-
-  
-    <!-- THIS IS MY PART -->
 <h1>Quest Of The Round Table</h1>
 <div class="container-fluid">
   <div class="row content">
-  
+
+    <!-- ALERT-INFO -->
     <div class="alert alert-info" *ngIf="sponsorReq">
       <strong>Are you willing to sponsor the current Quest?</strong>
       <button type="button" class="btn btn-link" (click)="acceptSponsor()">Yes</button>
@@ -15,6 +13,8 @@
       <button type="button" class="btn btn-link" (click)="acceptParticipation()">Yes</button>
       <button type="button" class="btn btn-link" (click)="declineParticipation()">No</button>
     </div>
+
+    <!-- SIDE -->
     <div class="col-sm-3 sidenav">
       <div  *ngIf="questCondition">
         <h4>Active Quest</h4>                
@@ -29,7 +29,12 @@
       <br> 
       <h4>each stage has to have a higher value than the last</h4>       
     </div>
+
+    <!-- MID -->
+      
     <div class="col-sm-9 midnav">
+      
+      <!-- PLAYER -->
       <div class = "player">
         <h4><small>Player: {{player["name"]}}</small></h4>
 
@@ -39,52 +44,55 @@
         
       </div>
       <br><br>
+
+      <!-- STAGE-DROPDOWN -->
       <div class="Stage" ngbDropdown>
         <button type="button" class="btn btn-primary dropdown-toggle" ngbDropdownToggle="dropdown">
           Stage {{roundNUM}}
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-        <!-- <ul class="dropdown-menu" ngbDropdownMenu>
+        <ul class="dropdown-menu" ngbDropdownMenu>
           <li><a class="dropdown-item">Stage 1</a></li>
           <li><a class="dropdown-item">Stage 2</a></li>
           <li><a class="dropdown-item">Stage 3</a></li>
-        </ul> -->
-        <div>
-          <button type="button" class="btn btn-link" (click)="nextStage()">Next Stage</button>
-        </div>
+        </ul> 
+      
+      <!-- STAGE-CARD -->
         <div *ngIf="areSelected">
           <div class="row" >
-            <div class="col-sm-2" *ngFor="let card of selectedCards, index as i">                
-              <img src="{{card['url']}}" alt="{{card['type']}}" style="width:100px;height:200px;">             
+            <div class="col-sm-1" *ngFor="let card of selectedCards, index as i">                
+              <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage">             
               
             </div>
           </div>
         </div>
       </div>
       <br><br>
+
+      <!-- HAND -->
       <div class = "hand">
         <div class = "row">
+
+          <!-- HANDCARD -->
           <div class = "col-sm-10">
             <h4> Your hand </h4>
-          </div>
-
-          <div *ngIf="condition">
-            <div class="row" >
-              <div class="col-sm-2" *ngFor="let card of myHand; let i = index" [attr.data-index]="i">                
-                <img src="{{card['url']}}" alt="{{card['type']}}" (click)="isSelected(i)" style="width:100px;height:200px;">             
-                
+            <div *ngIf="condition">
+              <div class="row" >
+                <div class="col-sm-2" *ngFor="let card of myHand; let i = index" [attr.data-index]="i">                
+                  <img src="{{card['url']}}" alt="{{card['type']}}" (click)="isSelected(i)" class="itemImage-hand">             
+                  
+                </div>
               </div>
             </div>
           </div>
+          
+          <!-- STARTBUTTON -->
           <div class = "col-sm-2">
             <div class="start">
-              <button type="button" class="btn btn-primary btn-lg" style="position: absolute; top: 40%; left: 40%;" (click)="start()">
-                Start
-              </button>
+              <div class="start-button">
+                <button type="button" class="btn btn-primary btn-lg" (click)="start()">
+                  Start
+                </button>
+            </div>
             </div>
           </div>
         </div>

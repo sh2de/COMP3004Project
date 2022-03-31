@@ -118,6 +118,9 @@ export class GameboardComponent implements OnInit {
         this.storyCard=res;
         console.log("test url "+res['url']);
 
+        console.log("story card");
+        console.log(res);
+
       },
       (err:HttpErrorResponse)=>{
         console.log("ERRO:"+err.message);
@@ -133,6 +136,8 @@ export class GameboardComponent implements OnInit {
       (res)=>{
         this.activeQuest=res;
         
+        console.log("active quest");
+        console.log(res);
       },
       (err:HttpErrorResponse)=>{
         console.log("ERRO:"+err.message);
