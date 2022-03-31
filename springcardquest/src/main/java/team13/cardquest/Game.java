@@ -313,10 +313,22 @@ public class Game {
     }
 
     public void questTurn(){//handle the start of a quest's stage
+        
+        //first step: check if stages are left in the quest
+        if (activeStage > activeQuest.stages){
+            questAnnounceResults();
+            return; 
+        }
 
-        //first step: check if any players are alive
-
-        //second step: check if stages are left in the quest
+        //second step: check if any players are alive
+        boolean aliveFlag = false;
+        for (Player player : players) {
+            if (player.getAlive()){aliveFlag = true;}
+        }
+        if (!aliveFlag){
+            questAnnounceResults();
+            return;
+        }
 
         //third step: announce foe or test
 
