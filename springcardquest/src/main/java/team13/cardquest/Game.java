@@ -273,12 +273,7 @@ public class Game {
         //just test the signal for now
         questStages = stages;
         activeStage = 1;
-        for (Player p : players) {
-            p.addEventSignal("QUEST_START");
-            //if (!p.equals(currentSponsor)){
-            //    p.addEventSignal("");
-            //}
-        }
+        questAttemptStart();
         
         
     }
@@ -292,11 +287,13 @@ public class Game {
         Player p = getPlayer(name);
         p.setWaiting(false);
         p.setAlive(true);
+        questAttemptStart();
     }
 
     public void questRejectParticipation(String name){
         Player p = getPlayer(name);
         p.setWaiting(false);
+        questAttemptStart();
     }
 
     public void questAttemptStart(){//try to start the quest if possible
