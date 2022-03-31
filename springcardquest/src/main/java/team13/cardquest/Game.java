@@ -424,6 +424,7 @@ public class Game {
     public void ReceiveWeapon(BlobWeapon w){currentWeapon = w;}
     public void ReceiveEvent(BlobEvent e){}
     public void ReceiveArmour(BlobArmour a){}
+    public void ReceiveTournament(BlobTournament t){}
 
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
         if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
