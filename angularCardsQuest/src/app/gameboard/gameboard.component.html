@@ -1,12 +1,23 @@
 
   
     <!-- THIS IS MY PART -->
-    <h1>Quest Of The Round Table</h1>
+<h1>Quest Of The Round Table</h1>
 <div class="container-fluid">
   <div class="row content">
+  
+    <div class="alert alert-info" *ngIf="sponsorReq">
+      <strong>Are you willing to sponsor the current Quest?</strong>
+      <button type="button" class="btn btn-link" (click)="acceptSponsor()">Yes</button>
+      <button type="button" class="btn btn-link" (click)="declineSponsor()">No</button>
+    </div>
+    <div class="alert alert-info" *ngIf="participate">
+      <strong>Are you willing to sponsor the current Quest?</strong>
+      <button type="button" class="btn btn-link" (click)="acceptSponsor()">Yes</button>
+      <button type="button" class="btn btn-link" (click)="declineSponsor()">No</button>
+    </div>
     <div class="col-sm-3 sidenav">
-      <h2>Text box containing the rules for quest preparation</h2>
-      <br><br><br><br>
+      <h3>Text box containing the rules for quest preparation</h3>
+      <br><br>
       <h4>a stage is made up of either a single foe and any number of weapons OR a single test card</h4>
       <br>
       <h4>a quest can only have one test</h4>
@@ -39,7 +50,6 @@
         </ul> -->
         <div>
           <button type="button" class="btn btn-link" (click)="nextStage()">Next Stage</button>
-
         </div>
         <div *ngIf="areSelected">
           <div class="row" >
@@ -59,7 +69,7 @@
 
           <div *ngIf="condition">
             <div class="row" >
-              <div class="col-sm-2" *ngFor="let card of myHand, index as i">                
+              <div class="col-sm-2" *ngFor="let card of myHand; let i = index" [attr.data-index]="i">                
                 <img src="{{card['url']}}" alt="{{card['type']}}" (click)="isSelected(i)" style="width:100px;height:200px;">             
                 
               </div>

@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { convertCompilerOptionsFromJson } from 'typescript';
 import { GameService } from '../game.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class GameboardComponent implements OnInit {
   sponsorReq: Boolean;
   prevUpdatesLen: number;
   areSelected:Boolean;
+  participate:Boolean;
 
   stages=[];
 
@@ -28,6 +30,7 @@ export class GameboardComponent implements OnInit {
   ngOnInit(): void {
     this.prevUpdatesLen=0;
     this.ready=true;
+    this.participate=false;
     this.sponsorReq=false;
     this.areSelected=false;
     this.playerName=this.route.snapshot.params["username"];
@@ -90,14 +93,16 @@ export class GameboardComponent implements OnInit {
   }
   start(){
     this.roundNUM += 1;
-    if(this.stages['length']==3){
-      this.gameService.sendingStages(this.stages).subscribe(
-        (res)=>{},
-        (err:HttpErrorResponse)=>{
-          console.log(err.message);
-        }
-      )
-    }
+    console.log("start was clicked")
+    this.gameService.sendingStages(this.stages).subscribe(
+      (res)=>{
+        console.log("stages responses")
+      },
+      (err:HttpErrorResponse)=>{
+        console.log(err.message);
+      }
+    )
+    
     this.stages=[];
   }
   send(){
@@ -113,7 +118,7 @@ export class GameboardComponent implements OnInit {
       (res:Object)=>{
         
         // console.log(res)
-        if(res["length"]>this.prevUpdatesLen){
+        if(res["length"]>0){
           this.prevUpdatesLen=res["length"]
           console.log("test updates: ");
           console.log(res)
@@ -124,37 +129,47 @@ export class GameboardComponent implements OnInit {
           }
 
           if(res[this.prevUpdatesLen-1]=="REQUEST_SPONSORSHIP"){
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
             this.sponsorReq=true;
           }
 
           if(res[this.prevUpdatesLen-1]=="DRAW_STORY"){
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
           if(res[this.prevUpdatesLen-1]=="CREATE_QUEST"){
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
           if(res[this.prevUpdatesLen-1]=="WAIT_FOR_QUEST_CREATION"){
+            this.participate=true;
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
           if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SELECT_CARDS"){
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
           if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SHOW_RESULTS"){
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
           if(res[this.prevUpdatesLen-1]=="QUEST_OVER"){
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
           if(res[this.prevUpdatesLen-1]=="QUEST_START"){
+            this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
+
 
         }
       },
@@ -162,6 +177,7 @@ export class GameboardComponent implements OnInit {
         console.log("ERROR: "+err.message);
       }
     )
+    
   }
 
   acceptSponsor(){
@@ -173,6 +189,7 @@ export class GameboardComponent implements OnInit {
       }
 
     )
+    this.sponsorReq=false;
   }
 
   declineSponsor(){
@@ -183,6 +200,7 @@ export class GameboardComponent implements OnInit {
         console.log(err.message);
       }
     );
+    this.sponsorReq=false;
   }
 
   selected(card){
@@ -196,11 +214,11 @@ export class GameboardComponent implements OnInit {
   }
 
   isSelected(i:number){  
-
+    console.log(this.myHand[i]);
     this.selectedCards.push(this.myHand[i]);
     this.myHand.splice(i, 1);
     this.areSelected=true;
-    console.log(this.myHand[i]);
+    
   }
   cancel(i:number){
     this.myHand.push(this.selectedCards[i]);

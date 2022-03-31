@@ -101,6 +101,20 @@ public class CardquestApplication {
 		return new ResponseEntity<>(game.getPlayer(name),HttpStatus.OK);
 	}
 
+	//accept participation in quest
+	@GetMapping("/acceptParticipation/{name}")
+	public ResponseEntity<Void> acceptParticipation(@PathVariable("name") String name){
+		game.questAcceptParticipation(name);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	//reject participation in quest
+	@GetMapping("/rejectParticipation/{name}")
+	public ResponseEntity<Void> rejectParticipation(@PathVariable("name") String name){
+		game.questRejectParticipation(name);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	// request for getting current player
 
 	@GetMapping("/getCurrentPlayer")

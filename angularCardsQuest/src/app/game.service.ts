@@ -115,6 +115,23 @@ export class GameService {
   public sendingStages(stages: Array<Array<object>>){
     return this.http.put(this.apiServerUrl+"/receiveStages",stages);
   }
+/**
+ * 
+ * @param name player who's accepting patricipation
+ * @returns observable of void
+ */
+  public acceptParticipation(name: string){
+    return this.http.get(this.apiServerUrl+"/acceptParticipation/"+name);
+  }
+
+  /**
+   * 
+   * @param name player who's accepting patricipation
+   * @returns observable of void
+  */
+  public rejectParticipation(name: string){
+    return this.http.get(this.apiServerUrl+"/rejectParticipation/"+name);
+  }
 
 
 //////////////// TEST ZONE ////////////////
