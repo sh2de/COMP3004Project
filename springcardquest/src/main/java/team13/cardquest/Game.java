@@ -360,7 +360,14 @@ public class Game {
         getPlayer(name).setPlayableHand(hand);
         getPlayer(name).setWaiting(false);
         //step 3: check if all other players are ready
+        boolean anyWaiting = false;
 
+        for (Player p : players) {
+            if (p.getWaiting()){anyWaiting = true;}
+        }
+        if (!anyWaiting){
+            questFoeStageResults();
+        }
 
     }
 
