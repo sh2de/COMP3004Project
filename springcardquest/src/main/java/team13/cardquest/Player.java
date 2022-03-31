@@ -11,7 +11,7 @@ public class Player {
     private Boolean alive = false; //this variable is used in quests or tournaments to judge if the player is a participant or not
     private ArrayList<String> eventQueue = new ArrayList<>();
     private ArrayList<BlobAlly> allies = new ArrayList<>();
-    private ArrayList<Playable> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
+    private ArrayList<Card> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
     
 
     public Player(String _name){
@@ -89,16 +89,16 @@ public class Player {
     }
 
     //playable hand functions
-    public void setPlayableHand(ArrayList<Playable> playableHand) {
+    public void setPlayableHand(ArrayList<Card> playableHand) {
         this.playableHand = playableHand;
     }
 
-    public ArrayList<Playable> getPlayableHand() {
+    public ArrayList<Card> getPlayableHand() {
         return playableHand;
     }
 
-    public ArrayList<Playable> discardPlayableHand(){//returns the list so it can be properly discarded in the game object
-        ArrayList<Playable> discards = playableHand;
+    public ArrayList<Card> discardPlayableHand(){//returns the list so it can be properly discarded in the game object
+        ArrayList<Card> discards = playableHand;
         playableHand = new ArrayList<>();
         return discards;
     }
