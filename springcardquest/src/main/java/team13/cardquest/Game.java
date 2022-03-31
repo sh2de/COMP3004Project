@@ -299,6 +299,22 @@ public class Game {
         p.setWaiting(false);
     }
 
+    public void questAttemptStart(){//try to start the quest if possible
+        
+        boolean anyWaiting = false;
+
+        for (Player p : players) {
+            if (p.getWaiting()){anyWaiting = true;}
+        }
+        if (!anyWaiting){
+            for (Player p : players) {
+                p.addEventSignal("QUEST_START");
+            }
+            questTurn();
+        }
+        
+    }
+
     public void questTurn(){//handle the start of a quest's stage
 
         //first step: check if any players are alive
@@ -335,10 +351,13 @@ public class Game {
         //MISSING: CHECK FOR A WINNER
     }
 
-    public void questReceivePlayableHand(){//receive the cards played by the player for a quest
+    public void questReceivePlayableHand(String name, ArrayList<Card> hand){//receive the cards played by the player for a quest
         //step 1: check if cards are valid. on fail, resend signal
-
+        //INCOMPLETE: ASSUMING VALIDITY FOR NOW
         //step 2: set player as ready, if all players ready move on to the next stage
+        getPlayer(name).setPlayableHand(hand);
+        getPlayer(name).setWaiting(false);
+        //step 3: check if all other players are ready
     }
 
 
