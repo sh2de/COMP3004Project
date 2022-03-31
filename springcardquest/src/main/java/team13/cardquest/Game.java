@@ -283,6 +283,7 @@ public class Game {
         //just test the signal for now
         questStages = stages;
         activeStage = 1;
+        currentSponsor.setWaiting(false);
         questAttemptStart();
         
         
