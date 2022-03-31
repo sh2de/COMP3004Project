@@ -16,6 +16,11 @@
       <button type="button" class="btn btn-link" (click)="declineParticipation()">No</button>
     </div>
     <div class="col-sm-3 sidenav">
+      <div  *ngIf="questCondition">
+        <h4>Active Quest</h4>                
+        <img src="{{storyCard['url']}}" alt="{{storyCard['type']}}" style="width:100px;height:200px;">             
+        
+      </div>
       <h3>Text box containing the rules for quest preparation</h3>
       <br><br>
       <h4>a stage is made up of either a single foe and any number of weapons OR a single test card</h4>

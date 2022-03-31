@@ -22,13 +22,16 @@ export class GameboardComponent implements OnInit {
   prevUpdatesLen: number;
   areSelected:Boolean;
   participate:Boolean;
-
+  activeQuest={};
+  storyCard={};
   stages=[];
+  questCondition:boolean;
 
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
     this.prevUpdatesLen=0;
+    this.questCondition=false;
     this.ready=true;
     this.participate=false;
     this.sponsorReq=false;
@@ -38,7 +41,9 @@ export class GameboardComponent implements OnInit {
       .subscribe(()=>{
         this.getUpdates();
       });
-      this.load()
+    this.load()
+    this.getUpdates();
+    this.getActiveQuest();
 
       
   }
@@ -110,7 +115,9 @@ export class GameboardComponent implements OnInit {
     this.gameService.getStoryCard().subscribe(
       (res)=>{
         console.log("stor card");
-        console.log(res);
+        this.storyCard=res;
+        console.log("test url "+res['url']);
+
       },
       (err:HttpErrorResponse)=>{
         console.log("ERRO:"+err.message);
@@ -124,8 +131,8 @@ export class GameboardComponent implements OnInit {
    getActiveQuest(){
     this.gameService.getActiveQuest().subscribe(
       (res)=>{
-        console.log("stor card");
-        console.log(res);
+        this.activeQuest=res;
+        
       },
       (err:HttpErrorResponse)=>{
         console.log("ERRO:"+err.message);
@@ -199,6 +206,7 @@ export class GameboardComponent implements OnInit {
           if(res[this.prevUpdatesLen-1]=="CREATE_QUEST"){
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
+            this.questCondition=true;
             this.getActiveQuest();
             this.getStoryCard();
           }
