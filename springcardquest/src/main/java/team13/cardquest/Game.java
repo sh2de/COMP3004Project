@@ -204,7 +204,7 @@ public class Game {
     }
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
-        currentSponsor = players.get((currentTurn - 1 + sponsor)%numPlayers);
+        currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
         forceAllUnready(); //we need a response from all players
         for (Player player : players) {
             if ((player).equals(currentSponsor)){
@@ -216,15 +216,21 @@ public class Game {
     }
 
     public void receiveStages(ArrayList<ArrayList<Card>> stages){
+        System.out.println(stages);
         //start by checking if the received list of cards is valid
         //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
         boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
         //SECOND CHECK: IS THERE ONLY ONE TEST?
-        
+        if (stages.size() != activeQuest.stages){
+            rejectStageSetup();
+            return;
+        }
         for (ArrayList<Card> stage : stages) {
             boolean foeFlag = false;
             ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
             for (Card card : stage) {
+                System.out.println(card);//debug line
+                System.out.println(card.toString());
                 switch(card.getType()){
                     case "FOE":
                         if (foeFlag){
@@ -313,10 +319,22 @@ public class Game {
     }
 
     public void questTurn(){//handle the start of a quest's stage
+        
+        //first step: check if stages are left in the quest
+        if (activeStage > activeQuest.stages){
+            questAnnounceResults();
+            return; 
+        }
 
-        //first step: check if any players are alive
-
-        //second step: check if stages are left in the quest
+        //second step: check if any players are alive
+        boolean aliveFlag = false;
+        for (Player player : players) {
+            if (player.getAlive()){aliveFlag = true;}
+        }
+        if (!aliveFlag){
+            questAnnounceResults();
+            return;
+        }
 
         //third step: announce foe or test
 
@@ -330,11 +348,41 @@ public class Game {
         }
     }
 
+    public void questFoeReceivePlayableHand(String name, ArrayList<Card> hand){//receive the cards played by the player for a quest
+        //step 1: check if cards are valid. on fail, resend signal
+        //INCOMPLETE: ASSUMING VALIDITY FOR NOW
+        //step 2: set player as ready, if all players ready move on to the next stage
+        getPlayer(name).setPlayableHand(hand);
+        getPlayer(name).setWaiting(false);
+        //step 3: check if all other players are ready
+
+
+    }
+
+    public void questFoeStageResults(){
+        questStageResults = "";
+        int foePower = getPower(questStages.get(activeStage - 1));
+        for (Player player : players) {
+            if (player.getAlive()){
+                //if player is alive, check if they survived
+                if (foePower > player.getPower() + getPower(player.getPlayableHand())){//if foe was stronger, kill the player
+                    player.setAlive(false);
+                    questStageResults += player.getName() + " was felled in battle!\n";
+                } else{
+                    questStageResults += player.getName() + " triumphed in battle!\n";
+                }                
+            }
+        }
+        activeStage++;
+        for (Player player : players){player.addEventSignal("QUEST_FOE_SHOW_RESULTS");}
+        questTurn();
+    }
+
     public void questAnnounceResults(){
         for (Player player : players) {
             if (player.getAlive()){
                 player.editShields(activeQuest.stages);
-                questFinalResults += player.getName() + " gets " + activeQuest.stages + " shields for surviving the quest!";
+                questFinalResults += player.getName() + " gets " + activeQuest.stages + " shields for surviving the quest!\n";
             }else if (player.equals(currentSponsor)){
                 player.addCardToHand(adventuredeck.draw());//draw 1 per stage + cards played in a stage
                 for (ArrayList<Card> stage : questStages) {
@@ -346,17 +394,10 @@ public class Game {
             player.addEventSignal("QUEST_OVER");
         }
         //MISSING: CHECK FOR A WINNER
+        
+        state = "turn_start";
+        turnStart();
     }
-
-    public void questReceivePlayableHand(String name, ArrayList<Card> hand){//receive the cards played by the player for a quest
-        //step 1: check if cards are valid. on fail, resend signal
-        //INCOMPLETE: ASSUMING VALIDITY FOR NOW
-        //step 2: set player as ready, if all players ready move on to the next stage
-        getPlayer(name).setPlayableHand(hand);
-        getPlayer(name).setWaiting(false);
-        //step 3: check if all other players are ready
-    }
-
 
 
     //this function is what each quest will call so that the game can put itself in the right state for the quest
