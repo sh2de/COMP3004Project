@@ -109,9 +109,9 @@ export class GameboardComponent implements OnInit {
   /**
    * command to the next steps
    */
-  nextStage(){
-    
-    this.stages.push(this.selectedCards);
+  nextStage(){    
+    this.roundNUM += 1;
+    this.stages = this.selectedCards;
     console.log(this.stages)
     this.selectedCards=[];    
     this.areSelected=false;
@@ -190,7 +190,7 @@ export class GameboardComponent implements OnInit {
    * start the game
    */
   start(){
-    this.roundNUM += 1;
+    this.nextStage();
     console.log("start was clicked")
     this.gameService.sendingStages(this.stages).subscribe(
       (res)=>{
@@ -200,10 +200,15 @@ export class GameboardComponent implements OnInit {
         console.log(err.message);
       }
     )
-    
-    this.stages=[];
+    for(let i = 0; i < this.myHand.length; i++){
+      if(document.getElementById(`${i}`).style.border=="5px solid rgb(255, 0, 0)"){
+        document.getElementById(`${i}`).style.border="0";
+      }
+    }
+    this.selectedCards=[];
   }
   
+
   send(){
     this.gameService.sendSelected(this.selectedCards);
     this.gameService.sendHanded(this.myHand);
@@ -321,10 +326,23 @@ export class GameboardComponent implements OnInit {
     this.myHand.push(this.cardList[i]);
   }
 
-  isSelected(i:number){  
+  isSelected(i:number){
+    if(document.getElementById(`${i}`).style.border=="0px"){
+      document.getElementById(`${i}`).style.border="5px solid rgb(255, 0, 0)";  
+      this.selectedCards.push(this.myHand[i]);
+    }else{
+      document.getElementById(`${i}`).style.border="0";
+      this.selectedCards.forEach(
+        selectedCards => {
+          if(selectedCards == this.myHand[i]){
+            this.selectedCards.splice(this.selectedCards.indexOf(selectedCards), 1);
+          }
+        }
+      );
+      //this.selectedCards.splice(i, 1);
+    }
     console.log(this.myHand[i]);
-    this.selectedCards.push(this.myHand[i]);
-    this.myHand.splice(i, 1);
+    //this.myHand.splice(i, 1);
     this.areSelected=true;
     
   }
