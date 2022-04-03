@@ -191,7 +191,7 @@ export class GameboardComponent implements OnInit {
    */
   start(){
     this.nextStage();
-    console.log("start was clicked")
+    console.log(this.stages);
     this.gameService.sendingStages(this.stages).subscribe(
       (res)=>{
         console.log("stages responses")
@@ -277,6 +277,16 @@ export class GameboardComponent implements OnInit {
           }
 
           if(res[this.prevUpdatesLen-1]=="QUEST_START"){
+            this.load()
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="UPDATE_PLAYERS"){
+            this.load()
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="DISCARD_NEEDED"){
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
