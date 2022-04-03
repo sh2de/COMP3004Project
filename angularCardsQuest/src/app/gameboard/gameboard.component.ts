@@ -167,6 +167,7 @@ export class GameboardComponent implements OnInit {
         console.log("ERRO:"+err.message);
        }
      )
+     this.playableHand=[];
    }
 
   /**
