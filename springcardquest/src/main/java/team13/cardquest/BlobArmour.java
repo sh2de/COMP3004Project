@@ -1,6 +1,6 @@
 package team13.cardquest;
 
-public class BlobArmour{
+public class BlobArmour {
     int value;
 	int power;
 
