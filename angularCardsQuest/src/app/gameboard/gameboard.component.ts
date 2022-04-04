@@ -25,6 +25,7 @@ export class GameboardComponent implements OnInit {
   activeQuest={};
   storyCard={};
   stages=[];
+  currentstages=0;
   playableHand=[];
   questCondition:Boolean;
   questCreator:Boolean;
@@ -111,7 +112,8 @@ export class GameboardComponent implements OnInit {
    */
   nextStage(){    
     this.roundNUM += 1;
-    this.stages = this.selectedCards;
+    this.stages.push(this.selectedCards);
+    this.currentstages = this.stages.length-1;
     console.log(this.stages)
     this.selectedCards=[];    
     this.areSelected=false;
@@ -200,11 +202,14 @@ export class GameboardComponent implements OnInit {
         console.log(err.message);
       }
     )
+    let newHand=[];
     for(let i = 0; i < this.myHand.length; i++){
       if(document.getElementById(`${i}`).style.border=="5px solid rgb(255, 0, 0)"){
-        document.getElementById(`${i}`).style.border="0";
+        continue;
       }
+      newHand.push(this.myHand[i]);
     }
+    this.myHand = newHand;
     this.selectedCards=[];
   }
   

@@ -51,17 +51,15 @@
         <button type="button" class="btn btn-primary dropdown-toggle" ngbDropdownToggle="dropdown">
           Stage {{roundNUM}}
         </button>
-        <ul class="dropdown-menu" ngbDropdownMenu>
-          <li><a class="dropdown-item">Stage 1</a></li>
-          <li><a class="dropdown-item">Stage 2</a></li>
-          <li><a class="dropdown-item">Stage 3</a></li>
+        <ul class="dropdown-menu" *ngFor="let stage of stages, index as i" ngbDropdownMenu>
+          <li><a class="dropdown-item" id="{{i}}" (click)="currentstages=i"> Stage {{i}}</a></li>
         </ul> 
         <!--<button type="button" class="btn btn-link" (click)="nextStage()">next stage</button>-->
 
       <!-- STAGE-CARD -->
         <div>
           <div class="row" >
-            <div class="col-sm-1" *ngFor="let card of stages, index as i">                
+            <div class="col-sm-1" *ngFor="let card of stages[currentstages], index as i">                
               <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage">             
               
             </div>
