@@ -26,7 +26,7 @@ public class Game {
     
     static BlobFoe currentFoe = null;
     static BlobWeapon currentWeapon = null;
-
+    static BlobAlly currentAlly = null;
 
     String state = "initialize";
     /*the state variable is what will be used to check what moves are currently legal or not.
@@ -416,12 +416,13 @@ public class Game {
 
     //this function is what each quest will call so that the game can put itself in the right state for the quest
     //public void ReceiveQuest(BlobQuest q){System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
-    public static void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);} //add ally to the allies of player who played it
+    //public static void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);} //add ally to the allies of player who played it
     //public void ReceiveFoe(BlobFoe f){System.out.println(f.name + " " + f.power + " " + f.boost);}
     //public void ReceiveWeapon(BlobWeapon w){System.out.println(w.name + " " + w.power);}
 
     public static void ReceiveFoe(BlobFoe f){currentFoe = f;}
     public static void ReceiveWeapon(BlobWeapon w){currentWeapon = w;}
+    public static void ReceiveAlly(BlobAlly a){currentAlly = a;}
     public static void ReceiveEvent(BlobEvent e){}
     public static void ReceiveArmour(BlobArmour a){}
     public static void ReceiveTournament(BlobTournament t){}
@@ -558,6 +559,14 @@ public class Game {
 
     //api call to play an ally card
     public void playAlly(String name, Card c){
+        Player p = getPlayer(name);
+        Card card = p.getCardByName(c.getName());
+
+        if (card.getType().equals("ALLY")){
+            card.play();
+            p.addAlly(currentAlly);
+            p.removeCardByName(name);
+        }
         
     }
 
