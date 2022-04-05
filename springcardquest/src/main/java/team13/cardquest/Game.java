@@ -562,7 +562,14 @@ public class Game {
     }
 
     public String getAllPlayersStatus(){
-        return "";
+        String status = "";
+        for (Player player : players) {
+            status += player.getName() + ": " + player.getHand().size() + " cards | " + player.getShields() + " shields";
+            if (player.getWaiting()){status += " (waiting for input)";}
+            status += "\n";
+        }
+        status += "It is currently " + players.get(currentTurn).getName()+"'s turn";
+        return status;
     }
 
     //api call to get a player's list of update signals
