@@ -144,6 +144,10 @@ public class Player {
         return allies;
     }
 
+    public void addAlly(BlobAlly a){
+        allies.add(a);
+    }
+
     public ArrayList<BlobAlly> discardAllAllies(){
         //missing: send allies to discard pile
         ArrayList<BlobAlly> discards = allies;
