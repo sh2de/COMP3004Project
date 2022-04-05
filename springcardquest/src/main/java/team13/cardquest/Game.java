@@ -561,6 +561,10 @@ public class Game {
         
     }
 
+    public String getAllPlayersStatus(){
+        return "";
+    }
+
     //api call to get a player's list of update signals
     public ArrayList<String> getUpdates(String name){
         return getPlayer(name).sendEventQueue();
