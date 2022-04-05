@@ -9,6 +9,6 @@ public class PlayableWeapon implements Playable{
 
     
 	public void OnPlay(){
-		 card.getGame().ReceiveWeapon(new BlobWeapon(card.getName(), card.getPower()));
+		 Game.ReceiveWeapon(new BlobWeapon(card.getName(), card.getPower()));
 	}
 }

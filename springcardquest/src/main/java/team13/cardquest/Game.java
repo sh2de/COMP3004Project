@@ -17,15 +17,15 @@ public class Game {
     
     Card currentStory = null;
 
-    BlobQuest activeQuest = null;
+    static BlobQuest activeQuest = null;
     int activeStage = 0;
     ArrayList<ArrayList<Card>> questStages = new ArrayList<ArrayList<Card>>();
     int questBonus = 0;
     String questStageResults = "";
     String questFinalResults = "";
     
-    BlobFoe currentFoe = null;
-    BlobWeapon currentWeapon = null;
+    static BlobFoe currentFoe = null;
+    static BlobWeapon currentWeapon = null;
 
 
     String state = "initialize";
@@ -179,7 +179,7 @@ public class Game {
 
     public Card getStoryCard(){return currentStory;}
 
-    public void ReceiveQuest(BlobQuest q){
+    public static void ReceiveQuest(BlobQuest q){
         activeQuest = q;
     }
     
@@ -416,16 +416,16 @@ public class Game {
 
     //this function is what each quest will call so that the game can put itself in the right state for the quest
     //public void ReceiveQuest(BlobQuest q){System.out.println(q.name + " " + q.stages + " " + q.namedFoe);}
-    public void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);} //add ally to the allies of player who played it
+    public static void ReceiveAlly(BlobAlly a){System.out.println(a.name + " " + a.power + " " + a.value);} //add ally to the allies of player who played it
     //public void ReceiveFoe(BlobFoe f){System.out.println(f.name + " " + f.power + " " + f.boost);}
     //public void ReceiveWeapon(BlobWeapon w){System.out.println(w.name + " " + w.power);}
 
-    public void ReceiveFoe(BlobFoe f){currentFoe = f;}
-    public void ReceiveWeapon(BlobWeapon w){currentWeapon = w;}
-    public void ReceiveEvent(BlobEvent e){}
-    public void ReceiveArmour(BlobArmour a){}
-    public void ReceiveTournament(BlobTournament t){}
-    public void ReceiveTest(BlobTest t){}
+    public static void ReceiveFoe(BlobFoe f){currentFoe = f;}
+    public static void ReceiveWeapon(BlobWeapon w){currentWeapon = w;}
+    public static void ReceiveEvent(BlobEvent e){}
+    public static void ReceiveArmour(BlobArmour a){}
+    public static void ReceiveTournament(BlobTournament t){}
+    public static void ReceiveTest(BlobTest t){}
 
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
         if (p.getPower() + getPower(p,playerCards) >= getPower(p,questCards)){return true;}

@@ -9,6 +9,6 @@ public class PlayableArmour implements Playable{
 
     
 	public void OnPlay(){
-		 card.getGame().ReceiveArmour(new BlobArmour(card.getValue(), card.getPower()));
+		 Game.ReceiveArmour(new BlobArmour(card.getValue(), card.getPower()));
 	}
 }

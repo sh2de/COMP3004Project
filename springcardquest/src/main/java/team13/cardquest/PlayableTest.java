@@ -9,6 +9,6 @@ public class PlayableTest implements Playable{
 
     
 	public void OnPlay(){
-		 card.getGame().ReceiveTest(new BlobTest(card.getName(), card.getMinBid()));
+		 Game.ReceiveTest(new BlobTest(card.getName(), card.getMinBid()));
 	}
 }

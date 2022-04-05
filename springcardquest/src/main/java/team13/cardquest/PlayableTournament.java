@@ -9,6 +9,6 @@ public class PlayableTournament implements Playable{
 
     
 	public void OnPlay(){
-		 card.getGame().ReceiveTournament(new BlobTournament(card.getName(), card.getShields()));
+		 Game.ReceiveTournament(new BlobTournament(card.getName(), card.getShields()));
 	}
 }
