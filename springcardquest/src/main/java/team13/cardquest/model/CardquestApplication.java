@@ -164,4 +164,10 @@ public class CardquestApplication {
 		game.receiveStages(stages);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+	//get al players
+	@GetMapping ("/getAllPlayersStatus")
+	public ResponseEntity<Object> getAllPlayersStatus(){
+		return new ResponseEntity<>(new String[]{game.getAllPlayersStatus()},HttpStatus.OK);
+	}
 }
