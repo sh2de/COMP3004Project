@@ -556,6 +556,10 @@ public class Game {
 
     //GENERAL USE FUNCTIONS---------------------------------------------------------------------------
 
+    //api call to play an ally card
+    public void playAlly(String name, Card c){
+        
+    }
 
     //api call to get a player's list of update signals
     public ArrayList<String> getUpdates(String name){
