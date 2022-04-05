@@ -8,7 +8,7 @@ public class PlayableEvent implements Playable{
     }
     
     public void OnPlay() {
-        card.getGame().ReceiveEvent(new BlobEvent(card.getName()));
+        Game.ReceiveEvent(new BlobEvent(card.getName()));
     }
     
 }

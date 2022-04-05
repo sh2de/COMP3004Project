@@ -9,6 +9,6 @@ public class PlayableQuest implements Playable{
 
     
 	public void OnPlay(){
-		 card.getGame().ReceiveQuest(new BlobQuest(card.getName(), card.getStages(), card.getNamedFoe()));
+		 Game.ReceiveQuest(new BlobQuest(card.getName(), card.getStages(), card.getNamedFoe()));
 	}
 }
