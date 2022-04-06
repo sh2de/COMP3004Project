@@ -1,6 +1,6 @@
 package team13.cardquest;
 
-public abstract class Card{
+public class Card{
 	private String name;
 	private String type;
 	private int value;
