@@ -678,7 +678,8 @@ public class Game {
     
     //api call to discard a card
     public void discardCard(String name, Card c){
-        
+        Player p = getPlayer(name);
+        p.discardCardByName(c.getName());
     }
 
     //print function for debugging purposes
