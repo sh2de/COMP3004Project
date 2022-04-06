@@ -232,6 +232,9 @@ public class Game {
             currentSponsor.setWaiting(false);
             questAttemptStart(); 
         } else { //if not done, subtract from the player's hand the cards used and send signal to input more stages
+            for (Card card : stage) {
+                currentSponsor.discardCardByName(card.getName());
+            }
             currentSponsor.addEventSignal("CREATE_QUEST");
         }
     }
