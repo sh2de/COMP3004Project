@@ -594,7 +594,7 @@ public class Game {
         if (card.getType().equals("ALLY")){
             card.play();
             p.addAlly(currentAlly);
-            p.removeCardByName(name);
+            p.discardCardByName(name);
         }
         
     }

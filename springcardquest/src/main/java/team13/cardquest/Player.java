@@ -13,6 +13,7 @@ public class Player {
     private ArrayList<BlobAlly> allies = new ArrayList<>();
     private ArrayList<Card> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
     private ArrayList<Card> backupHand = new ArrayList<>();
+    private ArrayList<Card> tempDiscards = new ArrayList<>();
 
     public Player(String _name){
         name = _name;
@@ -23,11 +24,11 @@ public class Player {
     }
 
     public void saveBackupHand(){
-        backupHand = new ArrayList<>(playableHand);
+        backupHand = new ArrayList<>(hand);
     }
 
     public void loadBackupHand(){
-        playableHand = new ArrayList<>(backupHand);
+        hand = new ArrayList<>(backupHand);
     }
 
     public ArrayList<String> sendEventQueue(){ //sends the top event from the event queue
@@ -65,7 +66,7 @@ public class Player {
         }
     }
 
-    public void removeCardByName(String n){
+    public void discardCardByName(String n){
         Card toRemove = null;
         Boolean flag = false;
         for (Card c : hand) {
@@ -76,6 +77,12 @@ public class Player {
             }
         }
         if (flag){hand.remove(toRemove);}
+    }
+
+    public ArrayList<Card> discardTempDiscards(){
+        ArrayList<Card> d = tempDiscards;
+        tempDiscards = null;
+        return d;
     }
 
     //check if this player is capable of sponsoring a given quest with their current hand
