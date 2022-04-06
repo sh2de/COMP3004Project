@@ -53,6 +53,16 @@
   height:auto;
 }
 
+.myBox {
+  border: none;
+  padding: 5px;
+  font: 24px/36px sans-serif;
+  width: 320px;
+  height: 200px;
+  overflow: scroll;
+  left:10cm;
+  }
+
 // Set black background color, white text and some padding 
 footer {
   background-color: rgb(27, 24, 24);

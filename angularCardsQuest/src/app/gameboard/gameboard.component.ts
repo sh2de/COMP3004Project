@@ -30,10 +30,12 @@ export class GameboardComponent implements OnInit {
   questCreator:Boolean;
   questPlayer:Boolean;
   foeWarning:Boolean;
-  stageInfo=""
+  stageInfo="";
+  discardCard: Boolean;
+  winner="";
 
   status=[];
-
+  eventLog=[];
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export class GameboardComponent implements OnInit {
     this.questCreator=true;
     this.questPlayer=false;
     this.foeWarning=false;
+    this.discardCard=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -55,13 +58,15 @@ export class GameboardComponent implements OnInit {
     this.getUpdates();
     this.getActiveQuest();
 
+    
+
       
   }
 
   load(){
     this.getPlayer();
     this.getALlPlayersStatus()    
-
+    this.getEventLog();
   }
 
   getPlayer(){
@@ -88,7 +93,7 @@ export class GameboardComponent implements OnInit {
     this.gameService.getAllPlayersStatus().subscribe(
       (res)=>{
         
-        this.status=Object.keys(res).map((key) => [res[key]]);;
+        this.status=Object.keys(res).map((key) => [res[key]]);
         console.log(this.status);
       }
     )
@@ -103,6 +108,7 @@ export class GameboardComponent implements OnInit {
         console.log("ERROR: "+err.message);
       }
     )
+    this.selectedCards=[];
   }
   /**
    * submit stage
@@ -133,6 +139,17 @@ export class GameboardComponent implements OnInit {
       }
     )
 
+  }
+
+  public getEventLog(){
+    this.gameService.getEventLog().subscribe(
+      (res)=>{
+        this.eventLog=Object.keys(res).map((key) => [res[key]])
+      },
+      (err:HttpErrorResponse)=>{
+        console.log("ERRO: "+err.message);
+      }
+    )
   }
 
   /**
@@ -242,6 +259,20 @@ export class GameboardComponent implements OnInit {
         console.log("ERROR: "+err.message);
       }
     )
+    
+  }
+
+  public getWinner(){
+    this.gameService.getWinner().subscribe(
+      (res)=>{
+        this.winner=res[0];
+        console.log(this.winner)
+      },
+      (err:HttpErrorResponse)=>{
+        console.log(err.message);
+      }
+
+    )
   }
 
   /**
@@ -298,6 +329,8 @@ export class GameboardComponent implements OnInit {
 
           if(res[this.prevUpdatesLen-1]=="DRAW_STORY"){
             this.load()
+            this.getStoryCard()
+            this.questCondition=true;
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
@@ -328,10 +361,25 @@ export class GameboardComponent implements OnInit {
 
           if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SHOW_RESULTS"){
             this.load()
+            this.foeWarning=false;
+            this.questPlayer=false;
+            this.questCreator=true;
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          if(res[this.prevUpdatesLen-1]=="PLAYER_QUEST_DEAD"){
+            this.load()
+            this.foeWarning=false;
+            this.questPlayer=false;
+            this.questCreator=true;
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
           
+          
           if(res[this.prevUpdatesLen-1]=="QUEST_OVER"){
+            this.foeWarning=false;
+            this.questPlayer=false;
+            this.questCreator=true;
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
@@ -346,7 +394,15 @@ export class GameboardComponent implements OnInit {
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
+          if(res[this.prevUpdatesLen-1]=="DECLARE_WINNER"){
+            this.load()
+            this.getWinner();
+            console.log("updates "+res[this.prevUpdatesLen-1]);
+          }
+
+          
           if(res[this.prevUpdatesLen-1]=="DISCARD_NEEDED"){
+            this.discardCard=true;
             this.load()
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
@@ -375,7 +431,7 @@ export class GameboardComponent implements OnInit {
 
   declineSponsor(){
     console.log("not sponsoring it")
-    this.gameService.acceptSponsor().subscribe(
+    this.gameService.declineSponsor().subscribe(
       (res)=>{},
       (err:HttpErrorResponse)=>{
         console.log(err.message);
@@ -415,6 +471,21 @@ export class GameboardComponent implements OnInit {
     //   );
     //   //this.selectedCards.splice(i, 1);
     // }
+
+    if(this.discardCard){
+
+      console.log("test discard");
+
+      this.gameService.discardCard(this.playerName,this.myHand[i]).subscribe(
+        (res)=>{},
+        (err:HttpErrorResponse)=>{
+          console.log("ERROR: "+err.message);
+        }
+      )
+      this.discardCard=false;
+      return;
+      
+    }
     if(this.myHand[i]["type"]==='ALLY'){
       console.log("test ally card")
       console.log(this.myHand[i]);

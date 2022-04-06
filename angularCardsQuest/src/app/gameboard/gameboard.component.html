@@ -1,28 +1,32 @@
 <h1>Quest Of The Round Table</h1>
 
 <!-- Other Player -->
-  <div class="row" *ngFor="let stat of status">
-    <div >
-      <p>{{stat}}</p>      
-    </div>
+  <div class="row" >
     
+    <div class="col-sm-4 " *ngFor="let stat of status">
+      <p>{{stat}}</p>      
+    </div>  
+    
+      
+  </div>
+
+  <!-- ALERT-INFO -->
+  <div class="alert alert-info" *ngIf="sponsorReq">
+    <strong>Are you willing to sponsor the current Quest?</strong>
+    <button type="button" class="btn btn-link" (click)="acceptSponsor()">Yes</button>
+    <button type="button" class="btn btn-link" (click)="declineSponsor()">No</button>
+  </div>
+  <div class="alert alert-info" *ngIf="participate">
+    <strong>Are you willing to participate in the Quest?</strong>
+    <button type="button" class="btn btn-link" (click)="acceptParticipation()">Yes</button>
+    <button type="button" class="btn btn-link" (click)="declineParticipation()">No</button>
   </div>
 
 <!-- page of player who's creating quest -->
 <div class="container-fluid" *ngIf="questCreator">
   <div class="row content">
 
-    <!-- ALERT-INFO -->
-    <div class="alert alert-info" *ngIf="sponsorReq">
-      <strong>Are you willing to sponsor the current Quest?</strong>
-      <button type="button" class="btn btn-link" (click)="acceptSponsor()">Yes</button>
-      <button type="button" class="btn btn-link" (click)="declineSponsor()">No</button>
-    </div>
-    <div class="alert alert-info" *ngIf="participate">
-      <strong>Are you willing to participate in the Quest?</strong>
-      <button type="button" class="btn btn-link" (click)="acceptParticipation()">Yes</button>
-      <button type="button" class="btn btn-link" (click)="declineParticipation()">No</button>
-    </div>
+    
 
     <!-- SIDE -->
     <div class="col-sm-3 sidenav">
@@ -31,6 +35,12 @@
         <img src="{{storyCard['url']}}" alt="{{storyCard['type']}}" style="width:100px;height:200px;">             
         
       </div>
+      <br>
+      <div class="myBox">
+        <div  *ngFor="let line of eventLog">
+          <p>{{line}}</p>
+        </div>        
+      </div>  
       <h3>Rules for quest preparation</h3>
       <br><br>
       <h4>a stage is made up of either a single foe and any number of weapons OR a single test card</h4>
@@ -114,7 +124,16 @@
     </div>
     <!-- SIDE -->
     <div class="col-sm-3 sidenav">
-      
+      <div  *ngIf="questCondition">
+        <h4>Active Quest</h4>                
+        <img src="{{storyCard['url']}}" alt="{{storyCard['type']}}" style="width:100px;height:200px;">             
+        
+      </div><br>
+      <div class="myBox">
+        <div  *ngFor="let line of eventLog">
+          <p>{{line}}</p>
+        </div>        
+      </div>  
       <h2> Rules for cards to be played</h2>
       <br><br>
       <h3>Select any number of weapons or allies to use for this stage</h3>
@@ -145,7 +164,6 @@
             <button type="button" class="btn btn-primary" (click)="sendPlayableHand()">Play Current Stage</button>
           </div>
           <div class="col-sm-3">
-            <button type="button" class="btn btn-primary" (click)="restartStages()">Restart Stage Play</button>
           </div>
           
         </div>

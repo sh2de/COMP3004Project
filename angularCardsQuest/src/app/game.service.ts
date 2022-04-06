@@ -182,6 +182,32 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/rejectStageSetup");
   }
 
+  /**
+   * getting event log 
+   * @returns observable of array list
+   */
+  public getEventLog(){
+    return this.http.get(this.apiServerUrl+"/getEventLog");
+  }
+
+  /**
+   * discarding card
+   * @param name of player who's discarding the card
+   * @param card to be discarded
+   * @returns 
+   */
+  public discardCard(name:string, card:object){
+    return this.http.put(this.apiServerUrl+"/discardCard/"+name,card);
+  }
+
+  /**
+   * getting winner
+   * @returns winners name
+   */
+  public getWinner(){
+    return this.http.get(this.apiServerUrl+"/getWinner");
+  }
+
 //////////////// PUT ZONE ////////////////
 
   /**
