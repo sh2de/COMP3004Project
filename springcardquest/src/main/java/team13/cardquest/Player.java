@@ -14,6 +14,8 @@ public class Player {
     private ArrayList<Card> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
     private ArrayList<Card> backupHand = new ArrayList<>();
     private ArrayList<Card> tempDiscards = new ArrayList<>();
+    private boolean hasMerlin = false;
+    private boolean usedMerlin = false;
 
     public Player(String _name){
         name = _name;
@@ -162,10 +164,23 @@ public class Player {
 
     public void addAlly(BlobAlly a){
         allies.add(a);
+        if (a.name.equals("Merlin")){hasMerlin = true;}
+    }
+
+    public boolean getMerlin(){
+        return hasMerlin;
+    }
+
+    public boolean useMerlin(){
+        //returns true if use was succesful
+        if (usedMerlin || !hasMerlin){return false;}
+        usedMerlin = true;
+        return true;
+
     }
 
     public ArrayList<BlobAlly> discardAllAllies(){
-        //missing: send allies to discard pile
+        hasMerlin = false;
         ArrayList<BlobAlly> discards = allies;
         allies = new ArrayList<>();
         return discards;
