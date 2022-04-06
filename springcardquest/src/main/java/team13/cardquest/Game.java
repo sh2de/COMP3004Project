@@ -211,6 +211,7 @@ public class Game {
     }
 
     public void sponsorshipDeclined(){//function that runs when a player rejects a quest
+        players.get((currentTurn - 2 + sponsor)%numPlayers).setWaiting(false);
         getSponsor();
     }
 
