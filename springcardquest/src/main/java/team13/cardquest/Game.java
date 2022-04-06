@@ -402,9 +402,20 @@ public class Game {
         }
     }
 
-    public void questFoeReceivePlayableHand(String name, ArrayList<Card> hand){//receive the cards played by the player for a quest
+    public void questFoeReceivePlayableHand(String name, ArrayList<Card> temphand){//receive the cards played by the player for a quest
         //step 1: check if cards are valid. on fail, resend signal
+        boolean invalidflag = false;
         //INCOMPLETE: ASSUMING VALIDITY FOR NOW
+        ArrayList<Card> hand = new ArrayList<>();
+        for (Card card : temphand) {
+            hand.add(getPlayer(name).getCardByName(card.getName()));
+        }
+
+        if (invalidflag){
+            getPlayer(name).addEventSignal("QUEST_FOE_SELECT_CARDS");
+            return;
+        }
+
         //step 2: set player as ready, if all players ready move on to the next stage
         getPlayer(name).setPlayableHand(hand);
         getPlayer(name).setWaiting(false);
@@ -485,8 +496,9 @@ public class Game {
 
     public int getPower(Player player, ArrayList<Card> hand){//get power sum of the current combination of cards
         int p = 0;
-        for (Card cardData : hand) {
-            Card card = player.getCardByName(cardData.getName());
+        for (Card card : hand) {
+        //for (Card cardData : hand) {
+            //Card card = player.getCardByName(cardData.getName());
             card.play();
             switch(card.getType()){
                 case "FOE":
@@ -626,6 +638,7 @@ public class Game {
         for (Player player : players) {
             String s = "";
             s += player.getName() + ": " + player.getHand().size() + " cards | " + player.getShields() + " shields";
+            if (player.getAlive()){s += " (participating in story) ";}
             if (player.getWaiting()){s += " (waiting for input)";}
             status.add(s);
         }
