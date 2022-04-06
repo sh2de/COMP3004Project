@@ -49,7 +49,7 @@ public class Game {
     */
 
     public ArrayList<String> getEventLog(){
-        eventLog.add("test string!");
+        //eventLog.add("test string!");
         return eventLog;
     }
 
@@ -676,6 +676,10 @@ public class Game {
         return players.get(currentTurn-1);
     }
     
+    //api call to discard a card
+    public void discardCard(String name, Card c){
+        
+    }
 
     //print function for debugging purposes
     public void print(){
