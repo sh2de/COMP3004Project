@@ -571,14 +571,15 @@ public class Game {
         
     }
 
-    public String getAllPlayersStatus(){
-        String status = "";
+    public ArrayList<String> getAllPlayersStatus(){
+        ArrayList<String> status = new ArrayList<>();
         for (Player player : players) {
-            status += player.getName() + ": " + player.getHand().size() + " cards | " + player.getShields() + " shields";
-            if (player.getWaiting()){status += " (waiting for input)";}
-            status += "\n";
+            String s = "";
+            s += player.getName() + ": " + player.getHand().size() + " cards | " + player.getShields() + " shields";
+            if (player.getWaiting()){s += " (waiting for input)";}
+            status.add(s);
         }
-        status += "It is currently " + players.get(currentTurn).getName()+"'s turn";
+        status.add("It is currently " + players.get(currentTurn).getName()+"'s turn");
         return status;
     }
 
