@@ -253,6 +253,7 @@ public class Game {
         //SECOND CHECK: IS THERE ONLY ONE TEST?
         if (stages.size() != activeQuest.stages){
             //rejectStageSetup();
+            rejectionReason = "too many stages!";
             return false;
         }
         for (ArrayList<Card> stage : stages) {
@@ -323,7 +324,7 @@ public class Game {
         questStages = new ArrayList<>();
         currentSetupStage = 1;
         currentSponsor.loadBackupHand();
-    
+        System.out.println("stage rejected for reason "+rejectionReason);
         currentSponsor.addEventSignal("CREATE_QUEST");
     }
 
