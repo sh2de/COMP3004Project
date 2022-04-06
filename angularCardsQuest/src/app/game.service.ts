@@ -6,20 +6,17 @@ import { environment } from 'src/environments/environment';
 import { NavComponent } from './nav/nav.component';
 import {tap} from 'rxjs/operators'
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
+  player=''
   private apiServerUrl = environment.apiBaseUrl;
-
-  private player= new Object;
-
   private imglist =[];  
   constructor(private http:HttpClient) { }
 
   load(){
-    
+    console.log(this.player+" test service");
   }
 
   private _refreshNeededs= new Subject<void>();
@@ -177,6 +174,4 @@ export class GameService {
   public sendHanded(card: string[]){
     return this.http.post(this.apiServerUrl+"/handed", card); 
   }
-
-
 }
