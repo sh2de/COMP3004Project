@@ -475,8 +475,9 @@ public class Game {
     public void questAnnounceResults(){
         for (Player player : players) {
             if (player.getAlive()){
-                player.editShields(activeQuest.stages);
-                questFinalResults += player.getName() + " gets " + activeQuest.stages + " shields for surviving the quest!\n";
+                player.editShields(activeQuest.stages + questBonus);
+                addEventString(player.getName() + " gets " + activeQuest.stages + " shields for surviving the quest!");
+                //questFinalResults += player.getName() + " gets " + activeQuest.stages + " shields for surviving the quest!\n";
             }else if (player.equals(currentSponsor)){
                 player.addCardToHand(adventuredeck.draw());//draw 1 per stage + cards played in a stage
                 for (ArrayList<Card> stage : questStages) {
@@ -489,6 +490,7 @@ public class Game {
         }
         //MISSING: CHECK FOR A WINNER
         
+        questBonus = 0; //reset quest bonus
         
         turnStart();
     }
