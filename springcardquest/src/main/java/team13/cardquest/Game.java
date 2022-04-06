@@ -470,6 +470,7 @@ public class Game {
                     player.setAlive(false);
                     //questStageResults += player.getName() + " was felled in battle!\n";
                     addEventString(player.getName() + " was felled in battle!");
+                    player.addEventSignal("PLAYER_QUEST_DEAD");
                 } else{
                     //questStageResults += player.getName() + " triumphed in battle!\n";
                     addEventString(player.getName() + " triumphed in battle!");
