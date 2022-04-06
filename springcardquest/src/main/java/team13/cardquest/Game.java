@@ -507,7 +507,6 @@ public class Game {
         }
 
         questBonus = 0; //reset quest bonus
-        
         turnStart();
     }
 
