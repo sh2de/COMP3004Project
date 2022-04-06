@@ -457,9 +457,11 @@ public class Game {
                 //if player is alive, check if they survived
                 if (foePower > player.getPower() + getPower(player,player.getPlayableHand())){//if foe was stronger, kill the player
                     player.setAlive(false);
-                    questStageResults += player.getName() + " was felled in battle!\n";
+                    //questStageResults += player.getName() + " was felled in battle!\n";
+                    addEventString(player.getName() + " was felled in battle!");
                 } else{
-                    questStageResults += player.getName() + " triumphed in battle!\n";
+                    //questStageResults += player.getName() + " triumphed in battle!\n";
+                    addEventString(player.getName() + " triumphed in battle!");
                 }                
             }
         }
