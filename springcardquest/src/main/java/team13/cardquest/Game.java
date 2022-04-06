@@ -31,7 +31,11 @@ public class Game {
     static BlobWeapon currentWeapon = null;
     static BlobAlly currentAlly = null;
 
-    
+    ArrayList<String> eventLog = new ArrayList<>();
+
+    //debug line
+    //debug end
+
     /*the state variable is what will be used to check what moves are currently legal or not.
     depending on the state, the game may end up waiting to receive input from all players. (possibly have a timer to prevent getting stuck?)
     an index of the states will be described here below:
@@ -43,6 +47,11 @@ public class Game {
     "quest foe"     players must select the cards they wish to use before the foe is revealed and result is calculated    
     "quest test"    tbd
     */
+
+    public ArrayList<String> getEventLog(){
+        eventLog.add("test string!");
+        return eventLog;
+    }
 
     //helper function to check if no players are waiting
     public boolean allPlayersReady(){
