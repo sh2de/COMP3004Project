@@ -230,11 +230,11 @@ public class Game {
         }
     }
 
-    public void receiveStage(ArrayList<Card> stage){
-        //stage = new ArrayList<Card>();
-        //for (Card card : stageTemplate) {
-            
-        //}
+    public void receiveStage(ArrayList<Card> tempstage){
+        ArrayList<Card> stage = new ArrayList<Card>();
+        for (Card card : tempstage) {
+            stage.add(currentSponsor.getCardByName(card.getName()));
+        }
 
         questStages.add(stage);
         currentSetupStage ++;
