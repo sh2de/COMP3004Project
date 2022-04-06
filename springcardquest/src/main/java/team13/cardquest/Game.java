@@ -150,8 +150,10 @@ public class Game {
 
     //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
     public void turnStart(){
+        addEventString("Player "+players.get(currentTurn-1).getName()+"'s turn:");
+        addEventString("Now drawing a card from the story deck.");
         currentStory = storydeck.draw();
-
+        addEventString(currentStory.getName()+" was drawn!");
         if (currentStory.getType().equals("QUEST")){
             //quest card drawn
             currentStory.play();
@@ -204,6 +206,7 @@ public class Game {
     
     public void getSponsor(){ //function to be called to iterate through possible sponsors for a quest
         if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
+            addEventString("No one wanted to sponsor the quest...");
             activeQuest = null;
             nextTurn();
             return;
