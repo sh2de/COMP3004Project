@@ -20,6 +20,9 @@ public class Game {
     static BlobQuest activeQuest = null;
     int activeStage = 0;
     ArrayList<ArrayList<Card>> questStages = new ArrayList<ArrayList<Card>>();
+    int currentSetupStage = 1;
+    String rejectionReason = "";
+
     int questBonus = 0;
     String questStageResults = "";
     String questFinalResults = "";
@@ -219,15 +222,37 @@ public class Game {
         }
     }
 
-    public void receiveStages(ArrayList<ArrayList<Card>> stages){
+    public void receiveStage(ArrayList<Card> stage){
+        questStages.add(stage);
+        currentSetupStage ++;
+        //if invalid, reset player state and restart
+        if (!receiveStages(questStages)){
+            rejectStageSetup();
+            return;
+        }
+        //if valid, check if all stages are done. if so filter them by power and begin
+        if (currentSetupStage == activeQuest.stages){
+            
+        } else { //if not done, subtract from the player's hand the cards used and send signal to input more stages
+            currentSponsor.addEventSignal("CREATE_QUEST");
+        }
+        
+
+    }
+
+    public String getStagePreparationString(){
+        return "Stage "+currentSetupStage+"/"+activeQuest.stages + rejectionReason;
+    }
+
+    public boolean receiveStages(ArrayList<ArrayList<Card>> stages){ //return true if setup is valid, false otherwise
         System.out.println(stages);
         //start by checking if the received list of cards is valid
         //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
         boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
         //SECOND CHECK: IS THERE ONLY ONE TEST?
         if (stages.size() != activeQuest.stages){
-            rejectStageSetup();
-            return;
+            //rejectStageSetup();
+            return false;
         }
         for (ArrayList<Card> stage : stages) {
             boolean foeFlag = false;
@@ -238,8 +263,8 @@ public class Game {
                 switch(card.getType()){
                     case "FOE":
                         if (foeFlag){
-                            rejectStageSetup();
-                            return;
+                            //rejectStageSetup();
+                            return false;
                         }
                         foeFlag = true;
                         break;
@@ -248,20 +273,20 @@ public class Game {
                         break;
                     case "TEST":
                         if (testFlag || stage.size() > 1){
-                            rejectStageSetup();
-                            return;
+                            //rejectStageSetup();
+                            return false;
                         }
                         testFlag = true;
                         break;
                     default: //reject if an invalid card is received
-                        rejectStageSetup();
-                        return;
+                        //rejectStageSetup();
+                        return false;
                 }
             }
             //reject if no foe or test is present
             if ((!foeFlag && !testFlag)||(foeFlag && testFlag)){
-                rejectStageSetup();
-                return;
+                //rejectStageSetup();
+                return false;
             }
 
             //reject if duplicate weapons
@@ -270,27 +295,32 @@ public class Game {
                 for (Card weapon : weapons) {
                     if (w.getName().equals(weapon.getName())){
                         //reject if they share a name
-                        rejectStageSetup();
-                        return;
+                        //rejectStageSetup();
+                        return false;
                     }
                 }
             }    
         }
 
+        
+
+        return true;
+
+        //old functionality down there, this is just a quest validator now
+
         //if the quest is accepted, automatically sort them by power
         //TBD
-
         //just test the signal for now
-        questStages = stages;
-        activeStage = 1;
-        currentSponsor.setWaiting(false);
-        questAttemptStart();
-        
-        
+        //questStages = stages;
+        //activeStage = 1;
+        //currentSponsor.setWaiting(false);
+        //questAttemptStart();        
     }
 
-    public void rejectStageSetup(){
+    public void rejectStageSetup(){ //restart quest creation from the beginning
         questStages = new ArrayList<>();
+        currentSponsor.loadBackupHand();
+    
         currentSponsor.addEventSignal("CREATE_QUEST");
     }
 

@@ -12,7 +12,7 @@ public class Player {
     private ArrayList<String> eventQueue = new ArrayList<>();
     private ArrayList<BlobAlly> allies = new ArrayList<>();
     private ArrayList<Card> playableHand = new ArrayList<>(); //this arraylist will temporarily hold the cards played by a player
-    
+    private ArrayList<Card> backupHand = new ArrayList<>();
 
     public Player(String _name){
         name = _name;
@@ -20,6 +20,14 @@ public class Player {
 
     public void addEventSignal(String s){
         eventQueue.add(s);
+    }
+
+    public void saveBackupHand(){
+        backupHand = new ArrayList<>(playableHand);
+    }
+
+    public void loadBackupHand(){
+        playableHand = new ArrayList<>(backupHand);
     }
 
 
