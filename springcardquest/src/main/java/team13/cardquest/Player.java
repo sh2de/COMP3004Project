@@ -82,6 +82,9 @@ public class Player {
             i++;
         }
         if (flag){tempDiscards.add(hand.remove(i));}
+        if(hand.size()>12){
+            eventQueue.add("DISCARD_NEEDED");
+        }
     }
 
     public ArrayList<Card> discardTempDiscards(){
