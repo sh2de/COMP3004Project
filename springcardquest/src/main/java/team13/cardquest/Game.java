@@ -316,6 +316,7 @@ public class Game {
 
     public void rejectStageSetup(){ //restart quest creation from the beginning
         questStages = new ArrayList<>();
+        currentSetupStage = 1;
         currentSponsor.loadBackupHand();
     
         currentSponsor.addEventSignal("CREATE_QUEST");
