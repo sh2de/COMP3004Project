@@ -156,15 +156,11 @@ public class Game {
             currentStory = null;
             turnStart();
         }
-        
-
-
         //activeQuest = new Quest();
         //c.initQuest(activeQuest);
         //state = "quest sponsor";
         //sponsor = 0;
         //forceAllUnready();
-
     }
 
     //QUEST PROCESSING FUNCTIONS----------------------------------------------------------------------
@@ -188,7 +184,6 @@ public class Game {
     
     public void getSponsor(){ //function to be called to iterate through possible sponsors for a quest
         if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
-            
             activeQuest = null;
             nextTurn();
             return;
@@ -212,6 +207,7 @@ public class Game {
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
         currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
+        rejectionReason = "";
         forceAllUnready(); //we need a response from all players
         for (Player player : players) {
             if ((player).equals(currentSponsor)){
@@ -238,8 +234,6 @@ public class Game {
         } else { //if not done, subtract from the player's hand the cards used and send signal to input more stages
             currentSponsor.addEventSignal("CREATE_QUEST");
         }
-        
-
     }
 
     public String getStagePreparationString(){
@@ -265,6 +259,7 @@ public class Game {
                 switch(card.getType()){
                     case "FOE":
                         if (foeFlag){
+                            rejectionReason = "(you cannot play more than one foe)";
                             //rejectStageSetup();
                             return false;
                         }
@@ -276,18 +271,21 @@ public class Game {
                     case "TEST":
                         if (testFlag || stage.size() > 1){
                             //rejectStageSetup();
+                            rejectionReason = "(only one test may be played in a quest)";
                             return false;
                         }
                         testFlag = true;
                         break;
                     default: //reject if an invalid card is received
                         //rejectStageSetup();
+                        rejectionReason = "(invalid card type submitted)";
                         return false;
                 }
             }
             //reject if no foe or test is present
             if ((!foeFlag && !testFlag)||(foeFlag && testFlag)){
                 //rejectStageSetup();
+                rejectionReason = "(each stage must have either one foe or one test)";
                 return false;
             }
 
@@ -298,16 +296,13 @@ public class Game {
                     if (w.getName().equals(weapon.getName())){
                         //reject if they share a name
                         //rejectStageSetup();
+                        rejectionReason = "(duplicate weapons are not allowed)";
                         return false;
                     }
                 }
             }    
         }
-
-        
-
         return true;
-
         //old functionality down there, this is just a quest validator now
 
         //if the quest is accepted, automatically sort them by power

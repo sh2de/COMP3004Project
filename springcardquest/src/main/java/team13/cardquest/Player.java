@@ -30,7 +30,6 @@ public class Player {
         playableHand = new ArrayList<>(backupHand);
     }
 
-
     public ArrayList<String> sendEventQueue(){ //sends the top event from the event queue
         //return eventQueue;
 //        if (eventQueue.size() == 0){return "";}
