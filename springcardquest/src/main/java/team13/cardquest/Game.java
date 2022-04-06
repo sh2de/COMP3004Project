@@ -28,7 +28,7 @@ public class Game {
     static BlobWeapon currentWeapon = null;
     static BlobAlly currentAlly = null;
 
-    String state = "initialize";
+    
     /*the state variable is what will be used to check what moves are currently legal or not.
     depending on the state, the game may end up waiting to receive input from all players. (possibly have a timer to prevent getting stuck?)
     an index of the states will be described here below:
@@ -110,7 +110,7 @@ public class Game {
                     player.addCardToHand(adventuredeck.draw());
                 }
             }
-            state = "turn_start"; //set the internal state to begin the game
+            
             turnStart();
         }
         return true;
@@ -136,7 +136,7 @@ public class Game {
                 player.addEventSignal("DRAW_STORY");
             }
 
-            state = "quest sponsor";
+            
             sponsor = 0;
             currentStory.play();
             forceAllUnready();
@@ -185,7 +185,7 @@ public class Game {
     
     public void getSponsor(){ //function to be called to iterate through possible sponsors for a quest
         if (allPlayersReady()){ //if all players rejected the sponsor, discard the quest and begin a new turn
-            state = "turn_start";
+            
             activeQuest = null;
             nextTurn();
             return;
@@ -388,6 +388,7 @@ public class Game {
         }
         activeStage++;
         System.out.println("result processed, now sending signal");
+        System.out.println(questStageResults);
         for (Player player : players){player.addEventSignal("QUEST_FOE_SHOW_RESULTS");}
         questTurn();
     }
@@ -409,7 +410,7 @@ public class Game {
         }
         //MISSING: CHECK FOR A WINNER
         
-        state = "turn_start";
+        
         turnStart();
     }
 
@@ -595,7 +596,7 @@ public class Game {
 
     //print function for debugging purposes
     public void print(){
-        System.out.println(state);
+        
         System.out.println("It is player "+currentTurn+"'s turn.");
         int pnum = 1;
         for (Player player : players) {
