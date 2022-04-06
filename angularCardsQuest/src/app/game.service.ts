@@ -152,9 +152,30 @@ export class GameService {
   public playAlly(name: string, card: object){
     return this.http.put(this.apiServerUrl+"/playAlly/"+name,card);
   }
-
+  /**
+   * get all players status
+   * @returns observable of players status
+   */
   public getAllPlayersStatus(){
     return this.http.get(this.apiServerUrl+"/getAllPlayersStatus");
+  }
+
+  /**
+   * sending curent stage
+   * @param cards played on curent stage
+   * @returns observable of void
+   */
+  public sendStage(cards: object){
+    return this.http.put(this.apiServerUrl+"/receiveStage",cards);
+  }
+
+  /**
+   * geting stages information
+   * @returns observable of stages information
+   */
+
+  public getStagePreparationString(){
+    return this.http.get(this.apiServerUrl+"/getStagePreparationString");
   }
 
 //////////////// PUT ZONE ////////////////
