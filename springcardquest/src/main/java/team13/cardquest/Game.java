@@ -692,7 +692,7 @@ public class Game {
             if (player.getWaiting()){s += " (waiting for input)";}
             status.add(s);
         }
-        status.add("It is currently " + players.get(currentTurn).getName()+"'s turn");
+        status.add("It is currently " + players.get(currentTurn-1).getName()+"'s turn");
         return status;
     }
 
