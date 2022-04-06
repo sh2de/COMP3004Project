@@ -208,6 +208,7 @@ public class Game {
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
         currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
         currentSponsor.saveBackupHand();
+        currentSetupStage = 0;
         adventuredeck.discardList(currentSponsor.discardTempDiscards());
         rejectionReason = "";
         forceAllUnready(); //we need a response from all players
@@ -327,7 +328,7 @@ public class Game {
 
     public void rejectStageSetup(){ //restart quest creation from the beginning
         questStages = new ArrayList<>();
-        currentSetupStage = 1;
+        currentSetupStage = 0;
         currentSponsor.loadBackupHand();
         System.out.println("stage rejected for reason "+rejectionReason);
         currentSponsor.addEventSignal("CREATE_QUEST");
