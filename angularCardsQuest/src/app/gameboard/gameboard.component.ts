@@ -31,6 +31,8 @@ export class GameboardComponent implements OnInit {
   questPlayer:Boolean;
   foeWarning:Boolean;
 
+  status=[];
+
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
@@ -56,8 +58,12 @@ export class GameboardComponent implements OnInit {
   }
 
   load(){
-    console.log("playename:"+this.route.snapshot.params["username"])
+    this.getPlayer();
+    this.getALlPlayersStatus()    
 
+  }
+
+  getPlayer(){
     this.gameService.getPlayer(this.playerName).subscribe(
       (res:Object)=>{
         this.player=res;
@@ -72,8 +78,31 @@ export class GameboardComponent implements OnInit {
         console.log("ERROR: "+err.message);
       }
     )
+  }
 
-    this.cardList = this.gameService.getImages();
+  /**
+   * all players status
+   */
+  getALlPlayersStatus(){
+    this.gameService.getAllPlayersStatus().subscribe(
+      (res)=>{
+        
+        this.status=Object.keys(res).map((key) => [res[key]]);;
+        console.log(this.status);
+      }
+    )
+  }
+  /**
+   * restart stage creation
+   */
+  restartStages(){
+
+  }
+  /**
+   * submit stage
+   */
+  submitStage(){
+    
   }
 
   /**
@@ -336,22 +365,23 @@ export class GameboardComponent implements OnInit {
   }
 
   isSelected(i:number){
-    if(document.getElementById(`${i}`).style.border=="0px"){
-      document.getElementById(`${i}`).style.border="5px solid rgb(255, 0, 0)";  
-      this.selectedCards.push(this.myHand[i]);
-    }else{
-      document.getElementById(`${i}`).style.border="0";
-      this.selectedCards.forEach(
-        selectedCards => {
-          if(selectedCards == this.myHand[i]){
-            this.selectedCards.splice(this.selectedCards.indexOf(selectedCards), 1);
-          }
-        }
-      );
-      //this.selectedCards.splice(i, 1);
-    }
+    // if(document.getElementById(`${i}`).style.border=="0px"){
+    //   document.getElementById(`${i}`).style.border="5px solid rgb(255, 0, 0)";  
+    //   this.selectedCards.push(this.myHand[i]);
+    // }else{
+    //   document.getElementById(`${i}`).style.border="0";
+    //   this.selectedCards.forEach(
+    //     selectedCards => {
+    //       if(selectedCards == this.myHand[i]){
+    //         this.selectedCards.splice(this.selectedCards.indexOf(selectedCards), 1);
+    //       }
+    //     }
+    //   );
+    //   //this.selectedCards.splice(i, 1);
+    // }
     console.log(this.myHand[i]);
-    //this.myHand.splice(i, 1);
+    this.selectedCards.push(this.myHand[i]);
+    this.myHand.splice(i, 1);
     this.areSelected=true;
     
   }
