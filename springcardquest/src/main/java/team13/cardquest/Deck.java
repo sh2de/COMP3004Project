@@ -37,4 +37,10 @@ public class Deck {
         discards.add(c);
     }
 
+    public void discardList(ArrayList<Card> c){
+        for (Card card : c) {
+            discards.add(card); 
+        }
+    }
+
 }

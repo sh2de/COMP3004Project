@@ -208,9 +208,7 @@ public class Game {
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
         currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
         currentSponsor.saveBackupHand();
-        //
-        //adventuredeck.discard();
-        //
+        adventuredeck.discardList(currentSponsor.discardTempDiscards());
         rejectionReason = "";
         forceAllUnready(); //we need a response from all players
         for (Player player : players) {
