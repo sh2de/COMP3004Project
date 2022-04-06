@@ -53,6 +53,17 @@ public class Game {
         return eventLog;
     }
 
+    public void addEventString(String s){
+        eventLog.add(s);
+        if (eventLog.size() > 10){
+            eventLog.remove(0);
+        }
+
+        for (Player p : players) {
+            p.addEventSignal("EVENT_LOG_UPDATE");
+        }
+    }
+
     //helper function to check if no players are waiting
     public boolean allPlayersReady(){
         boolean flag = true;
@@ -211,6 +222,7 @@ public class Game {
     }
 
     public void sponsorshipDeclined(){//function that runs when a player rejects a quest
+        System.out.println("Player " + players.get((currentTurn - 2 + sponsor)%numPlayers).getName()+"has declined to sponsor the quest");
         players.get((currentTurn - 2 + sponsor)%numPlayers).setWaiting(false);
         getSponsor();
     }
