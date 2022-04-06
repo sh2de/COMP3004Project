@@ -454,6 +454,7 @@ public class Game {
     public void questFoeStageResults(){
         questStageResults = "";
         int foePower = getPower(currentSponsor,questStages.get(activeStage - 1));
+        addEventString("The approaching foe has a power of "+foePower+"!");
         for (Player player : players) {
             if (player.getAlive()){
                 //if player is alive, check if they survived
