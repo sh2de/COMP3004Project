@@ -178,4 +178,17 @@ public class CardquestApplication {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	//sending stage
+	@PutMapping("/receiveStage")
+	public ResponseEntity<Void> sendStage(@RequestBody ArrayList<Card> cards){
+		game.receiveStage(cards);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	//get Stage Preparation String
+	@GetMapping("/getStagePreparationString")
+	public ResponseEntity<Object> getStagePreparationString(){
+		return new ResponseEntity<>(new String[]{game.getStagePreparationString()},HttpStatus.OK);
+	}
+
 }

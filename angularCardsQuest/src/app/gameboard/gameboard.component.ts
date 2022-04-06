@@ -30,6 +30,7 @@ export class GameboardComponent implements OnInit {
   questCreator:Boolean;
   questPlayer:Boolean;
   foeWarning:Boolean;
+  stageInfo=""
 
   status=[];
 
@@ -102,7 +103,30 @@ export class GameboardComponent implements OnInit {
    * submit stage
    */
   submitStage(){
-    
+    console.log("selected cards on stage")
+    console.log(this.selectedCards);
+    this.gameService.sendStage(this.selectedCards)
+    .subscribe(
+      (res)=>{},
+      (err:HttpErrorResponse)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+    this.selectedCards=[]
+    this.areSelected=false;
+  }
+
+  public getStageInfo(){
+    this.gameService.getStagePreparationString().subscribe(
+      (res)=>{
+        
+        this.stageInfo=res[0];
+      },
+      (err:HttpErrorResponse)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+
   }
 
   /**
@@ -273,6 +297,7 @@ export class GameboardComponent implements OnInit {
 
           if(res[this.prevUpdatesLen-1]=="CREATE_QUEST"){
             this.load()
+            this.getStageInfo();
             console.log("updates "+res[this.prevUpdatesLen-1]);
             this.questCondition=true;
             this.getActiveQuest();
@@ -379,6 +404,16 @@ export class GameboardComponent implements OnInit {
     //   );
     //   //this.selectedCards.splice(i, 1);
     // }
+    if(this.myHand[i]["type"]==="Ally"){
+      this.gameService.playAlly(this.playerName,this.myHand[i]).subscribe(
+        (res)=>{},
+        (err:HttpErrorResponse)=>{
+          console.log(err.message)
+        }
+      )
+      this.myHand.splice(i, 1);
+      return;
+    }
     console.log(this.myHand[i]);
     this.selectedCards.push(this.myHand[i]);
     this.myHand.splice(i, 1);
