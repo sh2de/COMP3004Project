@@ -222,13 +222,14 @@ public class Game {
     }
 
     public void sponsorshipDeclined(){//function that runs when a player rejects a quest
-        System.out.println("Player " + players.get((currentTurn - 2 + sponsor)%numPlayers).getName()+"has declined to sponsor the quest");
+        addEventString(players.get((currentTurn - 2 + sponsor)%numPlayers).getName()+" has declined to sponsor the quest!");
         players.get((currentTurn - 2 + sponsor)%numPlayers).setWaiting(false);
         getSponsor();
     }
 
     public void sponsorshipAccepted(){//function that runs when a player accepts a quest to sponsor to signal other players
         currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
+        addEventString(currentSponsor+" has accepted the quest as a sponsor!");
         currentSponsor.saveBackupHand();
         currentSetupStage = 0;
         adventuredeck.discardList(currentSponsor.discardTempDiscards());
