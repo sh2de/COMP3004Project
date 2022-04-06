@@ -221,6 +221,11 @@ public class Game {
     }
 
     public void receiveStage(ArrayList<Card> stage){
+        //stage = new ArrayList<Card>();
+        //for (Card card : stageTemplate) {
+            
+        //}
+
         questStages.add(stage);
         currentSetupStage ++;
         //if invalid, reset player state and restart
@@ -251,11 +256,11 @@ public class Game {
         //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
         boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
         //SECOND CHECK: IS THERE ONLY ONE TEST?
-        if (stages.size() != activeQuest.stages){
+        /*if (stages.size() != activeQuest.stages){
             //rejectStageSetup();
             rejectionReason = "too many stages!";
             return false;
-        }
+        }*/
         for (ArrayList<Card> stage : stages) {
             boolean foeFlag = false;
             ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
