@@ -9,7 +9,8 @@ public class Game {
     Deck storydeck = df.CreateDeck(true);
     Deck adventuredeck = df.CreateDeck(false);
     int numPlayers = 0;
-    int currentTurn = 0;
+    int currentTurn = 1;
+    boolean firstTurn = false;//lazy fix
     int sponsor = -1; //variable used for iterating through available sponsors
     Player currentSponsor = null;
     ArrayList<Player> players = new ArrayList<>();
@@ -153,6 +154,7 @@ public class Game {
     //function to be called at the start of a turn. draws a card for the current player and sends the proper signals
     public void turnStart(){
         nextTurn();
+        if (firstTurn){currentTurn--;firstTurn=false;}//lazy fix
         addEventString("Player "+players.get(currentTurn-1).getName()+"'s turn:");
         addEventString("Now drawing a card from the story deck.");
         currentStory = storydeck.draw();
