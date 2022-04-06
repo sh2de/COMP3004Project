@@ -97,7 +97,12 @@ export class GameboardComponent implements OnInit {
    * restart stage creation
    */
   restartStages(){
-
+    this.gameService.rejectStageSetup().subscribe(
+      (res)=>{},
+      (err:HttpErrorResponse)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
   }
   /**
    * submit stage
@@ -112,6 +117,7 @@ export class GameboardComponent implements OnInit {
         console.log("ERROR: "+err.message);
       }
     )
+    this.load();
     this.selectedCards=[]
     this.areSelected=false;
   }
@@ -316,6 +322,7 @@ export class GameboardComponent implements OnInit {
           if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SELECT_CARDS"){
             this.load()
             this.foeWarning=true;
+            this.getStageInfo();
             console.log("updates "+res[this.prevUpdatesLen-1]);
           }
 
@@ -385,6 +392,10 @@ export class GameboardComponent implements OnInit {
     
   }
 
+  playStage(){
+
+  }
+
   addToplayerList(i:number){
     this.myHand.push(this.cardList[i]);
   }
@@ -404,7 +415,9 @@ export class GameboardComponent implements OnInit {
     //   );
     //   //this.selectedCards.splice(i, 1);
     // }
-    if(this.myHand[i]["type"]==="Ally"){
+    if(this.myHand[i]["type"]==='ALLY'){
+      console.log("test ally card")
+      console.log(this.myHand[i]);
       this.gameService.playAlly(this.playerName,this.myHand[i]).subscribe(
         (res)=>{},
         (err:HttpErrorResponse)=>{

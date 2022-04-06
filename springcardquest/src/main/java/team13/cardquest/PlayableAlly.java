@@ -9,6 +9,6 @@ public class PlayableAlly implements Playable{
 
     
 	public void OnPlay(){
-		 Game.ReceiveAlly(new BlobAlly(card.getName(), card.getPower(), card.getValue()));
+		 Game.ReceiveAlly(new BlobAlly(card.getName(), card.getPower(), card.getValue(), card.getUrl()));
 	}
 }

@@ -24,13 +24,16 @@ export class HomeComponent implements OnInit {
 
     this.http.post(url,this.player).subscribe(
       (res)=>{
-        console.log(res);        
+        console.log(res[0]);  
+        this.player=res[0];  
+        this.route.navigateByUrl("gameboard/"+this.player); 
       },
       (err:HttpErrorResponse)=>{
         console.log("ERROR: "+err.message);
       }
     )
-    this.route.navigateByUrl("gameboard/"+this.player);
+    console.log("test joined player"+this.player)
+    
 
     
   }
