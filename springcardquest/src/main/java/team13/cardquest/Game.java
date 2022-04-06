@@ -232,7 +232,9 @@ public class Game {
         }
         //if valid, check if all stages are done. if so filter them by power and begin
         if (currentSetupStage == activeQuest.stages){
-            
+            activeStage = 1;
+            currentSponsor.setWaiting(false);
+            questAttemptStart(); 
         } else { //if not done, subtract from the player's hand the cards used and send signal to input more stages
             currentSponsor.addEventSignal("CREATE_QUEST");
         }
@@ -602,6 +604,7 @@ public class Game {
     }
 
     public ArrayList<String> getAllPlayersStatus(){
+        if (players.size() < 2){return new ArrayList<String>();} //method needs more than 1 player
         ArrayList<String> status = new ArrayList<>();
         for (Player player : players) {
             String s = "";
