@@ -67,16 +67,18 @@ public class Player {
     }
 
     public void discardCardByName(String n){
-        Card toRemove = null;
+        //Card toRemove = null;
         Boolean flag = false;
+        int i = 0;
         for (Card c : hand) {
             if (c.getName().equals(n)){
                 flag = true;
-                toRemove = c;
+                //toRemove = c;
                 break;
             }
+            i++;
         }
-        if (flag){hand.remove(toRemove);}
+        if (flag){tempDiscards.add(hand.remove(i));}
     }
 
     public ArrayList<Card> discardTempDiscards(){
