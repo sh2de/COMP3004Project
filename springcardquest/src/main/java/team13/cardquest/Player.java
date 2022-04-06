@@ -83,7 +83,7 @@ public class Player {
 
     public ArrayList<Card> discardTempDiscards(){
         ArrayList<Card> d = tempDiscards;
-        tempDiscards = null;
+        tempDiscards = new ArrayList<>();
         return d;
     }
 
