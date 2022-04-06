@@ -178,6 +178,10 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/getStagePreparationString");
   }
 
+  public rejectStageSetup(){
+    return this.http.get(this.apiServerUrl+"/rejectStageSetup");
+  }
+
 //////////////// PUT ZONE ////////////////
 
   /**
