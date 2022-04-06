@@ -27,7 +27,7 @@ public class Card{
 	public int getValue(){return value;}
 	public String getUrl(){return url;}
 	//public Game getGame(){return game;}
-	public Playable getPlay(){return play;}
+	//public Playable getPlay(){return play;}
 
 	public void setPlay(Playable p){play = p;}
 
