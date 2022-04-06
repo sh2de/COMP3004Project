@@ -142,6 +142,21 @@ export class GameService {
   public getStoryCard(){
     return this.http.get(this.apiServerUrl+"/getStoryCard");
   }
+
+  /**
+   * play ally
+   * @param name of payer who's playing ally
+   * @param card ally being played
+   * @returns observablle of void
+   */
+  public playAlly(name: string, card: object){
+    return this.http.put(this.apiServerUrl+"/playAlly/"+name,card);
+  }
+
+  public getAllPlayersStatus(){
+    return this.http.get(this.apiServerUrl+"/getAllPlayersStatus");
+  }
+
 //////////////// PUT ZONE ////////////////
 
   /**

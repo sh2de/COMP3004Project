@@ -168,6 +168,14 @@ public class CardquestApplication {
 	//get al players
 	@GetMapping ("/getAllPlayersStatus")
 	public ResponseEntity<Object> getAllPlayersStatus(){
-		return new ResponseEntity<>(new String[]{game.getAllPlayersStatus()},HttpStatus.OK);
+		return new ResponseEntity<>(game.getAllPlayersStatus(),HttpStatus.OK);
 	}
+
+	//play ally
+	@PutMapping ("/playAlly/{name}")
+	public ResponseEntity<Void> playAlly(@PathVariable("name") String name,@RequestBody Card c){
+		game.playAlly(name,c);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 }
