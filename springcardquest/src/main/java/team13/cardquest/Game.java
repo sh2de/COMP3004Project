@@ -491,7 +491,15 @@ public class Game {
             player.addEventSignal("QUEST_OVER");
         }
         //MISSING: CHECK FOR A WINNER
-        
+
+        for (Player p : players) {
+            if (p.getRank().equals("knight of the round table")){
+                winnerName = p.getName();
+                declareWin();
+                return;
+            }
+        }
+
         questBonus = 0; //reset quest bonus
         
         turnStart();
@@ -642,6 +650,12 @@ public class Game {
 
 
     //WIN STATE FUNCTION
+
+    public void declareWin(){
+        for (Player p : players) {
+            p.addEventSignal("DECLARE_WINNER");
+        }
+    }
 
     public String getWinner(){
         return winnerName;
