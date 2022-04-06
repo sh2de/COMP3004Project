@@ -248,7 +248,7 @@ public class Game {
     }
 
     public String getStagePreparationString(){
-        return "Stage "+currentSetupStage+"/"+activeQuest.stages + rejectionReason;
+        return "Stage "+(currentSetupStage+1)+"/"+activeQuest.stages + rejectionReason;
     }
 
     public boolean receiveStages(ArrayList<ArrayList<Card>> stages){ //return true if setup is valid, false otherwise
