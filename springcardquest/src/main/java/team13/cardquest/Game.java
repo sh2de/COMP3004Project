@@ -271,8 +271,13 @@ public class Game {
             for (Card card : stage) {
                 currentSponsor.discardCardByName(card.getName());
             }
+            sortStages();
             currentSponsor.addEventSignal("CREATE_QUEST");
         }
+    }
+
+    public void sortStages(){
+        
     }
 
     public String getStagePreparationString(){

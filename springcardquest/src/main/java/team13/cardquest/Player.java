@@ -53,9 +53,9 @@ public class Player {
         shields += s;
         if (shields < 0){shields = 0;}
         //check for rank up/down/win
-        if (shields >= 5 || rank.equals("squire")){rank = "knight";}
-        if (shields >= 7 || rank.equals("knight")){rank = "champion knight";}
-        if (shields >= 10 || rank.equals("champion knight")){rank = "knight of the round table";}
+        if (shields >= 5 && rank.equals("squire")){rank = "knight";}
+        if (shields >= 7 && rank.equals("knight")){rank = "champion knight";}
+        if (shields >= 10 && rank.equals("champion knight")){rank = "knight of the round table";}
     }
 
     public void addCardToHand(Card c){
