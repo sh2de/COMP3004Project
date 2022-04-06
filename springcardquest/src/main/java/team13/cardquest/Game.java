@@ -33,6 +33,8 @@ public class Game {
 
     ArrayList<String> eventLog = new ArrayList<>();
 
+    String winnerName = "";
+
     //debug line
     //debug end
 
@@ -637,6 +639,13 @@ public class Game {
     }
 
     //TOURNAMENT PROCESSING FUNCTIONS----------------------------------------------------------------
+
+
+    //WIN STATE FUNCTION
+
+    public String getWinner(){
+        return winnerName;
+    }
 
     //GENERAL USE FUNCTIONS---------------------------------------------------------------------------
 
