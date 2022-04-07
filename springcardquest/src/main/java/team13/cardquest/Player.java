@@ -232,6 +232,10 @@ public class Player {
             p += blobAlly.power;
         }
 
+        if (name.equals("cheater")){//cheat name for testing :)
+            p+=99999;
+        }
+
         return p;
     }
 
