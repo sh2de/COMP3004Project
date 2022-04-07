@@ -31,7 +31,8 @@ export class GameboardComponent implements OnInit {
   questPlayer:Boolean;
   foeWarning:Boolean;
   stageInfo="";
-  discardCard: Boolean;
+  discardCard=false;
+  winnerCondition=false;
   winner="";
 
   status=[];
@@ -48,7 +49,6 @@ export class GameboardComponent implements OnInit {
     this.questCreator=true;
     this.questPlayer=false;
     this.foeWarning=false;
-    this.discardCard=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -362,9 +362,7 @@ export class GameboardComponent implements OnInit {
 
           if(res[i]=="QUEST_FOE_SHOW_RESULTS"){
             this.load()
-            this.foeWarning=false;
-            this.questPlayer=false;
-            this.questCreator=true;
+            
             console.log("updates "+res[i]);
           }
 
@@ -397,7 +395,9 @@ export class GameboardComponent implements OnInit {
 
           if(res[i]=="DECLARE_WINNER"){
             this.load()
+            
             this.getWinner();
+            this.winnerCondition=true;
             console.log("updates "+res[i]);
           }
 
