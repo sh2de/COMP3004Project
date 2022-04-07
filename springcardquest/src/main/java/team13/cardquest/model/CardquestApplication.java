@@ -217,4 +217,12 @@ public class CardquestApplication {
 	public  ResponseEntity<Object> getWinner(){
 		return new ResponseEntity<>(new String[]{game.getWinner()},HttpStatus.OK);
 	}
+
+	//get stage playing string
+
+	@GetMapping("/getStagePlayingString")
+	public ResponseEntity<Object> getStagePlayingString(){
+		return new ResponseEntity<>(new String[]{game.getStagePlayingString()},HttpStatus.OK);
+	}
+
 }
