@@ -18,7 +18,7 @@ public class DeckFactory{
         Deck deck = new Deck();
 
         if(mode){
-            //addQuests(deck);
+            addQuests(deck);
             addEvents(deck);
             //addTournaments(deck);
         }else{
