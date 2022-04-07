@@ -256,6 +256,7 @@ public class Game {
         currentSponsor.saveBackupHand();
         currentSetupStage = 0;
         setupPreviousPower = 0;
+        activeStage = 0;
         adventuredeck.discardList(currentSponsor.discardTempDiscards());
         rejectionReason = "";
         forceAllUnready(); //we need a response from all players
