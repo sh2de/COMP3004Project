@@ -417,7 +417,7 @@ public class Game {
             if (p.getWaiting()){anyWaiting = true;}
         }
         if (!anyWaiting){
-            sortStages();
+            //sortStages(); rather than sort stages, maybe i could implement a rejection for it
             for (Player p : players) {
                 p.addEventSignal("QUEST_START");
             }
