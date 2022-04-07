@@ -563,7 +563,7 @@ public class Game {
             players.get(currentBidder).addEventSignal("REQUEST_BID");
 
         }else{
-            currentBidder++;
+            currentBidder = ((currentBidder+1)%numPlayers);
             testGetBid();
         }
 
