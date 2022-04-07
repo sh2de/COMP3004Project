@@ -21,6 +21,14 @@
     <button type="button" class="btn btn-link" (click)="acceptParticipation()">Yes</button>
     <button type="button" class="btn btn-link" (click)="declineParticipation()">No</button>
   </div>
+  <!-- ALERT FOR EVENT -->
+  <div class="row alert alert-info" *ngIf="isEvent">
+    <strong>{{event}}</strong>
+    <div *ngIf="okButton">
+      <button type="button" class="btn btn-primary" (click)="acceptEvent()">OK</button>
+    </div>
+    
+  </div>
 
 <!-- page of player who's creating quest -->
 <div class="container-fluid" *ngIf="questCreator">

@@ -225,4 +225,17 @@ public class CardquestApplication {
 		return new ResponseEntity<>(new String[]{game.getStagePlayingString()},HttpStatus.OK);
 	}
 
+	//display the event
+	@GetMapping("/getEvent")
+	public ResponseEntity<Object> getEvent(){
+		return new ResponseEntity<>(new String[]{game.displayEvent()},HttpStatus.OK);
+	}
+
+	//accept event
+	@PutMapping ("/acceptEvent")
+	public ResponseEntity<Void> acceptEvent(@RequestBody String name){
+		game.acceptEvent(name);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 }

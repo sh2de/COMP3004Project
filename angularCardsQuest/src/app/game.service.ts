@@ -216,6 +216,18 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/getStagePlayingString");
   }
 
+  /**
+   * get event
+   * @returns observable of event string
+   */
+  public getEvent(){
+    return this.http.get(this.apiServerUrl+"/getEvent");
+  }
+
+  public acceptEvent(name: string){
+    return this.http.put(this.apiServerUrl+"/acceptEvent",name);
+  }
+
 //////////////// PUT ZONE ////////////////
 
   /**
