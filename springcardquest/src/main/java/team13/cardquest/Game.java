@@ -487,6 +487,10 @@ public class Game {
         //third step: announce foe or test
         if (questStages.get(activeStage-1).get(0).getType().equals("TEST")){
             questStages.get(activeStage-1).get(0).play();
+            for (Player p : players) {
+                p.addEventSignal("TEST_START");
+            }
+            addEventString("A test is beginning!");
             testStart();
             return;
         }
@@ -527,8 +531,9 @@ public class Game {
 
         //begin bidding
         bidFlag = false;
-        currentBidder = (currentTurn-1);
+        currentBidder = (currentTurn%numPlayers);
         if (numPlayers > 2){bidFlag = true;}
+        addEventString("Bidding begins with player "+players.get(currentBidder).getName());
         testGetBid();
     }
 
@@ -567,6 +572,7 @@ public class Game {
     }
 
     public void testAcceptBid(){
+        addEventString("player "+players.get(currentBidder).getName()+" has raised the bid!");
         bidFlag = true;
         currentBid ++;
         currentBidder = ((currentBidder+1)%numPlayers);
@@ -574,6 +580,7 @@ public class Game {
     }
 
     public void testRejectBid(){
+        addEventString("player "+players.get(currentBidder).getName()+" could not match the bid and had to drop out!");
         players.get(currentBidder).setAlive(false);
         currentBidder = ((currentBidder+1)%numPlayers);
         testGetBid();
