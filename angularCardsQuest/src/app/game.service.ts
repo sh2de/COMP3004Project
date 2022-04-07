@@ -224,9 +224,27 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/getEvent");
   }
 
+  /**
+   * 
+   * @param name of player who is accepting event
+   * @returns 
+   */
   public acceptEvent(name: string){
     return this.http.put(this.apiServerUrl+"/acceptEvent",name);
   }
+
+  public acceptBid(){
+    return this.http.get(this.apiServerUrl+"/acceptBid");
+  }
+
+  public declineBid(){
+    return this.http.get(this.apiServerUrl+"/rejectBid");
+  }
+
+  public getBidText(){
+    return this.http.get(this.apiServerUrl+"/getBidText");
+  }
+
 
 //////////////// PUT ZONE ////////////////
 

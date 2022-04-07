@@ -238,4 +238,26 @@ public class CardquestApplication {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	//accept bid
+	@GetMapping("/acceptBid")
+	public ResponseEntity<Void> acceptBid(){
+		game.testAcceptBid();
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	//decline bid
+	@GetMapping("/rejectBid")
+	public ResponseEntity<Void> rejectBid(){
+		game.testRejectBid();
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	//get bid string
+	@GetMapping("/getBidText")
+	public ResponseEntity<Object> getBidText(){
+		return new ResponseEntity<>(new String[]{game.getBidText()},HttpStatus.OK);
+	}
+
+
+
 }
