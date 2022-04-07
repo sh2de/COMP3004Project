@@ -36,7 +36,7 @@ public class Player {
     public ArrayList<String> sendEventQueue(){ //sends the top event from the event queue
         //return eventQueue;
         ArrayList<String> q = new ArrayList<String>();
-        if (!(eventQueue.size() == 0)){q.add(eventQueue.remove(0));}
+        if ((eventQueue.size() > 0)){q.add(eventQueue.remove(0));}
         return q;
 
         /*send all at once (old)
