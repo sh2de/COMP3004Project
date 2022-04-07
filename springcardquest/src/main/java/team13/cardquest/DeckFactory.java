@@ -22,11 +22,11 @@ public class DeckFactory{
             addEvents(deck);
             //addTournaments(deck);
         }else{
-            addAllies(deck);
+            //addAllies(deck);
             addFoes(deck);
             addWeapons(deck);
             //addArmours(deck);
-            //addTests(deck);
+            addTests(deck);
         }
 
         return deck;

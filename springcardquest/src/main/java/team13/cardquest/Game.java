@@ -546,6 +546,12 @@ public class Game {
 
         if (players.get(currentBidder).getAlive()){
             //if player is alive send em the signal
+            if (players.get(currentBidder).getHand().size() <= currentBid+1){
+                testRejectBid();
+                return;
+            }
+            bidText = "The current bid is "+currentBid+" bids. Are you willing to bid "+(currentBid+1)+"?";
+            players.get(currentBidder).addEventSignal("REQUEST_BID");
 
         }
 
@@ -557,15 +563,21 @@ public class Game {
     }
 
     public void testAcceptBid(){
-        
+        bidFlag = true;
+        currentBid ++;
+        currentBidder = ((currentBidder+1)%numPlayers);
+        testGetBid();
     }
 
     public void testRejectBid(){
-
+        players.get(currentBidder).setAlive(false);
+        currentBidder = ((currentBidder+1)%numPlayers);
+        testGetBid();
     }
 
     public void testBidResults(){
-
+        addEventString("player "+players.get(currentBidder).getName()+"won the bid!");
+        questTurn();
     }
 
     public void questFoeReceivePlayableHand(String name, ArrayList<Card> temphand){//receive the cards played by the player for a quest
