@@ -68,7 +68,7 @@ public class Player {
             //test version, discard first card
             //actual version should prompt player to pick a card to discard
             //hand.remove(0);
-            eventQueue.add("DISCARD_NEEDED");
+            //eventQueue.add("DISCARD_NEEDED");
         }
     }
 
@@ -84,9 +84,15 @@ public class Player {
             }
             i++;
         }
-        if (flag){tempDiscards.add(hand.remove(i));}
+        System.out.println("attempting to discard card");
+        if (flag){
+            tempDiscards.add(hand.remove(i));
+            System.out.println("discard successful");
+        }
+        //System.out.println(hand);
+        //System.out.println(tempDiscards);
         if(hand.size()>12){
-            eventQueue.add("DISCARD_NEEDED");
+            //eventQueue.add("DISCARD_NEEDED");
         }
     }
 
