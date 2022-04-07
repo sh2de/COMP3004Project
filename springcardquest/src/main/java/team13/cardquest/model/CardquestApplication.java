@@ -198,4 +198,23 @@ public class CardquestApplication {
 		game.rejectStageSetup();
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+	// get event log
+	@GetMapping("/getEventLog")
+	public ResponseEntity<ArrayList<String>> getEventLog(){
+		return new ResponseEntity<>(game.getEventLog(), HttpStatus.OK);
+	}
+
+	// discard card
+	@PutMapping("/discardCard/{name}")
+	public  ResponseEntity<Void> discardCard(@PathVariable("name") String name, Card c){
+		game.discardCard(name,c);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	//Get winner
+	@GetMapping("/getWinner")
+	public  ResponseEntity<Object> getWinner(){
+		return new ResponseEntity<>(new String[]{game.getWinner()},HttpStatus.OK);
+	}
 }
