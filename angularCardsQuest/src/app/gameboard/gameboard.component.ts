@@ -310,104 +310,106 @@ export class GameboardComponent implements OnInit {
     this.gameService.getUpdates(this.playerName).subscribe(
       (res:Object)=>{
         
+        for (let i = 0; i < res["length"]; i++) {
         // console.log(res)
-        if(res["length"]>0){
+        
           this.prevUpdatesLen=res["length"]
           console.log("test updates: ");
           console.log(res)
           //test updates 
-          if(res[this.prevUpdatesLen-1]=="ALL_PLAYERS_READY"){
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+          if(res[i]=="ALL_PLAYERS_READY"){
+            console.log("updates "+res[i]);
             this.load()
           }
 
-          if(res[this.prevUpdatesLen-1]=="REQUEST_SPONSORSHIP"){
+          if(res[i]=="REQUEST_SPONSORSHIP"){
             this.load()
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
             this.sponsorReq=true;
           }
 
-          if(res[this.prevUpdatesLen-1]=="DRAW_STORY"){
+          if(res[i]=="DRAW_STORY"){
             this.load()
             this.getStoryCard()
             this.questCondition=true;
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
-          if(res[this.prevUpdatesLen-1]=="CREATE_QUEST"){
+          if(res[i]=="CREATE_QUEST"){
             this.load()
             this.getStageInfo();
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
             this.questCondition=true;
             this.getActiveQuest();
             this.getStoryCard();
           }
 
-          if(res[this.prevUpdatesLen-1]=="WAIT_FOR_QUEST_CREATION"){
+          if(res[i]=="WAIT_FOR_QUEST_CREATION"){
             this.participate=true;
 
             this.load()
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
             this.getActiveQuest();
             this.getStoryCard();
           }
 
-          if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SELECT_CARDS"){
+          if(res[i]=="QUEST_FOE_SELECT_CARDS"){
             this.load()
             this.foeWarning=true;
             this.getStageInfo();
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
-          if(res[this.prevUpdatesLen-1]=="QUEST_FOE_SHOW_RESULTS"){
+          if(res[i]=="QUEST_FOE_SHOW_RESULTS"){
             this.load()
             this.foeWarning=false;
             this.questPlayer=false;
             this.questCreator=true;
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
-          if(res[this.prevUpdatesLen-1]=="PLAYER_QUEST_DEAD"){
+          if(res[i]=="PLAYER_QUEST_DEAD"){
             this.load()
             this.foeWarning=false;
             this.questPlayer=false;
             this.questCreator=true;
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
           
           
-          if(res[this.prevUpdatesLen-1]=="QUEST_OVER"){
+          if(res[i]=="QUEST_OVER"){
             this.foeWarning=false;
             this.questPlayer=false;
             this.questCreator=true;
             this.load()
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
-          if(res[this.prevUpdatesLen-1]=="QUEST_START"){
+          if(res[i]=="QUEST_START"){
             this.load()
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
-          if(res[this.prevUpdatesLen-1]=="UPDATE_PLAYERS"){
+          if(res[i]=="UPDATE_PLAYERS"){
             this.load()
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
-          if(res[this.prevUpdatesLen-1]=="DECLARE_WINNER"){
+          if(res[i]=="DECLARE_WINNER"){
             this.load()
             this.getWinner();
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
           
-          if(res[this.prevUpdatesLen-1]=="DISCARD_NEEDED"){
+          if(res[i]=="DISCARD_NEEDED"){
             this.discardCard=true;
             this.load()
-            console.log("updates "+res[this.prevUpdatesLen-1]);
+            console.log("updates "+res[i]);
           }
 
 
+        
         }
       },
       (err:HttpErrorResponse)=>{
@@ -483,6 +485,7 @@ export class GameboardComponent implements OnInit {
         }
       )
       this.discardCard=false;
+      this.load()
       return;
       
     }
