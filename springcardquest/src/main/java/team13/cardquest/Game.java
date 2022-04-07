@@ -291,6 +291,10 @@ public class Game {
         return "Stage "+(currentSetupStage+1)+"/"+activeQuest.stages + rejectionReason;
     }
 
+    public String getStagePlayingString(){
+        return "Stage "+(activeStage)+"/"+activeQuest.stages;
+    }
+
     public boolean receiveStages(ArrayList<ArrayList<Card>> stages){ //return true if setup is valid, false otherwise
         System.out.println(stages);
         //start by checking if the received list of cards is valid
