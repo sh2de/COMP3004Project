@@ -254,6 +254,7 @@ public class Game {
         currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
         addEventString(currentSponsor.getName()+" has accepted the quest as a sponsor!");
         currentSponsor.saveBackupHand();
+        questStages = new ArrayList<>();
         currentSetupStage = 0;
         setupPreviousPower = 0;
         activeStage = 0;
