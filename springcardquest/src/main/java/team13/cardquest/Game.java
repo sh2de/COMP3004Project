@@ -591,6 +591,7 @@ public class Game {
 
     public void testBidResults(){
         addEventString("player "+players.get(currentBidder).getName()+"won the bid!");
+        activeStage++;
         questTurn();
     }
 
