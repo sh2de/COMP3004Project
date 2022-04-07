@@ -591,6 +591,34 @@ public class Game {
 
     public void testBidResults(){
         addEventString("player "+players.get(currentBidder).getName()+"won the bid!");
+        bidText = "Congratulations! Now pay your bid by discarding "+currentBid+" cards!";
+        players.get(currentBidder).addEventSignal("PAY_BID");
+    }
+
+    public void receiveBids(ArrayList<Card> temphand){
+        ArrayList<Card> hand = new ArrayList<>();
+        for (Card card : temphand) {
+            hand.add(players.get(currentBidder).getCardByName(card.getName()));
+        }
+        if (hand.size() > currentBid){//too big
+            bidText = "That was too many! Now pay your bid by discarding "+currentBid+" cards!";
+            players.get(currentBidder).addEventSignal("PAY_BID");
+            return;
+        }
+        if (hand.size() < currentBid){//too small
+            bidText = "That was not enough! Now pay your bid by discarding "+currentBid+" cards!";
+            players.get(currentBidder).addEventSignal("PAY_BID");
+            return;
+        }
+
+        
+
+        adventuredeck.discardList(hand);
+        for (Card card : hand) {
+            players.get(currentBidder).discardCardByName(card.getName());
+        }
+        players.get(currentBidder).discardTempDiscards();
+
         activeStage++;
         questTurn();
     }
