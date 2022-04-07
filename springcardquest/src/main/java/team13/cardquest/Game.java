@@ -599,6 +599,16 @@ public class Game {
 
     //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
 
+    public String displayEvent(){
+        return "this is a test event";
+    }
+
+    public void acceptEvent(String name){
+
+    }
+
+
+
     public void eventChivalrousDeed(){ //players with the lowest rank/amount of shields receives 3 shields
         int lowestShields = 10;
         for (Player player : players) {
