@@ -509,10 +509,6 @@ export class GameboardComponent implements OnInit {
     
   }
 
-  playStage(){
-
-  }
-
   addToplayerList(i:number){
     this.myHand.push(this.cardList[i]);
   }
