@@ -157,19 +157,20 @@
       <div class="Stage" ngbDropdown>         
       
       <!-- STAGE-CARD -->
-        <div *ngIf="areSelected">
-          <div class="row">
+        <div class="row">
           <div class="col topright">{{stageInfo}}</div>
           <div class="col-sm-3">
             <button type="button" class="btn btn-primary" (click)="sendPlayableHand()">Play Current Stage</button>
           </div>
-          <div class="col-sm-3">
-          </div>
+          <!-- <div class="col-sm-3">
+          </div> -->
           
         </div>
+        <div *ngIf="areSelected">
+          
           <div class="row" >
             <div class="col-sm-1" *ngFor="let card of playableHand, index as i">                
-              <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage">             
+              <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage" (click)="cancelPlayable()">             
               
             </div>
           </div>
