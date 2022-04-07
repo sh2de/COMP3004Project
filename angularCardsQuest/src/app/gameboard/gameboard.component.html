@@ -57,7 +57,7 @@
       <!-- PLAYER -->
       <div class = "player">
         <h4><small>Player: {{player["name"]}}    Rank: {{player["rank"]}}</small></h4>
-
+        <h1 *ngIf="winnerCondition"> The Winner is {{winner}} </h1>
         <div *ngIf="ready">
           <button type="button" class="btn btn-primary" (click)="readyToStart()">Ready</button>
         </div>
@@ -149,7 +149,7 @@
       <!-- PLAYER -->
       <div class = "player">
         <h4><small>Player: {{player["name"]}} Rank:{{player["rank"]}}</small></h4>       
-        
+        <h1 *ngIf="winnerCondition"> The Winner is {{winner}} </h1>
       </div>
       <br><br>
 
