@@ -329,8 +329,8 @@ public class Game {
             boolean foeFlag = false;
             ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
             for (Card card : stage) {
-                System.out.println(card);//debug line
-                System.out.println(card.toString());
+                //System.out.println(card);//debug line
+                //System.out.println(card.toString());
                 switch(card.getType()){
                     case "FOE":
                         if (foeFlag){

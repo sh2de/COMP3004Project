@@ -67,7 +67,7 @@ public class Player {
             //if hand is bigger than 12, player must discard a card
             //test version, discard first card
             //actual version should prompt player to pick a card to discard
-            //hand.remove(0);
+            hand.remove(0);
             //eventQueue.add("DISCARD_NEEDED");
         }
     }
