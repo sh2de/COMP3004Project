@@ -25,15 +25,20 @@ public class Game {
     int setupPreviousPower = 0;
     String rejectionReason = "";
 
+    int currentBid = 0;
+    int currentBidder = 0;
+    boolean bidFlag = false;
+    String bidText = "";
     int questBonus = 0;
     String questStageResults = "";
     String questFinalResults = "";
-    
+
     String eventText = "";
     
     static BlobFoe currentFoe = null;
     static BlobWeapon currentWeapon = null;
     static BlobAlly currentAlly = null;
+    static BlobTest currentTest = null;
 
     ArrayList<String> eventLog = new ArrayList<>();
 
@@ -476,6 +481,11 @@ public class Game {
         }
 
         //third step: announce foe or test
+        if (questStages.get(activeStage-1).get(0).getType().equals("TEST")){
+            questStages.get(activeStage-1).get(0).play();
+            testStart();
+            return;
+        }
 
         //fourth step: get cards to be played from alive players
         for (Player player : players) {
@@ -485,6 +495,77 @@ public class Game {
                 player.addEventSignal("QUEST_FOE_SELECT_CARDS"); //signal to select cards for the foe
             } 
         }
+    }
+
+    public void testStart(){
+        //set lowest bid
+        switch(currentTest.name){
+            case "Test of Morgan Le Fey":
+                currentBid = 2;
+            case "Test of the Questing Beast":
+                if (activeQuest.name.equals("Search for the Questing Beast")){
+                    currentBid = 3;
+                }else{
+                    if (numPlayers == 2){
+                        currentBid = 2;
+                    }else{
+                        currentBid = 0;
+                    }
+                }
+            default:
+                if (numPlayers == 2){
+                    currentBid = 2;
+                }else{
+                    currentBid = 0;
+                }
+                break;
+        }
+
+        //begin bidding
+        bidFlag = false;
+        currentBidder = (currentTurn-1);
+        if (numPlayers > 2){bidFlag = true;}
+        testGetBid();
+    }
+
+    public void testGetBid(){
+        
+
+        int aliveCount = 0;
+        for (Player p : players) {
+            if (p.getAlive()){aliveCount++;}
+        }
+        if (aliveCount == 0){
+            questAnnounceResults();
+            return;
+        }
+        if (aliveCount == 1 && bidFlag == true){
+            testBidResults();
+            return;
+        }
+
+        if (players.get(currentBidder).getAlive()){
+            //if player is alive send em the signal
+
+        }
+
+        
+    }
+
+    public String getBidText(){
+        return bidText;
+    }
+
+    public void testAcceptBid(){
+        
+    }
+
+    public void testRejectBid(){
+
+    }
+
+    public void testBidResults(){
+
     }
 
     public void questFoeReceivePlayableHand(String name, ArrayList<Card> temphand){//receive the cards played by the player for a quest
@@ -498,7 +579,7 @@ public class Game {
         }
 
         //validity test
-        
+
 
         if (invalidflag){
             getPlayer(name).addEventSignal("QUEST_FOE_SELECT_CARDS");
@@ -594,7 +675,7 @@ public class Game {
     public static void ReceiveEvent(BlobEvent e){}
     public static void ReceiveArmour(BlobArmour a){}
     public static void ReceiveTournament(BlobTournament t){}
-    public static void ReceiveTest(BlobTest t){}
+    public static void ReceiveTest(BlobTest t){currentTest = t;}
 
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
         if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
