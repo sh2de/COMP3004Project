@@ -170,7 +170,7 @@
           
           <div class="row" >
             <div class="col-sm-1" *ngFor="let card of playableHand, index as i">                
-              <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage" (click)="cancelPlayable()">             
+              <img src="{{card['url']}}" alt="{{card['type']}}" id = "{{i}}" class="itemImage-stage" (click)="cancelPlayable(i)">             
               
             </div>
           </div>

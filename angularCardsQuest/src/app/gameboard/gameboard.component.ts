@@ -476,20 +476,6 @@ export class GameboardComponent implements OnInit {
   }
 
   isSelected(i:number){
-    // if(document.getElementById(`${i}`).style.border=="0px"){
-    //   document.getElementById(`${i}`).style.border="5px solid rgb(255, 0, 0)";  
-    //   this.selectedCards.push(this.myHand[i]);
-    // }else{
-    //   document.getElementById(`${i}`).style.border="0";
-    //   this.selectedCards.forEach(
-    //     selectedCards => {
-    //       if(selectedCards == this.myHand[i]){
-    //         this.selectedCards.splice(this.selectedCards.indexOf(selectedCards), 1);
-    //       }
-    //     }
-    //   );
-    //   //this.selectedCards.splice(i, 1);
-    // }
 
     if(this.discardCard){
 
@@ -529,6 +515,11 @@ export class GameboardComponent implements OnInit {
     this.selectedCards.splice(i, 1);
 
   }
- 
+  
+  cancelPlayable(i:number){
+    this.myHand.push(this.playableHand[i]);
+    this.playableHand.splice(i, 1);
+
+  }
 
 }
