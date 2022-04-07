@@ -278,7 +278,6 @@ public class Game {
             for (Card card : stage) {
                 currentSponsor.discardCardByName(card.getName());
             }
-            sortStages();
             currentSponsor.addEventSignal("CREATE_QUEST");
         }
     }
@@ -418,6 +417,7 @@ public class Game {
             if (p.getWaiting()){anyWaiting = true;}
         }
         if (!anyWaiting){
+            sortStages();
             for (Player p : players) {
                 p.addEventSignal("QUEST_START");
             }
