@@ -318,6 +318,7 @@ public class Game {
     }
 
     public String getStagePreparationString(){
+        if (activeStage == 0){return "Waiting...";}
         return "Stage "+(currentSetupStage+1)+"/"+activeQuest.stages + rejectionReason;
     }
 
