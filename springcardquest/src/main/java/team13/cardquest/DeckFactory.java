@@ -53,7 +53,7 @@ public class DeckFactory{
         int value = 1;
 
         for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("King's Recognition", type, value, header+"King's_Recognition.png"));
-        for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("Queen's Favor", type, value, header+"Queen's_Favor.png"));
+        for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("Queen's Favor", type, value, header+"Queen's_favor.png"));
         for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("Court Called to Camelot", type, value, header+"Court_Called_to_Camelot.png"));
         deck.AddCard(new CardEvent("Pox", type, value, header+"Pox.png"));
         deck.AddCard(new CardEvent("Plague", type, value, header+"Plague.png"));
