@@ -339,6 +339,7 @@ public class Game {
         //start by checking if the received list of cards is valid
         //FIRST CHECK: DOES THE PLAYER HAVE THE REQUIRED CARDS? FOR SIMPLICITY ASSUME YES
         boolean testFlag = false;//boolean value to see if test has been played yet. only one test may be played per quest
+        //boolean testFlag2 = false;
         //SECOND CHECK: IS THERE ONLY ONE TEST?
         /*if (stages.size() != activeQuest.stages){
             //rejectStageSetup();
@@ -348,6 +349,7 @@ public class Game {
         setupPreviousPower = 0;
         for (ArrayList<Card> stage : stages) {
             boolean foeFlag = false;
+            boolean testFlag2 = false;
             ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
             for (Card card : stage) {
                 //System.out.println(card);//debug line
@@ -372,6 +374,7 @@ public class Game {
                             return false;
                         }
                         testFlag = true;
+                        testFlag2 = true;
                         break;
                     default: //reject if an invalid card is received
                         //rejectStageSetup();
@@ -380,7 +383,7 @@ public class Game {
                 }
             }
             //reject if no foe or test is present
-            if ((!foeFlag && !testFlag)||(foeFlag && testFlag)){
+            if ((!foeFlag && !testFlag2)||(foeFlag && testFlag2)){
                 //rejectStageSetup();
                 rejectionReason = "(each stage must have either one foe or one test)";
                 return false;
