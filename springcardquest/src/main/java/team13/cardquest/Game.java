@@ -284,7 +284,26 @@ public class Game {
     }
 
     public void sortStages(){
+        ArrayList<ArrayList<Card>> sortedStages = new ArrayList<>();
+        boolean flag = true;
+        int index = questStages.size();
+        while(flag){
+            int smallestPower = 99999;
+            for (ArrayList<Card> stage : questStages) {
+                if (getPower(stage) < smallestPower){
+                    smallestPower = getPower(stage);
+                }
+            }
+            for (ArrayList<Card> stage : questStages) {
+                if (getPower(stage) == smallestPower){
+                    sortedStages.add(stage);
+                    index--;
+                }
+            }
+            if (index==0){flag = false;}
+        }
         
+        questStages = sortedStages;
     }
 
     public String getStagePreparationString(){
@@ -469,12 +488,12 @@ public class Game {
 
     public void questFoeStageResults(){
         questStageResults = "";
-        int foePower = getPower(currentSponsor,questStages.get(activeStage - 1));
+        int foePower = getPower(questStages.get(activeStage - 1));
         addEventString("The approaching foe has a power of "+foePower+"!");
         for (Player player : players) {
             if (player.getAlive()){
                 //if player is alive, check if they survived
-                if (foePower > player.getPower() + getPower(player,player.getPlayableHand())){//if foe was stronger, kill the player
+                if (foePower > player.getPower() + getPower(player.getPlayableHand())){//if foe was stronger, kill the player
                     player.setAlive(false);
                     //questStageResults += player.getName() + " was felled in battle!\n";
                     addEventString(player.getName() + " was felled in battle!");
@@ -539,11 +558,11 @@ public class Game {
     public static void ReceiveTest(BlobTest t){}
 
     public boolean defeatedFoe(Player p, ArrayList<Card> playerCards, ArrayList<Card> questCards){ //check if the player successfully defeated a foe or not
-        if (p.getPower() + getPower(p,playerCards) >= getPower(p,questCards)){return true;}
+        if (p.getPower() + getPower(playerCards) >= getPower(questCards)){return true;}
         return false;
     }
 
-    public int getPower(Player player, ArrayList<Card> hand){//get power sum of the current combination of cards
+    public int getPower(ArrayList<Card> hand){//get power sum of the current combination of cards
         int p = 0;
         for (Card card : hand) {
         //for (Card cardData : hand) {
@@ -568,7 +587,8 @@ public class Game {
                     currentWeapon = null;
                     break;
                 default:
-                    break;
+                    return -1;
+                    
             }
             //p += card.GetPower();
         }
