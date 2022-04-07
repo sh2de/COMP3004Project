@@ -490,11 +490,15 @@ public class Game {
     public void questFoeReceivePlayableHand(String name, ArrayList<Card> temphand){//receive the cards played by the player for a quest
         //step 1: check if cards are valid. on fail, resend signal
         boolean invalidflag = false;
+
         //INCOMPLETE: ASSUMING VALIDITY FOR NOW
         ArrayList<Card> hand = new ArrayList<>();
         for (Card card : temphand) {
             hand.add(getPlayer(name).getCardByName(card.getName()));
         }
+
+        //validity test
+        
 
         if (invalidflag){
             getPlayer(name).addEventSignal("QUEST_FOE_SELECT_CARDS");
@@ -532,7 +536,8 @@ public class Game {
                 } else{
                     //questStageResults += player.getName() + " triumphed in battle!\n";
                     addEventString(player.getName() + " triumphed in battle!");
-                }                
+                }
+                adventuredeck.discardList(player.discardPlayableHand());                
             }
         }
         activeStage++;
@@ -543,6 +548,9 @@ public class Game {
     }
 
     public void questAnnounceResults(){
+        for (ArrayList<Card> stage : questStages) {
+            adventuredeck.discardList(stage);
+        }
         for (Player player : players) {
             if (player.getAlive()){
                 player.editShields(activeQuest.stages + questBonus);
