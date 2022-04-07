@@ -577,7 +577,8 @@ export class GameboardComponent implements OnInit {
    * and add it back to my hand
    */
   cancelPlayable(i:number){
-
+    this.myHand.push(this.playableHand[i]);
+    this.playableHand.splice(i, 1);
   }
  
 
