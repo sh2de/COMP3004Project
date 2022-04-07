@@ -22,6 +22,7 @@ public class Game {
     int activeStage = 0;
     ArrayList<ArrayList<Card>> questStages = new ArrayList<ArrayList<Card>>();
     int currentSetupStage = 1;
+    int setupPreviousPower = 0;
     String rejectionReason = "";
 
     int questBonus = 0;
@@ -253,6 +254,7 @@ public class Game {
         addEventString(currentSponsor.getName()+" has accepted the quest as a sponsor!");
         currentSponsor.saveBackupHand();
         currentSetupStage = 0;
+        setupPreviousPower = 0;
         adventuredeck.discardList(currentSponsor.discardTempDiscards());
         rejectionReason = "";
         forceAllUnready(); //we need a response from all players
@@ -347,6 +349,7 @@ public class Game {
                             return false;
                         }
                         foeFlag = true;
+
                         break;
                     case "WEAPON":
                         weapons.add(card);
@@ -383,8 +386,21 @@ public class Game {
                         return false;
                     }
                 }
-            }    
+            }
+            
+            //power scaling rejection test
+            int testingPower = getPower(stage);
+            if (testingPower != -1){//if not a test
+                if (testingPower < setupPreviousPower){
+                    rejectionReason = "(each stage must have a higher total power than the last!)";
+                    return false;
+                }
+                setupPreviousPower = testingPower;
+            }
         }
+
+
+
         return true;
         //old functionality down there, this is just a quest validator now
 
@@ -400,6 +416,7 @@ public class Game {
     public void rejectStageSetup(){ //restart quest creation from the beginning
         questStages = new ArrayList<>();
         currentSetupStage = 0;
+        setupPreviousPower = 0;
         currentSponsor.loadBackupHand();
         System.out.println("stage rejected for reason "+rejectionReason);
         currentSponsor.addEventSignal("CREATE_QUEST");
