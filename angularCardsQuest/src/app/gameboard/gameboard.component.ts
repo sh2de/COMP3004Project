@@ -128,16 +128,33 @@ export class GameboardComponent implements OnInit {
     this.areSelected=false;
   }
 
+  /**
+   * stage info
+   */
+
   public getStageInfo(){
-    this.gameService.getStagePreparationString().subscribe(
-      (res)=>{
-        
-        this.stageInfo=res[0];
-      },
-      (err:HttpErrorResponse)=>{
-        console.log("ERROR: "+err.message);
-      }
-    )
+    if(this.questCreator){
+      this.gameService.getStagePreparationString().subscribe(
+        (res)=>{
+          
+          this.stageInfo=res[0];
+        },
+        (err:HttpErrorResponse)=>{
+          console.log("ERROR: "+err.message);
+        }
+      )
+    }
+    if(this.questPlayer){
+      this.gameService.getStagePlayingString().subscribe(
+        (res)=>{
+          
+          this.stageInfo=res[0];
+        },
+        (err:HttpErrorResponse)=>{
+          console.log("ERROR: "+err.message);
+        }
+      )
+    }
 
   }
 

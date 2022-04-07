@@ -208,6 +208,14 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/getWinner");
   }
 
+  /**
+   * get stage playing string
+   * @returns observable of Stage Playing String
+   */
+  public getStagePlayingString(){
+    return this.http.get(this.apiServerUrl+"/getStagePlayingString");
+  }
+
 //////////////// PUT ZONE ////////////////
 
   /**
@@ -218,9 +226,12 @@ export class GameService {
     return this.http.put(this.apiServerUrl+"/questFoeReceivePlayableHand/"+name, hand);
   }
   
+  
   public sendingStages(stages: Array<Array<object>>){
     return this.http.put(this.apiServerUrl+"/receiveStages",stages);
   }
+
+
 
 //////////////// TEST ZONE ////////////////
   public getImages(){ //<--- WILL BE IN GET ZONE
