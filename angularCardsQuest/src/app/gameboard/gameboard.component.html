@@ -1,15 +1,18 @@
 <br><br>
 <!-- Other Player -->
-  <div class="row" >
-    
+  <div class="row" >    
     <div class="col-sm-4 " *ngFor="let stat of status">
       <p>{{stat}}</p>      
-    </div>  
-    
+    </div>     
       
   </div>
 
   <!-- ALERT-INFO -->
+  <div class="alert alert-info" *ngIf="false">
+    <strong>Are you willing to sponsor the current Quest?</strong>
+    <button type="button" class="btn btn-link" (click)="acceptSponsor()">Yes</button>
+    <button type="button" class="btn btn-link" (click)="declineSponsor()">No</button>
+  </div>
   <div class="alert alert-info" *ngIf="sponsorReq">
     <strong>Are you willing to sponsor the current Quest?</strong>
     <button type="button" class="btn btn-link" (click)="acceptSponsor()">Yes</button>
