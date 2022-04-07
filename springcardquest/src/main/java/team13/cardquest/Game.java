@@ -54,7 +54,7 @@ public class Game {
     public ArrayList<String> getEventLog(){
         //eventLog.add("test string!");
         ArrayList<String> e = new ArrayList<>();
-        for (int i = eventLog.size(); i >= 0; i--){
+        for (int i = eventLog.size()-1; i >= 0; i--){
             e.add(eventLog.get(i));
         }
         return e;
