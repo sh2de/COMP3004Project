@@ -336,6 +336,7 @@ public class Game {
             rejectionReason = "too many stages!";
             return false;
         }*/
+        setupPreviousPower = 0;
         for (ArrayList<Card> stage : stages) {
             boolean foeFlag = false;
             ArrayList<Card> weapons = new ArrayList<>();//this list is used to check for duplicate weapons 
