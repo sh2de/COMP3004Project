@@ -562,6 +562,9 @@ public class Game {
             bidText = "The current bid is "+currentBid+" bids. Are you willing to bid "+(currentBid+1)+"?";
             players.get(currentBidder).addEventSignal("REQUEST_BID");
 
+        }else{
+            currentBidder++;
+            testGetBid();
         }
 
         
