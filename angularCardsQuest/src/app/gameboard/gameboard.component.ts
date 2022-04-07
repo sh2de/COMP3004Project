@@ -38,7 +38,12 @@ export class GameboardComponent implements OnInit {
   isEvent: boolean;
   status=[];
   eventLog=[];
-  okButton:boolean
+  okButton:boolean;
+  createQuest:boolean;
+  payBid:boolean;
+  requestBid:boolean;
+  bidRequest="";
+
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
@@ -53,6 +58,8 @@ export class GameboardComponent implements OnInit {
     this.foeWarning=false;
     this.isEvent=false;
     this.okButton=false;
+    this.createQuest=false;
+    this.payBid=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -61,6 +68,7 @@ export class GameboardComponent implements OnInit {
     this.load()
     this.getUpdates();
     this.getActiveQuest();
+    this.requestBid=false;
     
 
       
@@ -171,6 +179,7 @@ export class GameboardComponent implements OnInit {
         (res)=>{
           
           this.stageInfo=res[0];
+          console.log("test stage Info |"+this.stageInfo+"|");
         },
         (err:HttpErrorResponse)=>{
           console.log("ERROR: "+err.message);
@@ -354,6 +363,55 @@ export class GameboardComponent implements OnInit {
   }
 
   /**
+   * get current bit
+   */
+  public getCurrentBit(){
+    this.gameService.getBidText().subscribe(
+      (res)=>{
+        this.bidRequest=res[0];
+      },
+      (err)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+  }
+
+  /**
+   * discarding 
+   */
+  public discarding(){
+    
+  }
+
+  /**
+   * accepting bid
+   */
+  public acceptBid(){
+    this.gameService.acceptBid().subscribe(
+      (res)=>{},
+      (err)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+    this.requestBid=false;
+  }
+
+  /**
+   * decline bid
+   */
+   public declineBid(){
+    this.gameService.declineBid().subscribe(
+      (res)=>{},
+      (err)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+    this.requestBid=false
+  }
+
+
+
+  /**
    * get players updates
    */
   getUpdates(){
@@ -370,6 +428,18 @@ export class GameboardComponent implements OnInit {
           if(res[i]=="ALL_PLAYERS_READY"){
             console.log("updates "+res[i]);
             this.load()
+          }
+
+          if(res[i]=="REQUEST_BID"){
+            console.log("updates "+res[i]);
+            this.getCurrentBit();
+            this.requestBid=true;
+          }
+
+          if(res[i]=="PAY_BID"){
+            console.log("updates "+res[i]);
+            this.payBid=true;
+            this.discardCard=true;
           }
 
           if(res[i]=="REQUEST_SPONSORSHIP"){
@@ -391,6 +461,7 @@ export class GameboardComponent implements OnInit {
             this.getStageInfo();
             console.log("updates "+res[i]);
             this.questCondition=true;
+            this.createQuest=true;
             this.getActiveQuest();
             this.getStoryCard();
           }
@@ -444,6 +515,7 @@ export class GameboardComponent implements OnInit {
 
           if(res[i]=="QUEST_START"){
             this.load()
+            this.createQuest=false;
             console.log("updates "+res[i]);
           }
 
@@ -533,12 +605,7 @@ export class GameboardComponent implements OnInit {
 
       console.log("test discard");
 
-      this.gameService.discardCard(this.playerName,this.myHand[i]).subscribe(
-        (res)=>{},
-        (err:HttpErrorResponse)=>{
-          console.log("ERROR: "+err.message);
-        }
-      )
+      
       this.discardCard=false;
       this.load()
       return;
