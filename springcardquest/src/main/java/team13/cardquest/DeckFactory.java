@@ -18,8 +18,8 @@ public class DeckFactory{
         Deck deck = new Deck();
 
         if(mode){
-            addQuests(deck);
-            //addEvents(deck);
+            //addQuests(deck);
+            addEvents(deck);
             //addTournaments(deck);
         }else{
             addAllies(deck);
@@ -54,9 +54,9 @@ public class DeckFactory{
 
         for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("King's Recognition", type, value, "King's_Recognition.png"));
         for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("Queen's Favor", type, value, "Queen's_Favor.png"));
-        for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("Cour Called to Camelot", type, value, "Court_Called_to_Camelot.png"));
+        for(int i = 0; i<2; i++) deck.AddCard(new CardEvent("Court Called to Camelot", type, value, "Court_Called_to_Camelot.png"));
         deck.AddCard(new CardEvent("Pox", type, value, "Pox.png"));
-        deck.AddCard(new CardEvent("Plauge", type, value, "Plague.png"));
+        deck.AddCard(new CardEvent("Plague", type, value, "Plague.png"));
         deck.AddCard(new CardEvent("Chivalrous Deed", type, value, "Chivalrous_Deed.png"));
         deck.AddCard(new CardEvent("Prosperity Throughout the Realm", type, value, "Prosperity_Throughout_the_Realm.png"));
     }

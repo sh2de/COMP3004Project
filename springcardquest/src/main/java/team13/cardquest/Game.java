@@ -28,6 +28,8 @@ public class Game {
     String questStageResults = "";
     String questFinalResults = "";
     
+    String eventText = "";
+    
     static BlobFoe currentFoe = null;
     static BlobWeapon currentWeapon = null;
     static BlobAlly currentAlly = null;
@@ -178,6 +180,13 @@ public class Game {
 
         } else if (currentStory.getType().equals("EVENT")){
             //event card drawn
+            forceAllUnready();
+
+            executeEvent();
+
+            for (Player p : players) {
+                p.addEventSignal("DISPLAY_EVENT");
+            }
 
         } else if (currentStory.getType().equals("TOURNAMENT")){
             //tournament card drawn
@@ -600,16 +609,53 @@ public class Game {
     //EVENT PROCESSING FUNCTIONS--------------------------------------------------------------------
 
     public String displayEvent(){
-        return "this is a test event";
+        return eventText;
     }
 
     public void acceptEvent(String name){
+        getPlayer(name).setWaiting(false);
+        if(allPlayersReady()){
+            eventText = "";
+            turnStart();
+        }
+    }
+
+    public void executeEvent(){
+        //String eventName = currentStory.getName();
+        switch(currentStory.getName()){
+            case "Chivalrous Deed":
+                eventText = eventChivalrousDeed();
+                break;
+            case "Court Called to Camelot":
+                eventText = eventCourtCalledToCamelot();
+                break;
+            case "King's Recognition":
+                eventText = eventKingsRecognition();
+                break;
+            case "Plague":
+                eventText = eventPlague();
+                break;
+            case "Pox":
+                eventText = eventPox();
+                break;
+            case "Prosperity Throughout the Realm":
+                eventText = eventProsperityThroughTheRealm();
+                break;
+            case "Queen's Favor":
+                eventText = eventQueensFavor();
+                break;
+            case "King's Call To Arms":
+                eventText = eventKingsCallToArms();
+                break;
+            default:
+                eventText = "invalid event card";
+                break;
+        }
 
     }
 
 
-
-    public void eventChivalrousDeed(){ //players with the lowest rank/amount of shields receives 3 shields
+    public String eventChivalrousDeed(){ //players with the lowest rank/amount of shields receives 3 shields
         int lowestShields = 10;
         for (Player player : players) {
             if (player.getShields()<lowestShields){
@@ -622,25 +668,29 @@ public class Game {
                 player.editShields(3);
             }
         }
+        return "A boon for the weak! A gift of 3 shields to our weakest knights!";
     }
 
-    public void eventPox(){ //all players except the one who drew this card lose 1 shield
+    public String eventPox(){ //all players except the one who drew this card lose 1 shield
         for (Player player : players) {
             if (!player.equals(getCurrentPlayer())){
                 player.editShields(-1);
             }
         }
+        return "A pox has stricken all knights but " + players.get(currentTurn-1).getName() + "! They all lost one shields during their rest...";
     }
 
-    public void eventPlague(){ //drawer loses two shields if possible
+    public String eventPlague(){ //drawer loses two shields if possible
         getCurrentPlayer().editShields(-2);
+        return "A plague has struck " + players.get(currentTurn-1).getName() + "! They lost two shields during their rest...";
     }
 
-    public void eventKingsRecognition(){ //next quest completion gets 2 extra shields
+    public String eventKingsRecognition(){ //next quest completion gets 2 extra shields
         questBonus += 2;
+        return "The king recognizes your efforts, and has prepared a special prize of two shields for your next quest...";
     }
 
-    public void eventQueensFavor(){ //lowest ranked players draw 1 card
+    public String eventQueensFavor(){ //lowest ranked players draw 1 card
         int lowestShields = 10;
         String targetRank = "squire";
         for (Player player : players) {
@@ -660,15 +710,17 @@ public class Game {
                 player.addCardToHand(adventuredeck.draw());
             }
         }
+        return "The queen has decided to favor the weak with a gift of one card!";
     }
 
-    public void eventCourtCalledToCamelot(){//discard all allies
+    public String eventCourtCalledToCamelot(){//discard all allies
         for (Player player : players) {
             player.discardAllAllies();
         }
+        return "The king summons all of thy allies! You must work alone from now on...";
     }
 
-    public void eventKingsCallToArms(){//highest ranked players must discard 1 weapon, if impossible must discard 2 foes (INCOMPLETE)
+    public String eventKingsCallToArms(){//highest ranked players must discard 1 weapon, if impossible must discard 2 foes (INCOMPLETE)
         int highestShields = 0;
         String targetRank = "squire";
         for (Player player : players) {
@@ -685,13 +737,15 @@ public class Game {
 
         //DISCARD PROCESS TBD
         //PROBABLY GONNA INVOLVE A SIGNAL
+        return "This event is incomplete very sorry about that";
     }
 
-    public void eventProsperityThroughTheRealm(){ //all players draw 2 cards
+    public String eventProsperityThroughTheRealm(){ //all players draw 2 cards
         for (Player player : players) {
             player.addCardToHand(adventuredeck.draw());
             player.addCardToHand(adventuredeck.draw());
         }
+        return "Prosperity for all! A gift of 2 cards to all my knights!";
     }
 
     //TOURNAMENT PROCESSING FUNCTIONS----------------------------------------------------------------
