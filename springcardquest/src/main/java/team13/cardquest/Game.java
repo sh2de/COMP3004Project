@@ -254,8 +254,10 @@ public class Game {
         currentSponsor = players.get((currentTurn - 2 + sponsor)%numPlayers);
         addEventString(currentSponsor.getName()+" has accepted the quest as a sponsor!");
         currentSponsor.saveBackupHand();
+        questStages = new ArrayList<>();
         currentSetupStage = 0;
         setupPreviousPower = 0;
+        activeStage = 0;
         adventuredeck.discardList(currentSponsor.discardTempDiscards());
         rejectionReason = "";
         forceAllUnready(); //we need a response from all players
@@ -318,6 +320,7 @@ public class Game {
     }
 
     public String getStagePreparationString(){
+        if (activeStage == 0){return "Waiting...";}
         return "Stage "+(currentSetupStage+1)+"/"+activeQuest.stages + rejectionReason;
     }
 
