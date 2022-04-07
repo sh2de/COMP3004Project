@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { convertCompilerOptionsFromJson } from 'typescript';
+import { collapseTextChangeRangesAcrossMultipleVersions, convertCompilerOptionsFromJson } from 'typescript';
 import { GameService } from '../game.service';
 
 @Component({
@@ -108,6 +108,7 @@ export class GameboardComponent implements OnInit {
         console.log("ERROR: "+err.message);
       }
     )
+    this.getPlayer();
     this.selectedCards=[];
   }
   /**
