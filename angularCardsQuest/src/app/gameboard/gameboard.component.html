@@ -1,5 +1,4 @@
-<h1>Quest Of The Round Table</h1>
-
+<br><br>
 <!-- Other Player -->
   <div class="row" >
     
@@ -20,6 +19,14 @@
     <strong>Are you willing to participate in the Quest?</strong>
     <button type="button" class="btn btn-link" (click)="acceptParticipation()">Yes</button>
     <button type="button" class="btn btn-link" (click)="declineParticipation()">No</button>
+  </div>
+  <!-- ALERT FOR EVENT -->
+  <div class="row alert alert-info" *ngIf="isEvent">
+    <strong>{{event}}</strong>
+    <div *ngIf="okButton">
+      <button type="button" class="btn btn-primary" (click)="acceptEvent()">OK</button>
+    </div>
+    
   </div>
 
 <!-- page of player who's creating quest -->
@@ -162,8 +169,6 @@
           <div class="col-sm-3">
             <button type="button" class="btn btn-primary" (click)="sendPlayableHand()">Play Current Stage</button>
           </div>
-          <!-- <div class="col-sm-3">
-          </div> -->
           
         </div>
         <div *ngIf="areSelected">

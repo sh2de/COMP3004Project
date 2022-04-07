@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { convertCompilerOptionsFromJson } from 'typescript';
+import { collapseTextChangeRangesAcrossMultipleVersions, convertCompilerOptionsFromJson } from 'typescript';
 import { GameService } from '../game.service';
 
 @Component({
@@ -34,9 +34,11 @@ export class GameboardComponent implements OnInit {
   discardCard=false;
   winnerCondition=false;
   winner="";
-
+  event="";
+  isEvent: boolean;
   status=[];
   eventLog=[];
+  okButton:boolean
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class GameboardComponent implements OnInit {
     this.questCreator=true;
     this.questPlayer=false;
     this.foeWarning=false;
+    this.isEvent=false;
+    this.okButton=false;
     this.playerName=this.route.snapshot.params["username"];
     this.gameService.refresNeededs
       .subscribe(()=>{
@@ -57,7 +61,6 @@ export class GameboardComponent implements OnInit {
     this.load()
     this.getUpdates();
     this.getActiveQuest();
-
     
 
       
@@ -87,6 +90,35 @@ export class GameboardComponent implements OnInit {
   }
 
   /**
+   * displaying current event
+   */
+  public displayEvent(){
+    this.gameService.getEvent().subscribe(
+      (res)=>{
+        this.event=res[0];
+        console.log("test event: " +this.event)
+      },
+      (err:HttpErrorResponse)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+  } 
+
+  /**
+   * accepting curent event
+   */
+    public acceptEvent(){
+      this.okButton=false;
+      this.gameService.acceptEvent(this.playerName).subscribe(
+        (res)=>{},
+        (err:HttpErrorResponse)=>{
+          console.log("ERROR: "+err.message);
+        }
+      )
+      
+    }
+
+  /**
    * all players status
    */
   getALlPlayersStatus(){
@@ -108,6 +140,7 @@ export class GameboardComponent implements OnInit {
         console.log("ERROR: "+err.message);
       }
     )
+    this.getPlayer();
     this.selectedCards=[];
   }
   /**
@@ -349,6 +382,7 @@ export class GameboardComponent implements OnInit {
             this.load()
             this.getStoryCard()
             this.questCondition=true;
+            this.isEvent=false;
             console.log("updates "+res[i]);
           }
 
@@ -378,8 +412,16 @@ export class GameboardComponent implements OnInit {
           }
 
           if(res[i]=="QUEST_FOE_SHOW_RESULTS"){
-            this.load()
-            
+            this.load()            
+            console.log("updates "+res[i]);
+          }
+
+          if(res[i]=="DISPLAY_EVENT"){
+            this.displayEvent();
+            this.getStoryCard();
+            this.questCondition=true;
+            this.isEvent=true;
+            this.okButton=true;
             console.log("updates "+res[i]);
           }
 
@@ -476,6 +518,20 @@ export class GameboardComponent implements OnInit {
   }
 
   isSelected(i:number){
+    // if(document.getElementById(`${i}`).style.border=="0px"){
+    //   document.getElementById(`${i}`).style.border="5px solid rgb(255, 0, 0)";  
+    //   this.selectedCards.push(this.myHand[i]);
+    // }else{
+    //   document.getElementById(`${i}`).style.border="0";
+    //   this.selectedCards.forEach(
+    //     selectedCards => {
+    //       if(selectedCards == this.myHand[i]){
+    //         this.selectedCards.splice(this.selectedCards.indexOf(selectedCards), 1);
+    //       }
+    //     }
+    //   );
+    //   //this.selectedCards.splice(i, 1);
+    // }
 
     if(this.discardCard){
 
@@ -515,11 +571,14 @@ export class GameboardComponent implements OnInit {
     this.selectedCards.splice(i, 1);
 
   }
-  
+
+  /**
+   * remove card on index i of playable hand
+   * and add it back to my hand
+   */
   cancelPlayable(i:number){
-    this.myHand.push(this.playableHand[i]);
-    this.playableHand.splice(i, 1);
 
   }
+ 
 
 }
