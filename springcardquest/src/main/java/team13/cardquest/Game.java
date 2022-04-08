@@ -550,6 +550,9 @@ public class Game {
             return;
         }
         if (aliveCount == 1 && bidFlag == true){
+            while (!players.get(currentBidder).getAlive()){
+                currentBidder = ((currentBidder+1)%numPlayers);
+            }
             testBidResults();
             return;
         }
