@@ -245,6 +245,10 @@ export class GameService {
     return this.http.get(this.apiServerUrl+"/getBidText");
   }
 
+  public sendBids(temp: object){
+    return this.http.put(this.apiServerUrl+"/sendBids",temp);
+  }
+
 
 //////////////// PUT ZONE ////////////////
 

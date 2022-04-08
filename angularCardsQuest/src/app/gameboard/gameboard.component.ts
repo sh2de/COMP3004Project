@@ -43,6 +43,8 @@ export class GameboardComponent implements OnInit {
   payBid:boolean;
   requestBid:boolean;
   bidRequest="";
+  bids=[];
+  stagesCreator=false;
 
   constructor(private gameService:GameService, http:HttpClient,private route:ActivatedRoute) { }
   
@@ -366,9 +368,11 @@ export class GameboardComponent implements OnInit {
    * get current bit
    */
   public getCurrentBit(){
+    
     this.gameService.getBidText().subscribe(
       (res)=>{
         this.bidRequest=res[0];
+        console.log("test request Bid",this.bidRequest)
       },
       (err)=>{
         console.log("ERROR: "+err.message);
@@ -380,7 +384,15 @@ export class GameboardComponent implements OnInit {
    * discarding 
    */
   public discarding(){
-    
+    this.gameService.sendBids(this.bids).subscribe(
+      (res)=>{},
+      (err)=>{
+        console.log("ERROR: "+err.message);
+      }
+    )
+    this.bids=[];
+    this.load();
+    this.discardCard=false;
   }
 
   /**
@@ -438,9 +450,15 @@ export class GameboardComponent implements OnInit {
 
           if(res[i]=="PAY_BID"){
             console.log("updates "+res[i]);
-            this.payBid=true;
+            this.getCurrentBit();
+            this.requestBid=true;
+            this.questCreator=true;
+            this.questPlayer=false;
+            this.payBid=true;    
+            this.stagesCreator=false;        
             this.discardCard=true;
           }
+
 
           if(res[i]=="REQUEST_SPONSORSHIP"){
             this.load()
@@ -458,10 +476,12 @@ export class GameboardComponent implements OnInit {
 
           if(res[i]=="CREATE_QUEST"){
             this.load()
+            this.stagesCreator=true;
             this.getStageInfo();
             console.log("updates "+res[i]);
             this.questCondition=true;
             this.createQuest=true;
+            this.questCreator=true;
             this.getActiveQuest();
             this.getStoryCard();
           }
@@ -498,7 +518,7 @@ export class GameboardComponent implements OnInit {
 
           if(res[i]=="PLAYER_QUEST_DEAD"){
             this.load()
-            this.foeWarning=false;
+            this.foeWarning=false;      
             this.questPlayer=false;
             this.questCreator=true;
             console.log("updates "+res[i]);
@@ -508,12 +528,13 @@ export class GameboardComponent implements OnInit {
           if(res[i]=="QUEST_OVER"){
             this.foeWarning=false;
             this.questPlayer=false;
-            this.questCreator=true;
+            this.stagesCreator=false;
             this.load()
             console.log("updates "+res[i]);
           }
 
           if(res[i]=="QUEST_START"){
+            this.stagesCreator=false;
             this.load()
             this.createQuest=false;
             console.log("updates "+res[i]);
@@ -604,9 +625,8 @@ export class GameboardComponent implements OnInit {
     if(this.discardCard){
 
       console.log("test discard");
-
-      
-      this.discardCard=false;
+      this.bids.push(this.myHand[i])
+      this.myHand.splice(i, 1);      
       this.load()
       return;
       
@@ -642,6 +662,10 @@ export class GameboardComponent implements OnInit {
   cancelPlayable(i:number){
     this.myHand.push(this.playableHand[i]);
     this.playableHand.splice(i, 1);
+  }
+  cancelBids(i:number){
+    this.myHand.push(this.bids[i]);
+    this.bids.splice(i, 1);
   }
  
 

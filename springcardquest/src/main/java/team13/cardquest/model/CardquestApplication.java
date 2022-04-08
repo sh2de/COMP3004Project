@@ -257,7 +257,12 @@ public class CardquestApplication {
 	public ResponseEntity<Object> getBidText(){
 		return new ResponseEntity<>(new String[]{game.getBidText()},HttpStatus.OK);
 	}
-
+	// sending bids
+	@PutMapping("/sendBids")
+	public ResponseEntity<Void> sendBids(@RequestBody ArrayList<Card> tempHand){
+		game.receiveBids(tempHand);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 
 }

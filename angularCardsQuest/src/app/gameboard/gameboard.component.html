@@ -10,8 +10,9 @@
   <!-- ALERT-INFO -->
   <div class="alert alert-info" *ngIf="requestBid">
     <strong>{{bidRequest}}</strong>
-    <button type="button" class="btn btn-link" (click)="acceptBid()">Yes</button>
-    <button type="button" class="btn btn-link" (click)="declineBid()">No</button>
+
+    <button type="button" class="btn btn-link" (click)="acceptBid()" *ngIf="!discardCard">Yes</button>
+    <button type="button" class="btn btn-link" (click)="declineBid()" *ngIf="!discardCard">No</button>
   </div>
   <div class="alert alert-info" *ngIf="sponsorReq">
     <strong>Are you willing to sponsor the current Quest?</strong>
@@ -69,7 +70,7 @@
 
       <!-- STAGE -->
       <div class="Stage" ngbDropdown>
-        <div class="row" *ngIf="questCreator">
+        <div class="row" *ngIf="stagesCreator">
           <div class="col topright">{{stageInfo}}</div>
           <div class="col-sm-3">
             <button type="button" class="btn btn-primary" (click)="submitStage()">submit current stage</button>
@@ -80,14 +81,23 @@
           
         </div>
         <div class="row" *ngIf="payBid">
-          <div class="col-sm-1">
-            <button type="button" class="btn btn-primary" (click)="restartStages()">Restart Stage creation</button>
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-primary" (click)="restartStages()">Pay Bid</button>
+            <br>
+            
           </div>
         </div>
 
       <!-- STAGE-CARD -->
+        
+      <div class="row" *ngIf="payBid">
+        <div class="col-sm-1" *ngFor="let card of bids, index as i">                
+          <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage" (click)="cancelBids(i)">             
+          
+        </div>
+      </div>
         <div>
-          <div class="row" >
+          <div class="row" *ngIf="stagesCreator">
             <div class="col-sm-1" *ngFor="let card of selectedCards, index as i">                
               <img src="{{card['url']}}" alt="{{card['type']}}" class="itemImage-stage" (click)="cancel(i)">             
               
@@ -148,7 +158,6 @@
       <h3>Select any number of weapons or allies to use for this stage</h3>
       <br><br>
       -->
->>>>>>> d116b91706e1b6e303bcc2179f76ad8568801824
              
     </div>
 
