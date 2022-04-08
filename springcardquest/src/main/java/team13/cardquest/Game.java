@@ -433,7 +433,7 @@ public class Game {
         currentSetupStage = 0;
         setupPreviousPower = 0;
         currentSponsor.loadBackupHand();
-        System.out.println("stage rejected for reason "+rejectionReason);
+        //System.out.println("stage rejected for reason "+rejectionReason);
         currentSponsor.addEventSignal("CREATE_QUEST");
     }
 
@@ -600,8 +600,10 @@ public class Game {
     }
 
     public void receiveBids(ArrayList<Card> temphand){
+        System.out.println("receiving bids");
         ArrayList<Card> hand = new ArrayList<>();
         for (Card card : temphand) {
+            System.out.println(card.getName()+" received");
             hand.add(players.get(currentBidder).getCardByName(card.getName()));
         }
         if (hand.size() > currentBid){//too big
