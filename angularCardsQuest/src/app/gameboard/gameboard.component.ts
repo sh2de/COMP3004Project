@@ -393,6 +393,9 @@ export class GameboardComponent implements OnInit {
     this.bids=[];
     this.load();
     this.discardCard=false;
+    this.requestBid=false;
+    this.questCreator=false;
+    this.questPlayer=true;
   }
 
   /**
@@ -452,8 +455,9 @@ export class GameboardComponent implements OnInit {
             console.log("updates "+res[i]);
             this.getCurrentBit();
             this.requestBid=true;
-            this.questCreator=true;
             this.questPlayer=false;
+            this.questCreator=true;
+            
             this.payBid=true;    
             this.stagesCreator=false;        
             this.discardCard=true;
@@ -528,6 +532,7 @@ export class GameboardComponent implements OnInit {
           if(res[i]=="QUEST_OVER"){
             this.foeWarning=false;
             this.questPlayer=false;
+            this.questCreator=true;
             this.stagesCreator=false;
             this.load()
             console.log("updates "+res[i]);

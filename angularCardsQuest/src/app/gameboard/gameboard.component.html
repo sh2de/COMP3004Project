@@ -11,8 +11,8 @@
   <div class="alert alert-info" *ngIf="requestBid">
     <strong>{{bidRequest}}</strong>
 
-    <button type="button" class="btn btn-link" (click)="acceptBid()" *ngIf="!discardCard">Yes</button>
-    <button type="button" class="btn btn-link" (click)="declineBid()" *ngIf="!discardCard">No</button>
+    <button type="button" class="btn btn-link" (click)="acceptBid()" *ngIf="!payBid">Yes</button>
+    <button type="button" class="btn btn-link" (click)="declineBid()" *ngIf="!payBid">No</button>
   </div>
   <div class="alert alert-info" *ngIf="sponsorReq">
     <strong>Are you willing to sponsor the current Quest?</strong>
@@ -82,7 +82,7 @@
         </div>
         <div class="row" *ngIf="payBid">
           <div class="col-sm-2">
-            <button type="button" class="btn btn-primary" (click)="restartStages()">Pay Bid</button>
+            <button type="button" class="btn btn-primary" (click)="discarding()">Pay Bid</button>
             <br>
             
           </div>
